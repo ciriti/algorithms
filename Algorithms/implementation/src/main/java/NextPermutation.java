@@ -4,7 +4,8 @@ public class NextPermutation {
 
 	/**
 	 * LINK - https://leetcode.com/problems/next-permutation/
-	 * 
+	 * LIKN - https://www.nayuki.io/page/next-lexicographical-permutation-algorithm
+	 *
 	 Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
 
 	 If such arrangement is not possible, it must rearrange it as the lowest possible order (ie, sorted in ascending order).
@@ -17,10 +18,21 @@ public class NextPermutation {
 	 1,1,5 → 1,5,1
 	 */
 
+	/**
+	 Input: 	[1,5,1]
+	 Output: 	[1,1,5]
+	 Expected: 	[5,1,1]
+	 * @param args
+	 */
+
+
+
 	public static void main(String[] args){
+		// res : 0, 1, 3, 0, 2, 3, 5
 		int[] nums = new int[]{0, 1, 2, 5, 3, 3, 0};
 		int[] nums1 = new int[]{3,2,1};
-		nextPermutation(nums);
+		int[] nums2 = new int[]{1,5,1};
+		nextPermutation(nums2);
 	}
 
 	/**
@@ -31,39 +43,53 @@ public class NextPermutation {
 	 * @param nums
 	 */
 	public static void nextPermutation(int[] nums) {
-		int i = nums.length-1;
-		int j = nums.length-1;
-		
-		for(int k = nums.length-1; k >0; k--){
-			if(nums[k]>nums[k-1]){
-				i = k;
-				break;
-			}
+		int i = nums.length - 1;
+
+		/**
+		 * 1. find the largest i such that nums[i] < nums[i+1]
+		 */
+
+		while(i > 0 &&  nums[i-1] >= nums[i]){
+			i--;
 		}
-		
-		for(int k = nums.length-1; k >= i; k--){
-			if(nums[k]>nums[i-1]){
-				j = k;
-				break;
-			}
+
+		if(i == 0){
+			Arrays.sort(nums);
+			System.out.print(Arrays.toString(nums));
+			return;
 		}
-		
-		int copy = nums[i-1];
-		nums[i-1] = nums[j];
-		nums[j] = copy;
-		
-		int c;
-		
-		for(int ii = i; ii < nums.length; ii ++){
-			c = nums[ii];
-			nums[ii] = nums[nums.length-1-ii];
-			nums[nums.length-1-ii] = c;
+
+
+		int j = nums.length - 1;
+
+		while(i > 0 && j > i && nums[j] <= nums[i-1]){
+			j--;
 		}
-		
-		for(int ii = 0; ii < nums.length; ii ++){
-			System.out.print(nums[ii] + ",");
+
+
+		nums[i-1] = nums[i-1] ^nums[j];
+		nums[j] = nums[i-1] ^nums[j];
+		nums[i-1] = nums[i-1] ^nums[j];
+
+		/*
+		x = x xor y
+		y = x xor y
+		x = x xor y
+		*/
+
+
+		/** reverse array */
+		j = nums.length - 1;
+		while( i < j){
+			nums[i] = nums[i] ^ nums[j];
+			nums[j] = nums[i] ^ nums[j];
+			nums[i] = nums[i] ^ nums[j];
+			i++;
+			j--;
 		}
-		
+
+		System.out.print(Arrays.toString(nums));
+
 	}
 
 }
