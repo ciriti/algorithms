@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /*  Recursion example: creating anagrams
 
 An anagram is a type of word play, the result of rearranging the
@@ -25,9 +27,11 @@ public class Anagram {
 //		//Read a string from the user
 //		System.out.print("Enter a string:"); 
 //		String s = r.readString(); 
-//		r.readLine(); 
+//		r.readLine();
+
+		Scanner scanner = new Scanner(System.in);
 		
-		String s ="abcdefgh";
+		String s = scanner.nextLine();//"abcdefgh";
 
 		//We convert the string to an array of characters. Basically
 		//we want to freely change the letters in the string, and this
@@ -55,6 +59,7 @@ public class Anagram {
 		// System.out.println("MakeAnagram i=" + i); //for debug
 		if (i == a.length-1)  {
 			count++;
+			System.out.println("save: " + new String(a));
 //			printArray(a);
 			
 		}
@@ -65,11 +70,13 @@ public class Anagram {
 				char c = a[i]; 
 				a[i] = a[j]; 
 				a[j] = c;
+				System.out.println("prima: " + new String(a));
 				makeAnagram(a, i+1);
 				//swap back
 				c = a[i]; 
 				a[i] = a[j]; 
 				a[j] = c;
+				System.out.println("dopo: " + new String(a));
 			}
 		}
 	}//end of makeAnagram

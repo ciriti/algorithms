@@ -13,7 +13,7 @@ public class MyAnagram {
 		makeAnagram();
 		System.out.println(System.currentTimeMillis()-start);
 		start = System.currentTimeMillis();
-		makeAnagram2();
+//		makeAnagram2();
 		System.out.println(System.currentTimeMillis()-start);
 		
 	}
@@ -38,6 +38,7 @@ public class MyAnagram {
 		
 		if(position == array.length){
 			list.add(new String(array));
+			System.out.println(new String(array));
 		}else{
 			for(int i = position; i<array.length; i++){
 				exchange(array, position, i);
