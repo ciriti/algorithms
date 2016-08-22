@@ -6,10 +6,21 @@ package it.car.matrix;
  */
 public class NumMatrix {
 
+    int[][] sum;
     int[][] matrix;
 
     public NumMatrix(int[][] matrix) {
         this.matrix = matrix;
+        if(matrix.length>0 && matrix[0].length>0){
+            this.sum = new int[matrix.length][matrix[0].length];
+            for(int i = 0; i < matrix.length; i++){
+                int temp = 0;
+                for(int j = 0; j < matrix[0].length; j++){
+                    temp += matrix[i][j];
+                    sum[i][j] = temp + ((i - 1)>=0?sum[i - 1][j] : 0);
+                }
+            }
+        }
     }
 
     public int sumRegion(int row1, int col1, int row2, int col2) {
@@ -20,6 +31,11 @@ public class NumMatrix {
             }
         }
         return res;
+    }
+
+    public int sumRegionCool(int row1, int col1, int row2, int col2) {
+        if(matrix.length==0 && matrix[0].length==0) return 0;
+        return sum[row2][col2] - ((row1-1)>=0?sum[row1-1][col2]:0) - ((col1-1)>=0?sum[row2][col1-1]:0) + (((row1-1)>=0&&(col1-1)>=0)?sum[row1-1][col1-1]:0);
     }
 
     public static void main(String args[]){
@@ -35,11 +51,11 @@ public class NumMatrix {
                 {5, 6, 3},
                 {1, 2, 0}
         };
-        NumMatrix numMatrix = new NumMatrix(matrix);
-        System.out.println(numMatrix.sumRegion(1, 1, 2, 2)); //-> 8
-//        System.out.println(numMatrix.sumRegion(2, 1, 4, 3)); //-> 8
-//        System.out.println(numMatrix.sumRegion(1, 1, 2, 2)); //-> 11
-//        System.out.println(numMatrix.sumRegion(1, 2, 2, 4)); //-> 12
+        NumMatrix numMatrix = new NumMatrix(new int[0][0]);
+        System.out.println(numMatrix.sumRegion(1, 1, 2, 2) == numMatrix.sumRegionCool(1, 1, 2, 2)); //-> 8
+        System.out.println(numMatrix.sumRegion(2, 1, 4, 3)  == numMatrix.sumRegionCool(2, 1, 4, 3)); //-> 8
+        System.out.println(numMatrix.sumRegion(1, 1, 2, 2)  == numMatrix.sumRegionCool(1, 1, 2, 2)); //-> 11
+        System.out.println(numMatrix.sumRegion(1, 2, 2, 4)  == numMatrix.sumRegionCool(1, 2, 2, 4)); //-> 12
     }
 
 }
