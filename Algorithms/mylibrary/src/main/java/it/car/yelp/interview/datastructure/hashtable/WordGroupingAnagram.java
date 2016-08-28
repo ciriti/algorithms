@@ -10,7 +10,7 @@ import java.util.Set;
 public class WordGroupingAnagram {
 
 	/**
-	 * Ragruppa insieme che sono anagramma di loro stessi es. like � anagramma di kile e vanno nello stesso gruppo
+	 * Ragruppa insieme che sono anagramma di loro stessi es. like  anagramma di kile e vanno nello stesso gruppo
 	 * @param args
 	 */
 

@@ -76,7 +76,7 @@ public class RotateArray {
 		}
 
 		/**
-		 * IMPORTANTE!!!! tramite questa riga io ruoto a destra o sinistra a seconda se la posizione è negativa o positiva
+		 * IMPORTANTE!!!! tramite questa riga io ruoto a destra o sinistra a seconda se la posizione  negativa o positiva
 		 */
 		position = (dim + position) % dim;
 

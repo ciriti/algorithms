@@ -121,7 +121,7 @@ public class ImmGraph implements IGraph<Integer> {
         System.out.println("Num of vertices: ");
         System.out.println("Num of to edges: ");
         for(int i : graph.vertices){
-            System.out.println("Adj of " + 1 + ": " + graph.adj(i));
+            System.out.println("Adj of " + i + ": " + graph.adj(i));
         }
 
     }

@@ -7,7 +7,7 @@ import java.util.List;
 public class CombinationSum {
 	
 	/**
-	 * Dammi tutti i sub set per cui la somma dei numeri contenuti è unguale a quella richiesta
+	 * Dammi tutti i sub set per cui la somma dei numeri contenuti  unguale a quella richiesta
 	 * @param args
 	 */
 	

@@ -6,7 +6,7 @@ import java.util.List;
 public class FindAllSubString {
 	
 	/**
-	 * Il numero di tutte le sotto stringhe � il fattoriale della dimensione
+	 * Il numero di tutte le sotto stringhe  il fattoriale della dimensione
 	 * @param args
 	 */
 	

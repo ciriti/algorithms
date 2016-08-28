@@ -4,7 +4,7 @@ public class DecoratorExample {
 	
 	
 	/**
-	 * Component Interface – The interface or abstract class defining the methods that will be implemented. 
+	 * Component Interface  The interface or abstract class defining the methods that will be implemented.
 	 * In our case Car will be the component interface.
 	 *
 	 */
@@ -14,7 +14,7 @@ public class DecoratorExample {
 	
 	
 	/**
-	 * Component Implementation – The basic implementation of the component interface. 
+	 * Component Implementation  The basic implementation of the component interface.
 	 * We can have BasicCar class as our component implementation.
 	 *
 	 */
@@ -29,7 +29,7 @@ public class DecoratorExample {
 	}
 	
 	/**
-	 * Decorator – Decorator class implements the component interface and it has a HAS-A relationship with the component interface. 
+	 * Decorator  Decorator class implements the component interface and it has a HAS-A relationship with the component interface.
 	 * The component variable should be accessible to the child decorator classes, so we will make this variable protected.
 	 *
 	 */
@@ -50,7 +50,7 @@ public class DecoratorExample {
 	}
 	
 	/**
-	 * Concrete Decorators – Extending the base decorator functionality and modifying the component behavior accordingly. 
+	 * Concrete Decorators  Extending the base decorator functionality and modifying the component behavior accordingly.
 	 * We can have concrete decorator classes as LuxuryCar and SportsCar.
 	 *
 	 */
