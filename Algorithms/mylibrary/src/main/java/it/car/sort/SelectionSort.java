@@ -18,9 +18,9 @@ public class SelectionSort {
 /*
 				I passi sono i seguenti:
 				
-				si inizializza un puntatore i che va da 1 a n (dove n è la lunghezza dell'array).
-				Si cerca il più piccolo elemento dell'array
-				Scambia l'elemento più piccolo con l'elemento alla posizione i
+				si inizializza un puntatore i che va da 1 a n (dove n  la lunghezza dell'array).
+				Si cerca il pi piccolo elemento dell'array
+				Scambia l'elemento pi piccolo con l'elemento alla posizione i
 				Incrementa l'indice i e si torna al passo uno fino alla fine dell'array.	 
 */
 

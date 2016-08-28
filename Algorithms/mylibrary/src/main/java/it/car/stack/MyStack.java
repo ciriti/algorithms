@@ -39,7 +39,7 @@ public class MyStack {
 	}
 	
 	/**
-	 * se il nodo in cime è nullo allora onci sono elementi
+	 * se il nodo in cime  nullo allora onci sono elementi
 	 * @return
 	 */
 	public boolean isEmpty(){

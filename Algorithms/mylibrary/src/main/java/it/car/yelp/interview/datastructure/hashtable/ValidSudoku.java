@@ -28,10 +28,10 @@ public class ValidSudoku {
 			for(int j = 0; j < 9; j++){
 
 
-				if(board[i][j] != '.' /*se non è una cella vuota*/ && /* e se il numero è minore di 1 o maggiore di 9 nella RIGA*/ (Character.getNumericValue(board[i][j])<1 ||  Character.getNumericValue(board[i][j]) > 9 ) || 
-						board[j][i] != '.' /*se non è una cella vuota*/ && /* e se il numero è minore di 1 o maggiore di 9 nell COLONNA*/ (Character.getNumericValue(board[j][i])<1 ||  Character.getNumericValue(board[j][i]) > 9 ) ||
-								board[i][j] != '.' && row.containsKey(board[i][j]) || /* se lo stesso valore già esiste nella riga */
-								board[j][i] != '.' && col.containsKey(board[j][i])){/* se lo stesso valore già esiste nella riga */
+				if(board[i][j] != '.' /*se non  una cella vuota*/ && /* e se il numero  minore di 1 o maggiore di 9 nella RIGA*/ (Character.getNumericValue(board[i][j])<1 ||  Character.getNumericValue(board[i][j]) > 9 ) ||
+						board[j][i] != '.' /*se non  una cella vuota*/ && /* e se il numero  minore di 1 o maggiore di 9 nell COLONNA*/ (Character.getNumericValue(board[j][i])<1 ||  Character.getNumericValue(board[j][i]) > 9 ) ||
+								board[i][j] != '.' && row.containsKey(board[i][j]) || /* se lo stesso valore gi esiste nella riga */
+								board[j][i] != '.' && col.containsKey(board[j][i])){/* se lo stesso valore gi esiste nella riga */
 					return false;
 				}
 

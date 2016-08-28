@@ -4,7 +4,7 @@ public class Auto implements Comparable<Auto>{
 	
 	/**
 	 * Compare current person with specified person
-	 * 0 is the same; negative questo oggetto è più piccolo; positive viceversa
+	 * 0 is the same; negative questo oggetto e' piu' piccolo; positive viceversa
 	 */
 
 	@Override

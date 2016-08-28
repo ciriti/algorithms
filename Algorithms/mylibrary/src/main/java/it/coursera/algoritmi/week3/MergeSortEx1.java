@@ -25,7 +25,7 @@ public class MergeSortEx1 {
 	}
 
 	/**
-	 * I� step
+	 * I step
 	 * @param a
 	 */
 	public static void sort(int[] a)
@@ -35,7 +35,7 @@ public class MergeSortEx1 {
 	}
 
 	/**
-	 * II� step
+	 * II step
 	 * @param a
 	 * @param aux
 	 * @param lo

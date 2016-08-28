@@ -33,7 +33,7 @@ public class SerializationDeserializationBST {
 
 				if(newVal < current.val){
 					/**
-					 * se è minore vai a sinistra
+					 * se  minore vai a sinistra
 					 */
 					if(current.left!=null){
 						current = current.left;
@@ -44,7 +44,7 @@ public class SerializationDeserializationBST {
 
 				}else{
 					/**
-					 * se è maggiore vai a destra
+					 * se  maggiore vai a destra
 					 */
 					if(current.right!=null){
 						current = current.right;

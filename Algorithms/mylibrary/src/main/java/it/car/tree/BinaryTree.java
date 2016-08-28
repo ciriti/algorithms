@@ -171,7 +171,7 @@ public class BinaryTree {
 
 				if(newVal < current.val){
 					/**
-					 * se � minore vai a sinistra
+					 * se  minore vai a sinistra
 					 */
 					if(current.left!=null){
 						current = current.left;
@@ -182,7 +182,7 @@ public class BinaryTree {
 
 				}else{
 					/**
-					 * se � maggiore vai a destra
+					 * se  maggiore vai a destra
 					 */
 					if(current.right!=null){
 						current = current.right;
