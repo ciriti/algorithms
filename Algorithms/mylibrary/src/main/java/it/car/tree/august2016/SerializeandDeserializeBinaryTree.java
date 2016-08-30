@@ -1,9 +1,13 @@
 package it.car.tree.august2016;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+
+import it.car.dynamic.Lis;
 
 /**
  * Created by carmeloiriti, 30/08/16.
@@ -41,25 +45,41 @@ public class SerializeandDeserializeBinaryTree {
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
 
-        List<Integer> serialize = new ArrayList<>();
+        Integer[] serialize = new Integer[1000];
 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
+        serialize[0] = root.val;
 
-        TreeNode nullNode = new TreeNode(Integer.MAX_VALUE);
-
+        int i = 1;
         while(!queue.isEmpty()){
             TreeNode tmp = queue.poll();
-            serialize.add(tmp.val == Integer.MAX_VALUE? null:tmp.val);
-            if(tmp.left != null && tmp.left.val != Integer.MAX_VALUE){
-                queue.add(tmp.left == null ? nullNode:tmp.left);
+            if(tmp.left != null){
+                queue.add(tmp.left);
+                serialize[i*2] =  tmp.left.val;
+            }else{
+                serialize[i*2] = null;
             }
-            if(tmp.right != null && tmp.right.val != Integer.MAX_VALUE) {
-                queue.add(tmp.right == null ? nullNode : tmp.right);
+
+            if(tmp.right != null) {
+                queue.add(tmp.right);
+                serialize[i*2 +1] = tmp.right.val;
+            }else{
+                serialize[i*2 +1] =  null;
+            }
+
+            i++;
+        }
+        int index = 0;
+        for( int x = 1000; x > 0; x--){
+            if(serialize[x-1] != null){
+                index = x;
+                break;
+
             }
         }
 
-        return serialize.toString();
+        return Arrays.asList(serialize).subList(0, index).toString();
     }
 
     // Decodes your encoded data to tree.
