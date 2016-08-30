@@ -1,4 +1,4 @@
-package it.car.yelp.interview.pi;
+package it.car.yelp.intw.pi;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -82,7 +82,7 @@ public class Fibonacci {
 	
 	/**
 	 * You are climbing a stair case. It takes n steps to reach to the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
-	 * La soluzione è la serie di fibonacci
+	 * La soluzione ï¿½ la serie di fibonacci
 	 * https://leetcode.com/problems/climbing-stairs/
 	 * @param n
 	 * @return

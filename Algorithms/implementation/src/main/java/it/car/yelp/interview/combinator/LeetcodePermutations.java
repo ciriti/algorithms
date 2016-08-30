@@ -1,4 +1,4 @@
-package it.car.yelp.interview.combinator;
+package it.car.yelp.intw.combinator;
 
 import java.util.List;
 import java.util.ArrayList;

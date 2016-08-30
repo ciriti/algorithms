@@ -1,6 +1,6 @@
 package it.car.tree;
 
-import it.car.yelp.interview.binarytree.FindValueTree.TreeNode;
+import it.car.yelp.intw.binarytree.FindValueTree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

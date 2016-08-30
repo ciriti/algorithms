@@ -1,4 +1,4 @@
-package it.car.yelp.interview.combinator;
+package it.car.yelp.intw.combinator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,7 +7,7 @@ import java.util.List;
 public class CombinationSum {
 	
 	/**
-	 * Dammi tutti i sub set per cui la somma dei numeri contenuti è unguale a quella richiesta
+	 * Dammi tutti i sub set per cui la somma dei numeri contenuti ï¿½ unguale a quella richiesta
 	 * @param args
 	 */
 	

@@ -1,4 +1,4 @@
-package it.car.yelp.interview.string;
+package it.car.yelp.intw.string;
 
 import java.util.ArrayList;
 import java.util.List;

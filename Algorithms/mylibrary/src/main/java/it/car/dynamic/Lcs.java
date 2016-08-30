@@ -114,7 +114,40 @@ public class Lcs {
 
         System.out.println("Length of LCS is " + lcs(X,Y) );
         System.out.println("Length of LCS recursive is " + lcs_recursive(X,Y, X.length(), Y.length()) );
+        System.out.println("Length of LCS recursive is " + lcs_recursive_String(X,Y) );
 
+    }
+
+    /**
+     * Build the longest commen sequence
+     * @param s1
+     * @param s2
+     * @return a string that is the LCS
+     */
+    public static String lcs_recursive_String(String s1, String s2){
+        String res = "";
+        res = lcs_recursive_char(s1, s2, s1.length(), s2.length());
+        return new StringBuilder(res).reverse().toString();
+    }
+
+    /**
+     * Support method to extract the LCS string
+     * @param s1
+     * @param s2
+     * @param index1
+     * @param index2
+     * @return
+     */
+    public static String lcs_recursive_char(String s1, String s2, int index1, int index2){
+        if(index1 == 0 || index2 == 0){
+            return "";
+        }else if(s1.charAt(index1-1) == s2.charAt(index2-1)){
+            return String.valueOf(s1.charAt(index1-1)) + lcs_recursive_char(s1, s2, index1 -1, index2-1);
+        }else{
+            String tmp1 = lcs_recursive_char(s1, s2, index1 -1, index2);
+            String tmp2 = lcs_recursive_char(s1, s2, index1, index2-1);
+            return tmp1.length() > tmp2.length() ? tmp1:tmp2;
+        }
     }
 
 }

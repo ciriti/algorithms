@@ -1,4 +1,4 @@
-package it.car.yelp.interview.datastructure.binarytree;
+package it.car.yelp.intw.datastructure.binarytree;
 
 import java.util.ArrayList;
 import java.util.Arrays;
