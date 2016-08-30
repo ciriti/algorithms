@@ -5,6 +5,16 @@ package it.car.dynamic;
  */
 public class Lcs {
 
+    static int lcs_recursive( String X, String Y, int m, int n){
+
+        if (m == 0 || n == 0)
+            return 0;
+        if (X.charAt(m-1) == Y.charAt(n-1))
+            return 1 + lcs_recursive(X, Y, m-1, n-1);
+        else
+            return max(lcs_recursive(X, Y, m, n-1), lcs_recursive(X, Y, m-1, n));
+    }
+
     /**
      * Longest Common Subsequence
      */
@@ -73,6 +83,7 @@ public class Lcs {
          */
 
         System.out.println("Length of LCS is " + lcs(X,Y) );
+        System.out.println("Length of LCS recursive is " + lcs(X,Y) );
 
     }
 
