@@ -5,6 +5,20 @@ package it.car.dynamic;
  */
 public class Lcs {
 
+    /**
+
+     * This is the table for recursive alg:
+
+     -- G X T X A Y B
+     -----------------
+     A| 0 0 0 0 1 0 0
+     G| 1 0 0 0 0 0 0
+     G| 1 0 0 0 0 0 0
+     T| 0 0 1 0 0 0 0
+     A| 0 0 0 0 1 0 0
+     B| 0 0 0 0 0 0 1
+
+     */
     static int lcs_recursive( String X, String Y, int m, int n){
 
         if (m == 0 || n == 0)
@@ -70,20 +84,36 @@ public class Lcs {
         String Y = "GXTXAYB";
 
         /**
+
          * I will have the following matrix at the end:
 
-         0 0 0 0 0 0 0 0
-         0 0 0 0 0 1 1 1
-         0 1 1 1 1 1 1 1
-         0 1 1 1 1 1 1 1
-         0 1 1 2 2 2 2 2
-         0 1 1 2 2 3 3 3
-         0 1 1 2 2 3 3 4
+              G X T X A Y B
+          -----------------
+          | 0 0 0 0 0 0 0 0
+         A| 0 0 0 0 0 1 1 1
+         G| 0 1 1 1 1 1 1 1
+         G| 0 1 1 1 1 1 1 1
+         T| 0 1 1 2 2 2 2 2
+         A| 0 1 1 2 2 3 3 3
+         B| 0 1 1 2 2 3 3 4
+
+
+
+         * This is the table for recursive alg:
+
+            G X T X A Y B
+         -----------------
+         A| 0 0 0 0 1 0 0
+         G| 1 0 0 0 0 0 0
+         G| 1 0 0 0 0 0 0
+         T| 0 0 1 0 0 0 0
+         A| 0 0 0 0 1 0 0
+         B| 0 0 0 0 0 0 1
 
          */
 
         System.out.println("Length of LCS is " + lcs(X,Y) );
-        System.out.println("Length of LCS recursive is " + lcs(X,Y) );
+        System.out.println("Length of LCS recursive is " + lcs_recursive(X,Y, X.length(), Y.length()) );
 
     }
 
