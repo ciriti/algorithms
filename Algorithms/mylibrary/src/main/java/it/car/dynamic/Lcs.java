@@ -6,6 +6,30 @@ package it.car.dynamic;
 public class Lcs {
 
     /**
+
+     * This is the table for recursive alg:
+
+     -- G X T X A Y B
+     -----------------
+     A| 0 0 0 0 1 0 0
+     G| 1 0 0 0 0 0 0
+     G| 1 0 0 0 0 0 0
+     T| 0 0 1 0 0 0 0
+     A| 0 0 0 0 1 0 0
+     B| 0 0 0 0 0 0 1
+
+     */
+    static int lcs_recursive( String X, String Y, int m, int n){
+
+        if (m == 0 || n == 0)
+            return 0;
+        if (X.charAt(m-1) == Y.charAt(n-1))
+            return 1 + lcs_recursive(X, Y, m-1, n-1);
+        else
+            return max(lcs_recursive(X, Y, m, n-1), lcs_recursive(X, Y, m-1, n));
+    }
+
+    /**
      * Longest Common Subsequence
      */
 
@@ -60,20 +84,70 @@ public class Lcs {
         String Y = "GXTXAYB";
 
         /**
+
          * I will have the following matrix at the end:
 
-         0 0 0 0 0 0 0 0
-         0 0 0 0 0 1 1 1
-         0 1 1 1 1 1 1 1
-         0 1 1 1 1 1 1 1
-         0 1 1 2 2 2 2 2
-         0 1 1 2 2 3 3 3
-         0 1 1 2 2 3 3 4
+              G X T X A Y B
+          -----------------
+          | 0 0 0 0 0 0 0 0
+         A| 0 0 0 0 0 1 1 1
+         G| 0 1 1 1 1 1 1 1
+         G| 0 1 1 1 1 1 1 1
+         T| 0 1 1 2 2 2 2 2
+         A| 0 1 1 2 2 3 3 3
+         B| 0 1 1 2 2 3 3 4
+
+
+
+         * This is the table for recursive alg:
+
+            G X T X A Y B
+         -----------------
+         A| 0 0 0 0 1 0 0
+         G| 1 0 0 0 0 0 0
+         G| 1 0 0 0 0 0 0
+         T| 0 0 1 0 0 0 0
+         A| 0 0 0 0 1 0 0
+         B| 0 0 0 0 0 0 1
 
          */
 
         System.out.println("Length of LCS is " + lcs(X,Y) );
+        System.out.println("Length of LCS recursive is " + lcs_recursive(X,Y, X.length(), Y.length()) );
+        System.out.println("Length of LCS recursive is " + lcs_recursive_String(X,Y) );
 
+    }
+
+    /**
+     * Build the longest commen sequence
+     * @param s1
+     * @param s2
+     * @return a string that is the LCS
+     */
+    public static String lcs_recursive_String(String s1, String s2){
+        String res = "";
+        res = lcs_recursive_char(s1, s2, s1.length(), s2.length());
+        return new StringBuilder(res).reverse().toString();
+    }
+
+    /**
+     * Support method to extract the LCS string
+     * @param s1
+     * @param s2
+     * @param index1
+     * @param index2
+     * @return
+     */
+    public static String lcs_recursive_char(String s1, String s2, int index1, int index2){
+        if(index1 == 0 || index2 == 0){
+            return "";
+        }else if(s1.charAt(index1-1) == s2.charAt(index2-1)){
+            return String.valueOf(s1.charAt(index1-1)) + lcs_recursive_char(s1, s2, index1 -1, index2-1);
+        }else{
+            String tmp1 = lcs_recursive_char(s1, s2, index1 -1, index2);
+            String tmp2 = lcs_recursive_char(s1, s2, index1, index2-1);
+            return tmp1.length() > tmp2.length() ? tmp1:tmp2;
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package it.car.yelp.interview.datastructure.hashtable;
+package it.car.yelp.intw.datastructure.hashtable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
