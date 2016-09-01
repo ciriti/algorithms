@@ -1,4 +1,4 @@
-package it.car.yelp.intw.combinator;
+package it.car.yelp.intrw.combinator;
 
 import java.util.ArrayList;
 

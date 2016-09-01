@@ -1,4 +1,4 @@
-package it.car.yelp.intw.datastructure.linkedlist;
+package it.car.yelp.intrw.datastructure.linkedlist;
 
 import java.util.ArrayList;
 import java.util.HashMap;

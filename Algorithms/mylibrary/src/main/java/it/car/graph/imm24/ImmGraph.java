@@ -191,7 +191,7 @@ public class ImmGraph implements IGraph<Integer> {
          * 1. Init the data structures
          * N.B. COMPARE is the comparator used to order the element to the priority queue
          */
-        PriorityQueue<WeightedEdge> pq = new PriorityQueue<>(COMPARE);
+        PriorityQueue<WeightedEdge> pq = null;//new PriorityQueue<>(COMPARE);
         Set<Integer> visited = new HashSet<>();
         HashMap<Integer, List<Integer>> parents = new HashMap<>();
         HashMap<Integer, Integer> distance = new HashMap<>();

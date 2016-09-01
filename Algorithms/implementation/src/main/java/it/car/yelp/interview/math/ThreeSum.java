@@ -1,4 +1,4 @@
-package it.car.yelp.intw.math;
+package it.car.yelp.intrw.math;
 
 import java.util.List;
 import java.util.HashMap;

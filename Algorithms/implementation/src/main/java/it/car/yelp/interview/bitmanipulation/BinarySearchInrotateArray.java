@@ -1,4 +1,4 @@
-package it.car.yelp.intw.bitmanipulation;
+package it.car.yelp.intrw.bitmanipulation;
 
 import java.util.Arrays;
 

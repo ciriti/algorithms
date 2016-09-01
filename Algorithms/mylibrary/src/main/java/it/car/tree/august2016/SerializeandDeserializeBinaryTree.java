@@ -1,10 +1,10 @@
 package it.car.tree.august2016;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Created by carmeloiriti, 30/08/16.
@@ -103,18 +103,22 @@ public class SerializeandDeserializeBinaryTree {
         root.right = tre;
         tre.left = quatt;
         tre.right = cinque;
+        due.left = sette;
+        due.right = nove;
 
 
         SerializeandDeserializeBinaryTree tree = new SerializeandDeserializeBinaryTree();
 
         String s = tree.serialize(root);
-        System.out.println(s);
+        System.out.println("  Serialize: " + s);
         root = tree.deserialize(s);
+        System.out.println("Deserialize: " + tree.serialize(root));
 //        System.out.println("check: " + tree.serialize(root));
 //        System.out.println("check1: " + tree.serialize(root));
 //        TreeNode n = tree.deserialize("[-1,0,1]");
         System.out.println();
     }
+
 
 
 }
