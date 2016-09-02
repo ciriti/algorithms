@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.ResourceBundle;
 import java.util.Stack;
 
 /**
@@ -36,6 +37,11 @@ public class TreeVisit {
 
         TreeNode(int x) {
             val = x;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(val);
         }
     }
 
@@ -193,7 +199,7 @@ public class TreeVisit {
      * @param root
      * @return
      */
-    public List<Integer> postorderLinear(TreeNode root){
+    public List<TreeNode> postorderLinear(TreeNode root){
         List<TreeNode> nodesRes = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
 
@@ -214,13 +220,7 @@ public class TreeVisit {
             }
 
         }
-
-        List<Integer> res = new ArrayList<>();
-        for(TreeNode node : nodesRes){
-            res.add(node.val);
-        }
-
-        return res;
+        return nodesRes;
     }
 
     /**
@@ -273,11 +273,13 @@ public class TreeVisit {
         System.out.println("inorder leetcode : " + tree.inorderTraversalLeetCode(root));
         System.out.println("inorder linear   : " + tree.inorderLinear(root));
         System.out.println("inorder recursive: " + tree.inorderRecursive(root));
+        System.out.println("inorder train    : " + tree.trainInorder(root));
         System.out.println("--------------------------------------");
         System.out.println("------------- Preorder ---------------");
         System.out.println("preorder leetcode : " + tree.preorderTraversalLeetCode(root));
         System.out.println("preorder linear   : " + tree.preorderLinear(root));
         System.out.println("preorder recursive: " + tree.preorderRecursive(root));
+        System.out.println("preorder train    : " + tree.trainPreorder(root));
         System.out.println("--------------------------------------");
         System.out.println("------------- Postorder ---------------");
         System.out.println("postorder linear   : " + tree.postorderLinear(root));
@@ -374,6 +376,42 @@ public class TreeVisit {
             }
         }
 
+        return res;
+    }
+
+    /**
+     * Training Inorder
+     */
+
+    public List<TreeNode> trainInorder(TreeNode root){
+        List<TreeNode> res = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        stack.add(root);
+        while(!stack.isEmpty()){
+            TreeNode node = stack.peek();
+            if(node.left != null && !res.contains(node.left)){
+                stack.add(node.left);
+            }else{
+                res.add(node);
+                stack.pop();
+                if(node.right != null && !res.contains(node.right)){
+                    stack.add(node.right);
+                }
+
+            }
+        }
+        return res;
+    }
+
+    public List<TreeNode> trainPreorder(TreeNode root){
+        Stack<TreeNode> stack = new Stack<>();
+        List<TreeNode> res = new ArrayList<>();
+        stack.add(root);
+        while(!stack.isEmpty()){
+            TreeNode treeNode = stack.peek();
+            res.add(treeNode);
+
+        }
         return res;
     }
 

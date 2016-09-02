@@ -1,18 +1,32 @@
 package it.car.tree.august2016;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
- * Created by carmeloiriti, 31/08/16.
+ * Created by carmeloiriti, 30/08/16.
  */
-public class BalancedBinaryTree {
+public class DfsBfsTreeVisit {
+
 
     /**
-     * Given a binary tree, determine if it is height-balanced.
-     * For this problem, a height-balanced binary tree is defined as a binary tree in which
-     * the depth of the two subtrees of every node never differ by more than 1.
-     * LINK - https://leetcode.com/problems/balanced-binary-tree/
+     * Serialize and Deserialize Binary Tree
+     *
+     * LINK - https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
+     */
+
+
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode(int x) { val = x; }
+     * }
      */
 
     public static class TreeNode {
@@ -76,20 +90,57 @@ public class BalancedBinaryTree {
 
     }
 
-    public boolean isBalanced(TreeNode root) {
-        if(root == null) return true;
-        if(Math.abs(deep(root.left) - deep(root.right)) > 1) return false;
-        return isBalanced(root.left) && isBalanced(root.right);
+
+    /**
+     * Deep first search
+     * @param root
+     * @return
+     */
+    public List<TreeNode> DFS(TreeNode root){
+
+        List<TreeNode> res = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        stack.add(root);
+        while (!stack.isEmpty()){
+
+            TreeNode node = stack.pop();
+
+            if(!res.contains(node))
+                res.add(node);
+
+            if(node.right != null){
+                stack.add(node.right);
+            }
+            if(node.left != null){
+                stack.add(node.left);
+            }
+
+        }
+        return res;
     }
 
-    public int deep(TreeNode node){
-        if (node == null)
-            return 0;
-        return 1 + Math.max(deep(node.left), deep(node.right));
+    /**
+     * Breath first search
+     * @param root
+     * @return
+     */
+    public List<TreeNode> BFS(TreeNode root){
+
+        List<TreeNode> res = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+
+            TreeNode node = queue.poll();
+            res.add(node);
+
+            if(node.left != null)
+                queue.add(node.left);
+            if(node.right != null)
+                queue.add(node.right);
+        }
+        return res;
     }
-
-
-
 
 
     public static void main(String args[]){
@@ -112,14 +163,13 @@ public class BalancedBinaryTree {
         due.right = nove;
 
 
-        BalancedBinaryTree tree = new BalancedBinaryTree();
-        TreeNode test = tree.deserialize("[1,2,2,3,n,n,3,4,n,n,4]");
-        TreeNode test1 = tree.deserialize("[1,n,2,n,3]");
-        System.out.println(tree.isBalanced(tree.deserialize("[1,2,2,3,n,n,3,4,n,n,4]")) == false?"SUCCESS":"ERROR");
-        System.out.println(tree.isBalanced(tree.deserialize("[1,n,2,n,3]")) == false?"SUCCESS":"ERROR");
+        DfsBfsTreeVisit tree = new DfsBfsTreeVisit();
 
-//        System.out.println(tree.deep(root));
-
+        String s = tree.serialize(root);
+        System.out.println("  Serialize: " + s);
+        root = tree.deserialize(s);
+        System.out.println("DFS: " + tree.DFS(root));
+        System.out.println("BFS: " + tree.BFS(root));
     }
 
 
