@@ -1,5 +1,7 @@
 package it.car.tree.august2016;
 
+import android.location.Location;
+
 import static android.R.attr.left;
 
 /**
@@ -21,24 +23,19 @@ public class IsValidBST {
     }
 
     public boolean isValidBST(TreeNode root) {
-
-        return isValidBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
 
     }
 
-    public boolean isValidBST(TreeNode root, int rangeLeft, int rangeRight) {
-        if(root == null)
-            return true;
-
-        if(root.val > rangeRight || root.val < rangeRight){
-            return false;
-        }
-
-        return (isValidBST(root.left, rangeLeft, root.val) && isValidBST(root.right, root.val, rangeRight));
+    public boolean isValidBST(TreeNode node, long rangeLeft, long rangeRight) {
+        if(node == null) return true;
+        if( rangeLeft >= node.val || node.val >= rangeRight) return false;
+        return isValidBST(node.left, rangeLeft, node.val) && isValidBST(node.right, node.val, rangeRight);
     }
 
     public static void main(String args[]){
         TreeNode root = new TreeNode(1);
+        TreeNode uno = new TreeNode(1);
         TreeNode due = new TreeNode(2);
         TreeNode otto = new TreeNode(8);
         TreeNode cinque = new TreeNode(5);
@@ -53,26 +50,14 @@ public class IsValidBST {
         TreeNode quindici = new TreeNode(15);
         TreeNode venti = new TreeNode(20);
 
-//        root.right = otto;
 
-//        due.left =  zero ;
-//        due.right = quatt ;
-//
-//        quatt.left = tre ;
-//        quatt.right = cinque ;
-//
-//        otto.left = sette;
-//        otto.right = sei;
+        due.left = uno;
+        due.right = tre;
 
-        dieci.left = cinque;
-        dieci.right = quindici;
-
-        quindici.left = undici;
-        quindici.right = venti;
 
         IsValidBST treeCheck = new IsValidBST();
 
-        System.out.println(treeCheck.isValidBST(dieci));
+        System.out.println(treeCheck.isValidBST(due));
 
 
 
