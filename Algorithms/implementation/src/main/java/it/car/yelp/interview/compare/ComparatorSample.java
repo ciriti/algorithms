@@ -1,4 +1,4 @@
-package it.car.yelp.intw.compare;
+package it.car.yelp.intrw.compare;
 
 import java.util.Comparator;
 import java.util.Arrays;

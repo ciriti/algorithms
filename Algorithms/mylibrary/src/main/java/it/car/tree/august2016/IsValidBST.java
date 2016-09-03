@@ -1,7 +1,5 @@
 package it.car.tree.august2016;
 
-import static android.R.attr.left;
-
 /**
  * Created by ciriti on 31/08/16.
  */
@@ -21,20 +19,13 @@ public class IsValidBST {
     }
 
     public boolean isValidBST(TreeNode root) {
-
-        return isValidBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
-
+        return isValid(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
-    public boolean isValidBST(TreeNode root, int rangeLeft, int rangeRight) {
-        if(root == null)
-            return true;
-
-        if(root.val > rangeRight || root.val < rangeRight){
-            return false;
-        }
-
-        return (isValidBST(root.left, rangeLeft, root.val) && isValidBST(root.right, root.val, rangeRight));
+    boolean isValid(TreeNode node, long lower, long upper){
+        if(node == null) return true;
+        if(node.val >= upper || node.val <= lower)return false;
+        return (isValid(node.left, lower, node.val) && isValid(node.right, node.val, upper));
     }
 
     public static void main(String args[]){
