@@ -1,5 +1,7 @@
 package it.car.string;
 
+import java.util.Arrays;
+
 /**
  * Created by ciriti on 03/09/16.
  */
@@ -19,7 +21,6 @@ public class AddBinary {
     public static void main(String args[]){
 
         AddBinary ab = new AddBinary();
-
         System.out.println(ab.addBinary(String.valueOf(1010), String.valueOf(1011)).equals("10101")?"SUCCESS":"ERROR");
         System.out.println(ab.addBinary(String.valueOf(1), String.valueOf(11)).equals("100")?"SUCCESS":"ERROR");
         System.out.println(ab.addBinary(String.valueOf(1111), String.valueOf(1111)).equals("11110")?"SUCCESS":"ERROR");
