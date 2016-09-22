@@ -19,6 +19,7 @@ public class IsValidBST {
     }
 
     public boolean isValidBST(TreeNode root) {
+//<<<<<<< HEAD
         return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
 
     }
@@ -27,6 +28,15 @@ public class IsValidBST {
         if(node == null) return true;
         if( rangeLeft >= node.val || node.val >= rangeRight) return false;
         return isValidBST(node.left, rangeLeft, node.val) && isValidBST(node.right, node.val, rangeRight);
+//=======
+//        return isValid(root, Long.MIN_VALUE, Long.MAX_VALUE);
+//    }
+//
+//    boolean isValid(TreeNode node, long lower, long upper){
+//        if(node == null) return true;
+//        if(node.val >= upper || node.val <= lower)return false;
+//        return (isValid(node.left, lower, node.val) && isValid(node.right, node.val, upper));
+//>>>>>>> master
     }
 
     public static void main(String args[]){
@@ -47,8 +57,8 @@ public class IsValidBST {
         TreeNode venti = new TreeNode(20);
 
 
-        due.left = uno;
-        due.right = tre;
+        due.left = tre;
+        due.right = uno;
 
 
         IsValidBST treeCheck = new IsValidBST();

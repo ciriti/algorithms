@@ -24,8 +24,6 @@ import it.car.graph.util.StdOut;
 import it.car.graph.util.StdRandom;
 import it.car.tree.binaryheap.MinPQ;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
-
 /**
  *  The {@code GraphGenerator} class provides static methods for creating
  *  various graphs, including Erdos-Renyi random graphs, random bipartite

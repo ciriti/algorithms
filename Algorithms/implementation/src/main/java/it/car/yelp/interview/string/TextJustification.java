@@ -1,4 +1,4 @@
-package it.car.yelp.intw.string;
+package it.car.yelp.intrw.string;
 
 import java.util.List;
 import java.util.ArrayList;
