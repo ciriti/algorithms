@@ -1,9 +1,5 @@
 package it.car.tree.august2016;
 
-import android.location.Location;
-
-import static android.R.attr.left;
-
 /**
  * Created by ciriti on 31/08/16.
  */
