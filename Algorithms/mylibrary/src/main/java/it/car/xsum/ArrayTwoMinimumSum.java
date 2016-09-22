@@ -1,4 +1,4 @@
-package it.car.insparx.interview;
+package it.car.insparx.xsum;
 
 public class ArrayTwoMinimumSum {
 	

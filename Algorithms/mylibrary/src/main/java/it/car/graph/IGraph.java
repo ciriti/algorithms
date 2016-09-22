@@ -15,6 +15,7 @@ public interface IGraph<T> {
     boolean addDirectedEdge(T v1, T v2);
     boolean addDirectedWeightEdge(T v1, T v2, int weight);
     boolean addUndirectedEdge(T v1, T v2);
+    boolean addUndirectedWeightEdge(T v1, T v2, int weight);
     boolean addVertex(T v);
     List<T> adj(T v);
     List<WeightedEdge<T>> adjWeighted(T v);
@@ -26,17 +27,17 @@ public interface IGraph<T> {
 
 
     class WeightedEdge<T>{
-        public T t;
+        public T node;
         public int weigth;
 
         public WeightedEdge(T t, int weigth) {
-            this.t = t;
+            this.node = t;
             this.weigth = weigth;
         }
 
         @Override
         public String toString() {
-            return "  { v:" + t + " w:" + weigth + "}  ";
+            return "  { v:" + node + " w:" + weigth + "}  ";
         }
     }
 
