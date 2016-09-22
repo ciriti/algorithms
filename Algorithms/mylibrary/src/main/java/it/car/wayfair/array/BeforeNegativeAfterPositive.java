@@ -2,6 +2,9 @@ package it.car.wayfair.array;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
+
+import it.car.graph.util.In;
 
 /**
  * Created by carmeloiriti, 21/09/16.
@@ -50,38 +53,107 @@ public class BeforeNegativeAfterPositive {
      */
     public Integer[] sort_2(Integer[] pArray){
 
-        int neg = 0;
-        int pos = 0;
+        int lo = 0;
 
-//        while((neg + pos) < 2 * pArray.length){
-        int i = 0;
-        int tmp;
-        while(neg < pArray.length && pos < pArray.length){
-            if(pArray[neg] >= 0 && pArray[pos] < 0){
-                tmp = pArray[neg];
-                pArray[neg] = pArray[neg+1];
-                pArray[neg+1] = tmp;
-                pos++;
-                neg++;
-            } else if(pArray[neg] < 0){
-                neg++;
-            }else if(pArray[pos] >= 0){
-                pos++;
+        for(int i = 0; i < pArray.length; i++){
+            int iTmp = i ;
+            if(pArray[i] < 0){
+                while(iTmp > lo){
+                    int c = pArray[iTmp];
+                    if(iTmp-1 < 0) break;
+                    pArray[iTmp] = pArray[iTmp-1];
+                    pArray[iTmp-1] = c;
+                    iTmp--;
+                }
+                lo++;
             }
-            i++;
+
         }
 
         return pArray;
     }
 
+    public Integer[] sort_3(Integer[] pArray){
+        Arrays.sort(pArray, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer lhs, Integer rhs) {
+                return (int)(Math.signum(lhs) - Math.signum(rhs));
+            }
+        });
+        return pArray;
+    }
+
+    public Integer[] sort_4(Integer[] pArray){
+        return pArray;
+    }
+
+    public Integer[] dualPivot(Integer[] a){
+        return sort(a, 0, a.length-1);
+    }
+
+    // quicksort the subarray a[lo .. hi] using dual-pivot quicksort
+    private  Integer[] sort(Integer[] a, int lo, int hi) {
+        if (hi <= lo) return a;
+
+        // make sure a[lo] <= a[hi]
+        if (less(a[hi], a[lo])) exch(a, lo, hi);
+
+        int lt = lo + 1, gt = hi - 1;
+        int i = lo + 1;
+        while (i <= gt) {
+            if       (less(a[i], a[lo])) exch(a, lt++, i++);
+            else if  (less(a[hi], a[i])) exch(a, i, gt--);
+            else                         i++;
+        }
+        exch(a, lo, --lt);
+        exch(a, hi, ++gt);
+
+        // recursively sort three subarrays
+        sort(a, lo, lt-1);
+        if (less(a[lt], a[gt])) sort(a, lt+1, gt-1);
+        sort(a, gt+1, hi);
+
+        return a;
+
+    }
+
+
+    /***************************************************************************
+     *  Helper sorting functions.
+     ***************************************************************************/
+
+    // is v < w ?
+    private boolean less(int v, int w) {
+//        return v.compareTo(w) < 0;
+        return comparator.compare(v, w) < 0;
+    }
+
+    Comparator<Integer> comparator = new Comparator<Integer>() {
+        @Override
+        public int compare(Integer lhs, Integer rhs) {
+            return (int)(Math.signum(lhs) - Math.signum(rhs));
+        }
+    };
+
+    // exchange a[i] and a[j]
+    private static void exch(Object[] a, int i, int j) {
+        Object swap = a[i];
+        a[i] = a[j];
+        a[j] = swap;
+    }
+
+
+
     public  static void main(String args[]){
 
-        Integer[] array = new Integer[]{1, -5, -1, 3, 23, -12};
+        Integer[] array = new Integer[]{1, -1, 5, -1, 3, 23, -12};
         System.out.println("input");
         System.out.println(Arrays.asList(array));
         System.out.println("output");
         System.out.println(Arrays.asList(new BeforeNegativeAfterPositive().sort_1(array)));
         System.out.println(Arrays.asList(new BeforeNegativeAfterPositive().sort_2(array)));
+        System.out.println(Arrays.asList(new BeforeNegativeAfterPositive().sort_3(array)));
+        System.out.println("dualpivot\n" + Arrays.asList(new BeforeNegativeAfterPositive().dualPivot(array)));
 
     }
 

@@ -1,4 +1,4 @@
-package it.car.algoritmi;
+package it.car.wayfair.sort;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -83,7 +83,7 @@ public class QuickSort {
     static Comparator<Integer> comparator = new Comparator<Integer>() {
         @Override
         public int compare(Integer lhs, Integer rhs) {
-            return lhs - rhs;
+            return (int)(Math.signum(lhs) - Math.signum(rhs));
         }
     };
 
