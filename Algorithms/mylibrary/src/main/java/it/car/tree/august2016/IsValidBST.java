@@ -19,17 +19,29 @@ public class IsValidBST {
     }
 
     public boolean isValidBST(TreeNode root) {
-        return isValid(root, Long.MIN_VALUE, Long.MAX_VALUE);
+//<<<<<<< HEAD
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+
     }
 
-    boolean isValid(TreeNode node, long lower, long upper){
+    public boolean isValidBST(TreeNode node, long rangeLeft, long rangeRight) {
         if(node == null) return true;
-        if(node.val >= upper || node.val <= lower)return false;
-        return (isValid(node.left, lower, node.val) && isValid(node.right, node.val, upper));
+        if( rangeLeft >= node.val || node.val >= rangeRight) return false;
+        return isValidBST(node.left, rangeLeft, node.val) && isValidBST(node.right, node.val, rangeRight);
+//=======
+//        return isValid(root, Long.MIN_VALUE, Long.MAX_VALUE);
+//    }
+//
+//    boolean isValid(TreeNode node, long lower, long upper){
+//        if(node == null) return true;
+//        if(node.val >= upper || node.val <= lower)return false;
+//        return (isValid(node.left, lower, node.val) && isValid(node.right, node.val, upper));
+//>>>>>>> master
     }
 
     public static void main(String args[]){
         TreeNode root = new TreeNode(1);
+        TreeNode uno = new TreeNode(1);
         TreeNode due = new TreeNode(2);
         TreeNode otto = new TreeNode(8);
         TreeNode cinque = new TreeNode(5);
@@ -44,26 +56,14 @@ public class IsValidBST {
         TreeNode quindici = new TreeNode(15);
         TreeNode venti = new TreeNode(20);
 
-//        root.right = otto;
 
-//        due.left =  zero ;
-//        due.right = quatt ;
-//
-//        quatt.left = tre ;
-//        quatt.right = cinque ;
-//
-//        otto.left = sette;
-//        otto.right = sei;
+        due.left = tre;
+        due.right = uno;
 
-        dieci.left = cinque;
-        dieci.right = quindici;
-
-        quindici.left = undici;
-        quindici.right = venti;
 
         IsValidBST treeCheck = new IsValidBST();
 
-        System.out.println(treeCheck.isValidBST(dieci));
+        System.out.println(treeCheck.isValidBST(due));
 
 
 

@@ -19,11 +19,11 @@ public class FailFastHashMap
 		 * FALLISCE!!!
 		 */
 		Iterator<String> iterator = countryCode.keySet().iterator();
-
+		countryCode.put("USA", "+11");
 		while (iterator.hasNext())
 		{
 			System.out.println(countryCode.get(iterator.next()));
-			countryCode.put("USA", "+11");			
+			countryCode.put("USA", "+11");
 		}
 		
 		/**
@@ -32,7 +32,7 @@ public class FailFastHashMap
 		ConcurrentHashMap<String,String> countryCodeCC = new ConcurrentHashMap<>(countryCode);
 		
 		Iterator<String> iteratorCC = countryCodeCC.keySet().iterator();
-
+		countryCodeCC.put("USA", "+11");
 		while (iteratorCC.hasNext())
 		{
 			System.out.println(countryCodeCC.get(iteratorCC.next()));

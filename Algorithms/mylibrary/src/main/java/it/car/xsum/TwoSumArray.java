@@ -1,14 +1,46 @@
-package it.car.insparx.interview;
+package it.car.xsum;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import it.car.graph.util.In;
+
 public class TwoSumArray {
+
+	/**
+	 * Given an array of integers, return indices of the two numbers such that they add up to a
+	 * specific target. You may assume that each input would have exactly one solution.
+	 * LINK - https://leetcode.com/problems/two-sum/
+	 */
 
 	public static void main(String args[]){
 		System.out.println(solution(6, new int[]{1, 8, -3, 0, 1, 3, -2, 4, 5}));
+		TwoSumArray tw = new TwoSumArray();
+		System.out.println("Two sum: ");
+		int[] res = tw.twoSum(new int[]{3,2,4}, 6);
+		System.out.println(res[0]+ " " + res[1]);
+	}
+
+	public int[] twoSum(int[] nums, int target) {
+		int[] res = new int[2];
+		Map<Integer, Integer> map = new HashMap<>();
+
+		for(int i = 0; i < nums.length; i++){
+			map.put(target - nums[i], i);
+		}
+
+		for(int i = 0; i < nums.length; i++){
+			if(map.containsKey(nums[i]) && i != map.get(nums[i])){
+				res[0] = i;
+				res[1] = map.get(nums[i]);
+				return res;
+			}
+		}
+
+		return res;
 	}
 
 	public static  int solution(int K, int[] A) {
@@ -29,8 +61,8 @@ public class TwoSumArray {
 				Bean b = new Bean(A[i], i);
 				List<Bean> list = new ArrayList<>();
 				list.add(b);
-				map.put(tmp, list);                
-			}            
+				map.put(tmp, list);
+			}
 		}
 
 		for(int i = 0; i < A.length; i++){
@@ -38,12 +70,12 @@ public class TwoSumArray {
 				List<Bean> list = map.get(A[i]);
 				for(Bean b : list){
 					//                    if(b.index != i)
-						System.out.println("index: " + i + " bean index" + b.index);
+					System.out.println("index: " + i + " bean index" + b.index);
 					count++;
 				}
 
 			}
-		} 
+		}
 		return count;
 	}
 
