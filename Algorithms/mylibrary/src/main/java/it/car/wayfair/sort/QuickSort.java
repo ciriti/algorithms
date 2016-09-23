@@ -17,9 +17,9 @@ public class QuickSort {
             recursiveSort(arr, 0, arr.length-1);
         return arr;
     }
-    Integer[] sortComparator(Integer[] arr){
+    Integer[] sortComparator(Integer[] arr, Comparator<Integer> comparator){
         if(arr.length > 0)
-            recursiveSort_comparator(arr, 0, arr.length-1);
+            recursiveSort_comparator(arr, 0, arr.length-1, comparator);
         return arr;
     }
 
@@ -51,7 +51,7 @@ public class QuickSort {
         recursiveSort(arr, mid+1, pUp);
     }
 
-    private void recursiveSort_comparator(Integer[] arr, int pLo, int pUp){
+    private void recursiveSort_comparator(Integer[] arr, int pLo, int pUp, Comparator<Integer> comparator){
         if(pLo >= pUp) return;
         int lo = pLo;
         int up = pUp;
@@ -80,7 +80,7 @@ public class QuickSort {
         recursiveSort(arr, mid+1, pUp);
     }
 
-    static Comparator<Integer> comparator = new Comparator<Integer>() {
+    static Comparator<Integer> binaryComparator = new Comparator<Integer>() {
         @Override
         public int compare(Integer lhs, Integer rhs) {
             return (int)(Math.signum(lhs) - Math.signum(rhs));
@@ -94,7 +94,7 @@ public class QuickSort {
     public static void main(String arg[]){
         System.out.println(Arrays.asList(new QuickSort().sort(new Integer[]{1, 12, 5, 26, 7, 14, 3, 7, 2})));
         System.out.println(Arrays.asList(new QuickSort().sort(new Integer[]{1, -1, 1, -5, 1, -21})));
-        System.out.println("Comparator\n"+Arrays.asList(new QuickSort().sortComparator(new Integer[]{1, -1, 1, -5, 1, -21})));
+        System.out.println("Comparator\n"+Arrays.asList(new QuickSort().sortComparator(new Integer[]{1, -1, 1, -5, 1, -21}, binaryComparator)));
     }
 
 }
