@@ -36,11 +36,34 @@ public class LongestSubstringWithoutRepeatingCharacters {
         max = (max > maxTmp)? max : maxTmp;
         return max;
     }
+    public static int lengthOfLongestSubstringImprooved(String s) {
+
+        int[] visitedChar = new int[256];
+        Arrays.fill(visitedChar, -1);
+        int max = 0;
+        int maxTmp = 0;
+
+        int i = 0;
+
+        while(i < s.length()){
+            char x = s.charAt(i);
+            if(visitedChar[x] == -1){
+                visitedChar[x] = i;
+                maxTmp++;
+                i++;
+            }else{
+                max = (max > maxTmp)? max : maxTmp;
+                visitedChar[s.charAt(i)] = -1;
+            }
+        }
+        max = (max > maxTmp)? max : maxTmp;
+        return max;
+    }
 
     public static void main(String args[]){
-        System.out.println(lengthOfLongestSubstring("abcabcbb") == 3?"SUCCES":"ERROR");
-        System.out.println(lengthOfLongestSubstring("bbbbb") == 1?"SUCCES":"ERROR");
-        System.out.println(lengthOfLongestSubstring("pwwkew") == 3?"SUCCES":"ERROR");
-        System.out.println(lengthOfLongestSubstring("dvdf") == 3?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringImprooved("abcabcbb") == 3?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringImprooved("bbbbb") == 1?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringImprooved("pwwkew") == 3?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringImprooved("dvdf") == 3?"SUCCES":"ERROR");
     }
 }
