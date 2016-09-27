@@ -12,99 +12,64 @@ public class QuickSort {
      * LINK - http://www.algolist.net/Algorithms/Sorting/Quicksort
      */
 
-    Integer[] sort(Integer[] arr){
-        if(arr.length > 0)
-            recursiveSort(arr, 0, arr.length-1);
-        return arr;
-    }
-    Integer[] sortComparator(Integer[] arr, Comparator<Integer> comparator){
-        if(arr.length > 0)
-            recursiveSort_comparator(arr, 0, arr.length-1, comparator);
-        return arr;
+    void swap(int[] arr, int i, int j){
+        int c = arr[i];
+        arr[i] = arr[j];
+        arr[j] = c;
     }
 
-    private void recursiveSort(Integer[] arr, int pLo, int pUp){
-        if(pLo >= pUp) return;
-        int lo = pLo;
-        int up = pUp;
-        int mid = findPivot(lo, up);
-        while(lo < up){
+    public void sort(int[] arr){
+        sort(arr, 0, arr.length-1);
+    }
 
-            if(arr[lo] >= arr[mid]  && arr[up] <= arr[mid]){
-                int tmp = arr[lo];
-                arr[lo] = arr[up];
-                arr[up] = tmp;
-                lo ++;
-                up--;
-            }else if(arr[lo] >= arr[mid]){
-                up--;
-            }else if(arr[up] <= arr[mid]){
+    public int partition(int[] arr, int lo, int up){
+
+        int mid = arr[lo + (up-lo)/2];
+        while(lo<=up){
+
+
+            while(arr[lo] < mid){
                 lo++;
-            }else{
-                lo ++;
+            }
+            while(mid < arr[up]){
                 up--;
             }
 
-
-        }
-        recursiveSort(arr, pLo, mid);
-        recursiveSort(arr, mid+1, pUp);
-    }
-
-    private void recursiveSort_comparator(Integer[] arr, int pLo, int pUp, Comparator<Integer> comparator){
-        if(pLo >= pUp) return;
-        int lo = pLo;
-        int up = pUp;
-        int mid = findPivot(lo, up);
-        while(lo < up){
-
-            if(/*arr[lo] >= arr[mid]*/ comparator.compare(arr[lo], arr[mid]) >= 0   &&
-                    /*arr[up] <= arr[mid]*/ comparator.compare(arr[up], arr[mid]) <= 0){
-                int tmp = arr[lo];
-                arr[lo] = arr[up];
-                arr[up] = tmp;
-                lo ++;
-                up--;
-            }else if(comparator.compare(arr[lo], arr[mid]) >= 0){
-                up--;
-            }else if(comparator.compare(arr[up], arr[mid]) <= 0){
+            if((lo<=up)){
+                swap(arr, lo, up);
                 lo++;
-            }else{
-                lo ++;
                 up--;
             }
 
-
         }
-        recursiveSort(arr, pLo, mid);
-        recursiveSort(arr, mid+1, pUp);
+
+        return lo;
     }
 
-    static Comparator<Integer> binaryComparator = new Comparator<Integer>() {
-        @Override
-        public int compare(Integer lhs, Integer rhs) {
-            return (int)(Math.signum(lhs) - Math.signum(rhs));
-        }
-    };
+    public void sort(int[] arr, int lo, int up){
 
-    private int findPivot(int lo, int up){
-        return (up - lo) / 2 + lo;
+        int pivot = partition(arr, lo, up);
+
+        if(lo < pivot-1)
+            sort(arr, lo, pivot-1);
+        if(pivot < up)
+            sort(arr, pivot , up);
+
+
     }
 
     public static void main(String arg[]){
-        System.out.println(Arrays.asList(new QuickSort().sort(new Integer[]{1, 12, 5, 26, 7, 14, 3, 7, 2})));
-        System.out.println(Arrays.asList(new QuickSort().sort(new Integer[]{1, -1, 1, -5, 1, -21})));
-        System.out.println("Comparator\n"+Arrays.asList(new QuickSort().sortComparator(new Integer[]{1, -1, 1, -5, 1, -21}, binaryComparator)));
 
         System.out.println();
         for(int i = 0; i < 4; i ++){
-            Integer[][] test = new Integer[][]{
+            int[][] test = new int[][]{
                     {2,2,-1,0,0,-1,-1,0},
                     {0,0,0,0,0,-1,0,0},
                     {0,2,2,0,0,2,2,2},
                     {2,2,2,-1,0,-1,2,2}
             };
-            System.out.println(Arrays.asList(new QuickSort().sort(test[i])));
+            new QuickSort().sort(test[i]);
+            System.out.println(Arrays.toString(test[i]));
         }
     }
 

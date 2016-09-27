@@ -178,9 +178,7 @@ public class ArrayUtilsMethods {
         /**
          * For class
          */
-        Integer[] arr1 = new Integer[]{1,2,3,4,5,6,7,8,9};
-        Integer[] arr2 = new Integer[]{4,9,3,1,5,6,7,2,8};
-        createListFromArray(arr1);
+        createListFromArray(new Integer[]{1,2,3,4,5,6,7,8,9});
         intersection(new Integer[]{1,2,3,4,5,6,7,8,9}, new Integer[]{7,8,9});
 
         /**
