@@ -4,8 +4,10 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -173,6 +175,31 @@ public class ArrayUtilsMethods {
 
     }
 
+    public static void randomOrder(Integer[] arr){
+
+        System.out.println("---------------------------------------");
+
+        List<Integer> list = Arrays.asList(arr);
+        System.out.println("NO shuffle: " + list);
+        Collections.shuffle(list);
+        System.out.println("   shuffle: " + list);
+    }
+
+    public static void randomOrder1(Integer[] arr){
+
+        System.out.println("---------------------------------------");
+        System.out.println("NO shuffle: " + Arrays.asList(arr));
+        Random r = new Random();
+        for(int i = 1; i < arr.length; i++){
+            int rNum = r.nextInt(i+1);
+            int c = arr[i];
+            arr[i] = arr[rNum];
+            arr[rNum] = c;
+        }
+        System.out.println("   shuffle: " + Arrays.asList(arr));
+
+    }
+
     public static void  main(String[] arg){
 
         /**
@@ -182,6 +209,8 @@ public class ArrayUtilsMethods {
         Integer[] arr2 = new Integer[]{4,9,3,1,5,6,7,2,8};
         createListFromArray(arr1);
         intersection(new Integer[]{1,2,3,4,5,6,7,8,9}, new Integer[]{7,8,9});
+        randomOrder(new Integer[]{1,2,3,4,5,6,7,8,9});
+        randomOrder1(new Integer[]{1,2,3,4,5,6,7,8,9});
 
         /**
          * For simple type
