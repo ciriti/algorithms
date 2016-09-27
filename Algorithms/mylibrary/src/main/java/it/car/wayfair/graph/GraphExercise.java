@@ -1,7 +1,6 @@
-package it.car.graph.imm24;
+package it.car.wayfair.graph;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -22,7 +21,7 @@ import it.car.graph.IGraph;
  */
 
 @SuppressWarnings("ALL")
-public class ImmGraph implements IGraph<Integer> {
+public class GraphExercise implements IGraph<Integer> {
 
     List<Integer> vertices = new ArrayList<>();
     Map<Integer, List<Integer>> edges = new HashMap<>();
@@ -200,7 +199,7 @@ public class ImmGraph implements IGraph<Integer> {
          * 1. Init the data structures
          * N.B. COMPARE is the comparator used to order the element to the priority queue
          */
-        PriorityQueue<WeightedEdge> pq = new PriorityQueue<>(vertices.size(), COMPARE);
+        PriorityQueue<WeightedEdge> pq = new PriorityQueue<WeightedEdge>(vertices.size(), COMPARE);
         Set<Integer> visited = new HashSet<>();
         HashMap<Integer, List<Integer>> parents = new HashMap<>();
         HashMap<Integer, Integer> distance = new HashMap<>();
@@ -339,7 +338,7 @@ public class ImmGraph implements IGraph<Integer> {
     }
 
     public static void undirectedGrap(){
-        ImmGraph graph = new ImmGraph();
+        GraphExercise graph = new GraphExercise();
 
         // vertices
         graph.addVertex(1);
@@ -365,7 +364,7 @@ public class ImmGraph implements IGraph<Integer> {
         System.out.println();
     }
     public static void directedGrap(){
-        ImmGraph graph = new ImmGraph();
+        GraphExercise graph = new GraphExercise();
 
         // vertices
         graph.addVertex(1);
@@ -410,7 +409,7 @@ public class ImmGraph implements IGraph<Integer> {
 
     public static void directedWeightGrap(){
 
-        ImmGraph graph = new ImmGraph();
+        GraphExercise graph = new GraphExercise();
 
         // vertices
         graph.addVertex(1);
@@ -461,7 +460,7 @@ public class ImmGraph implements IGraph<Integer> {
 
     public static void dijkstra(){
 
-        ImmGraph graph = new ImmGraph();
+        GraphExercise graph = new GraphExercise();
 
         // vertices
         graph.addVertex(1);
@@ -490,45 +489,65 @@ public class ImmGraph implements IGraph<Integer> {
     }
 
     public List<Integer> trainDijkstra(int from, int to){
-        Queue<Integer> queue = new PriorityQueue<>(100, new Comparator<Integer>() {
+
+        Queue<WeightedEdge<Integer>> pq = new PriorityQueue<>(vertices.size(), new Comparator<WeightedEdge>() {
             @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1-o2;
+            public int compare(WeightedEdge lhs, WeightedEdge rhs) {
+                return lhs.weigth - rhs.weigth;
             }
         });
-        Set<Integer> visited = new HashSet<>();
-        Map<Integer, List<Integer>> parents = new HashMap<>();
-        HashMap<Integer, Integer> distance = new HashMap<>();
-        for(int v = 0; v < getNumberVertex(); v++){
-            distance.put(v, Integer.MAX_VALUE);
-        }
 
-        queue.add(from);
+        Map<Integer, List<Integer>> parents = new HashMap<>();
+        Map<Integer, Integer> distance = new HashMap<>();
+        Set<Integer> visited = new HashSet<>();
+
+
+        for(Integer ver : vertices){
+            distance.put(ver, Integer.MAX_VALUE);
+            parents.put(ver, new ArrayList<Integer>());
+        }
         distance.put(from, 0);
         visited.add(from);
-        parents.put(from, new ArrayList<Integer>());
 
-        while(!queue.isEmpty()){
-            Integer current = queue.poll();
-            for(WeightedEdge<Integer> edge : weighedEdges.get(current)){
-               if(!visited.contains(edge.node)){
-                   if(distance.get(edge.node) > distance.get(current) + edge.weigth){
-                       distance.put(edge.node, distance.get(current) + edge.weigth);
-                       if(parents.containsKey(edge.node)){
-                           parents.get(edge.node).clear();
-                       }else
-                           parents.put(edge.node, new ArrayList<Integer>());
-                       parents.get(edge.node).addAll(parents.get(current));
-                       parents.get(edge.node).add(current);
-                       visited.add(edge.node);
-                       queue.add(edge.node);
-                   }
-               }
+
+        pq.add(new WeightedEdge(from, 0));
+
+        while(!pq.isEmpty()){
+            // take the current node
+            WeightedEdge<Integer> ed = pq.poll();
+            Integer curr = ed.node;
+            // scan all children
+            for(WeightedEdge<Integer> wChild : weighedEdges.get(curr)){
+
+                Integer child = wChild.node;
+                // if the child is in visited continue with the while
+                if(visited.contains(child))
+                    continue;
+
+                pq.add(wChild);
+
+                // if children == to exit
+                if(to == curr){
+                    parents.get(to).add(curr, 0);
+                    break;
+                }
+
+                // add the child in visited
+                visited.add(child);
+
+                if(distance.get(child) > distance.get(curr) + ed.weigth){
+                    // update the distance
+                    distance.put(child, distance.get(curr) + ed.weigth);
+                    // add to child's parents the current node
+                    parents.get(child).clear();
+                    parents.get(child).add(curr);
+                    parents.get(child).addAll(parents.get(curr));
+
+                }
             }
         }
 
-        if(parents.containsKey(to))parents.get(to).add(to);
-
-        return parents.containsKey(to)?parents.get(to): Collections.EMPTY_LIST;
+        Collections.reverse(parents.get(to));
+        return parents.get(to);
     }
 }

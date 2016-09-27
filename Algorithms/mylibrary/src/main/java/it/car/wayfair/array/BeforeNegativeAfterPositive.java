@@ -1,10 +1,7 @@
 package it.car.wayfair.array;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
-
-import it.car.graph.util.In;
 
 /**
  * Created by carmeloiriti, 21/09/16.
@@ -142,6 +139,36 @@ public class BeforeNegativeAfterPositive {
         a[j] = swap;
     }
 
+    /**
+     * Insertionsort
+     *
+     * 1, -1, 5, -1, 3, 23, -12  k = 0, J = 1 -> j-1 = 0
+     *
+     */
+
+    public static Integer[] sort_insertionsort(Integer[] arr, Comparator<Integer> comparator){
+
+        for(int k = 0; k < arr.length-1; k++){
+            int j = k+1;
+            while(j > 0){
+
+                if(comparator.compare(arr[j], arr[j-1]) < 0){
+                    swap(j-1, j, arr);
+                }
+                j--;
+            }
+        }
+
+        return arr;
+    }
+
+    public static void swap(int a, int b, Integer[] arr){
+        Integer c = arr[a];
+        arr[a] = arr[b];
+        arr[b] = c;
+    }
+
+
 
 
     public  static void main(String args[]){
@@ -149,11 +176,23 @@ public class BeforeNegativeAfterPositive {
         Integer[] array = new Integer[]{1, -1, 5, -1, 3, 23, -12};
         System.out.println("input");
         System.out.println(Arrays.asList(array));
+
         System.out.println("output");
-        System.out.println(Arrays.asList(new BeforeNegativeAfterPositive().sort_1(array)));
-        System.out.println(Arrays.asList(new BeforeNegativeAfterPositive().sort_2(array)));
-        System.out.println(Arrays.asList(new BeforeNegativeAfterPositive().sort_3(array)));
-        System.out.println("dualpivot\n" + Arrays.asList(new BeforeNegativeAfterPositive().dualPivot(array)));
+//        System.out.println(Arrays.asList(new BeforeNegativeAfterPositive().sort_1(array)));
+//        System.out.println(Arrays.asList(new BeforeNegativeAfterPositive().sort_2(array)));
+//        System.out.println(Arrays.asList(new BeforeNegativeAfterPositive().sort_3(array)));
+        System.out.println(Arrays.asList(sort_insertionsort(array,
+
+                new Comparator<Integer>(){
+                    public int compare(Integer a, Integer b){
+                        return (int)(Math.signum(a) - Math.signum(b));
+                    }
+                }
+
+
+        )));
+
+//        System.out.println("dualpivot\n" + Arrays.asList(new BeforeNegativeAfterPositive().dualPivot(array)));
 
     }
 

@@ -95,6 +95,17 @@ public class QuickSort {
         System.out.println(Arrays.asList(new QuickSort().sort(new Integer[]{1, 12, 5, 26, 7, 14, 3, 7, 2})));
         System.out.println(Arrays.asList(new QuickSort().sort(new Integer[]{1, -1, 1, -5, 1, -21})));
         System.out.println("Comparator\n"+Arrays.asList(new QuickSort().sortComparator(new Integer[]{1, -1, 1, -5, 1, -21}, binaryComparator)));
+
+        System.out.println();
+        for(int i = 0; i < 4; i ++){
+            Integer[][] test = new Integer[][]{
+                    {2,2,-1,0,0,-1,-1,0},
+                    {0,0,0,0,0,-1,0,0},
+                    {0,2,2,0,0,2,2,2},
+                    {2,2,2,-1,0,-1,2,2}
+            };
+            System.out.println(Arrays.asList(new QuickSort().sort(test[i])));
+        }
     }
 
 }

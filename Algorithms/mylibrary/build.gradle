@@ -29,4 +29,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     testCompile 'junit:junit:4.12'
     compile 'com.google.guava:guava:19.0'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
 }

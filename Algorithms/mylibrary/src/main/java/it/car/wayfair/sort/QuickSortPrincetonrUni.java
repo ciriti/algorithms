@@ -11,7 +11,7 @@ public class QuickSortPrincetonrUni {
 
     public static void sort(Comparable[] a)
     {
-        StdRandom.shuffle(a);          // Eliminate dependence on input.
+//        StdRandom.shuffle(a);          // Eliminate dependence on input.
         sort(a, 0, a.length - 1);
     }
     private static void sort(Comparable[] a, int lo, int hi)
@@ -45,15 +45,47 @@ public class QuickSortPrincetonrUni {
     }
 
     private static boolean less(Comparable a, Comparable b){
-//        return a.compareTo(b) < 0;
-        return Math.signum((Integer)a) - Math.signum((Integer)b) < 0;
+        return a.compareTo(b) < 0;
+//        return Math.signum((Integer)a) - Math.signum((Integer)b) < 0;
     }
 
 
     public static void main(String args[]){
-        Integer[] arr = new Integer[]{1, -1, 5, -1, 3, 23, -12};
-        QuickSortPrincetonrUni.sort(arr);
-        System.out.println(Arrays.asList(arr));
+        Integer[] arr = new Integer[]{2,2,2,-1,0,-1,2,2};
+
+        User[] users = new User[]{
+                new User("a", 2),
+                new User("b", 2),
+                new User("c", 2),
+                new User("d", -1),
+                new User("e", -0),
+                new User("f", -1),
+                new User("g", 2),
+                new User("h", 2)
+        };
+
+        sort(users);
+        System.out.println(Arrays.asList(users));
+    }
+
+    static class User implements Comparable<User>{
+        final String name;
+        final Integer age;
+
+        public User(String name, Integer age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        @Override
+        public int compareTo(User another) {
+            return this.age - another.age;
+        }
+
+        @Override
+        public String toString() {
+            return "[" + name + " " + age + "]";
+        }
     }
 
 }
