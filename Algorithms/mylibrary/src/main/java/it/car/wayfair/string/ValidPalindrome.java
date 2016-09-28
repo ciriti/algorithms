@@ -1,6 +1,4 @@
-package it.car.wayfair.string_;
-
-import java.util.regex.Pattern;
+package it.car.wayfair.string;
 
 /**
  * Created by carmeloiriti, 23/09/16.

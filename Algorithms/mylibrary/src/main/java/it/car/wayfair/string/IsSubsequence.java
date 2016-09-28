@@ -1,4 +1,4 @@
-package it.car.wayfair.string_;
+package it.car.wayfair.string;
 
 /**
  * Created by ciriti on 24/09/16.
