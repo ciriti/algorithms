@@ -111,18 +111,18 @@ public class FindNonCommonElementInArray {
 		
 		return res;
 
-	/*	// Option 2: union minus intersection
+	/*	// Option 2: union minus intersectionSet
 		// Combine both sets
 		Set<Character> union = new HashSet<Character>(setA);
 		union.addAll(setB);
 
-		// Get the intersection
-		Set<Character> intersection = new HashSet<Character>(setA);
-		intersection.retainAll(setB);
+		// Get the intersectionSet
+		Set<Character> intersectionSet = new HashSet<Character>(setA);
+		intersectionSet.retainAll(setB);
 
-		// The symmetric difference is the union of the 2 sets minus the intersection
+		// The symmetric difference is the union of the 2 sets minus the intersectionSet
 		Set<Character> symmetricDifference2 = new HashSet<Character>(union);
-		symmetricDifference2.removeAll(intersection);*/
+		symmetricDifference2.removeAll(intersectionSet);*/
 
 		// Present our results
 //		System.out.println("Not in set A: " + notInSetA);
@@ -149,16 +149,16 @@ public class FindNonCommonElementInArray {
 //		System.out.println("In set B: " + setB);
 
 
-		// Option 2: union minus intersection
+		// Option 2: union minus intersectionSet
 		// Combine both sets
 		Set<Character> union = new HashSet<Character>(setA);
 		union.addAll(setB);
 
-		// Get the intersection
+		// Get the intersectionSet
 		Set<Character> intersection = new HashSet<Character>(setA);
 		intersection.retainAll(setB);
 
-		// The symmetric difference is the union of the 2 sets minus the intersection
+		// The symmetric difference is the union of the 2 sets minus the intersectionSet
 		Set<Character> symmetricDifference2 = new HashSet<Character>(union);
 		symmetricDifference2.removeAll(intersection);
 		
