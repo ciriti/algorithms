@@ -1,4 +1,4 @@
-package it.car.wayfair.string_;
+package it.car.wayfair.string;
 
 import java.util.Arrays;
 
