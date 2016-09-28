@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.SortedSet;
 
 /**
  * Created by carmeloiriti, 27/09/16.
@@ -78,17 +80,33 @@ public class ArrayUtilsMethods {
     }
 
 
-    public static void intersection(Integer[] arr1, Integer[] arr2){
+    /**
+     * Intersection of two array
+     * @param arr1
+     * @param arr2
+     */
+    public static void intersectionSet(Integer[] arr1, Integer[] arr2){
 
         System.out.println("---------------------------------------");
-        
+
         Set<Integer> set1 = new HashSet<>(Arrays.asList(arr1));
         Set<Integer> set2 = new HashSet<>(Arrays.asList(arr2));
 
         set1.removeAll(set2);
 
-        System.out.println("Intersection " + set1);
+        System.out.println("Intersection Set" + set1);
 
+    }
+
+    private static void intersectionList(Integer[] arr1, Integer[] arr2) {
+
+        System.out.println("---------------------------------------");
+        List<Integer> set1 = new ArrayList<>(Arrays.asList(arr1));
+        List<Integer> set2 = new ArrayList<>(Arrays.asList(arr2));
+
+        set1.removeAll(set2);
+
+        System.out.println("Intersection List" + set1);
     }
 
     /**
@@ -200,7 +218,60 @@ public class ArrayUtilsMethods {
 
     }
 
+    public static void shuffle(int[] arr){
+
+        System.out.println("---------------------------------------");
+
+        Random r = new Random();
+        for(int i = arr.length-1; i > 1; i--){
+            swap(arr, i , r.nextInt(i-1));
+        }
+        System.out.println("Shuffle: " + Arrays.toString(arr));
+    }
+
+    public static void swap(int[] arr, int i , int j){
+        int c = arr[i];
+        arr[i] = arr[j];
+        arr[j] = c;
+    }
+
+    public static <E> List<E> dealHand(List<E> deck, int n) {
+
+        System.out.println("---------------------------------------");
+
+        int deckSize = deck.size();
+        List<E> handView = deck.subList(deckSize - n, deckSize);
+        List<E> hand = new ArrayList<E>(handView);
+        handView.clear();
+        System.out.println("Remove: " + hand);
+        return hand;
+    }
+
+    public static void deleteRange(List<Integer> list, int first, int second){
+
+        System.out.println("---------------------------------------");
+
+        list.subList(first, second).clear();
+
+        System.out.println("deleted elem: " + list);
+    }
+
+    public static void deleteDuplicates(Integer[] arr){
+
+        System.out.println("---------------------------------------");
+        System.out.println(" original: " + Arrays.toString(arr));
+        Set<Integer> set = new LinkedHashSet<>(Arrays.asList(arr));
+        List<Integer> res = new ArrayList<>(set);
+        System.out.println("no duplic: " + res);
+
+    }
+
     public static void  main(String[] arg){
+
+        /**
+         * For List
+         */
+        deleteRange(new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8,9,0)), 1, 10);
 
         /**
          * For class
@@ -208,9 +279,12 @@ public class ArrayUtilsMethods {
         Integer[] arr1 = new Integer[]{1,2,3,4,5,6,7,8,9};
         Integer[] arr2 = new Integer[]{4,9,3,1,5,6,7,2,8};
         createListFromArray(arr1);
-        intersection(new Integer[]{1,2,3,4,5,6,7,8,9}, new Integer[]{7,8,9});
+        intersectionSet(new Integer[]{1,2,3,4,5,6,7,8,9}, new Integer[]{7,8,9});
+        intersectionList(new Integer[]{1,2,3,4,5,6,7,8,9, 9, 9}, new Integer[]{7,8,9,9});
         randomOrder(new Integer[]{1,2,3,4,5,6,7,8,9});
         randomOrder1(new Integer[]{1,2,3,4,5,6,7,8,9});
+        dealHand(new ArrayList(Arrays.asList(new Integer[]{1,2,3,4,5,6,7,8,9})), 3);
+        deleteDuplicates(new Integer[]{9,8,7,6,5,9,4,8,3,7,2,6,1});
 
         /**
          * For simple type
@@ -223,7 +297,7 @@ public class ArrayUtilsMethods {
         reverseArray1(new int[]{1,2,3,4,5,6,7,8,9});
         removeElemArray(new int[]{1,2,3,4,5,6,7,8,9}, 1);
         removeElemArray1(new int[]{1,2,3,4,5,6,7,8,9}, 1);
-
+        shuffle(new int[]{1,2,3,4,5,6,7,8,9});
 
     }
 
