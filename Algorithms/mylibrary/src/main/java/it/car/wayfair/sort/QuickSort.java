@@ -58,7 +58,7 @@ public class QuickSort {
 
     }
 
-    public static void main(String arg[]){
+    public static void main(String arg){
 
         System.out.println();
         for(int i = 0; i < 4; i ++){
@@ -71,6 +71,21 @@ public class QuickSort {
             new QuickSort().sort(test[i]);
             System.out.println(Arrays.toString(test[i]));
         }
+    }
+
+    public static void main(String[] args) {
+        int[] a = new int[]{-1,9,1,-4,-6,5,1,8};
+//        Arrays.sort(a,
+//                new Comparator<Integer>(){
+//
+//                    @Override
+//                    public int compare(Integer lhs, Integer rhs) {
+//                        return 0;
+//                    }
+//                }
+//        );
+//        System.out.println(Arrays.toString(a));
+
     }
 
 }
