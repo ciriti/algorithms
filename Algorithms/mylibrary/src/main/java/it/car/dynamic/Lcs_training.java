@@ -15,6 +15,7 @@ public class Lcs_training {
         System.out.println(lcs_recursive_String("AGGTAB", "GXTXAYB").equals("GTAB")?"SUCCESS":"ERROR");
         System.out.println(lcs_recursive_String("SFABC", "ABCPL").equals("ABC")?"SUCCESS":"ERROR");
         System.out.println(lcs_recursive_String("ABC", "ABC").equals("ABC")?"SUCCESS":"ERROR");
+        System.out.println(lcs_recursive_String("qaersdzfuuuz", "12a34as56d78a9s0df").equals("asdf")?"SUCCESS":"ERROR");
 
     }
 

@@ -1,5 +1,10 @@
 package it.car.dynamic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 /**
  * Created by carmeloiriti, 25/08/16.
  */
@@ -72,6 +77,57 @@ public class Lcs {
         return L[m][n];
     }
 
+    public static String lcsFindSubSequenceCollection(String s, String t){
+        List<Character> sArr = new ArrayList<>(s.length());
+        List<Character> tArr = new ArrayList<>(t.length());
+
+        for(char c : s.toCharArray()){
+            sArr.add(c);
+        }
+
+        for(char c : t.toCharArray()){
+            tArr.add(c);
+        }
+
+        sArr.retainAll(tArr);
+
+        tArr.retainAll(new ArrayList<>(sArr));
+
+        StringBuilder sb = new StringBuilder();
+
+        for(Character c : tArr){
+            sb.append(c);
+        }
+
+        return sb.toString();
+    }
+    public static String lcsFindSubSequence(String s, String t){
+
+        String[][] m = new String[s.length() + 1 ][t.length() + 1];
+        for(String[] row : m){
+            Arrays.fill(row, "");
+        }
+
+        for(int i = 1; i < t.length() + 1; i++){
+            for(int j = 1; j < s.length() + 1; j++){
+                if(s.charAt(j-1) == t.charAt(i-1)){
+                    m[j][i] = m[j-1][i-1]= m[j-1][i-1] + s.charAt(j-1);
+                }else{
+                    String x = m[j-1][i]==null?"":m[j-1][i];
+                    String y = m[j][i-1]==null?"":m[j][i-1];
+                    if(x.length() >=  y.length())
+                        m[j][i] = x;
+                    else
+                        m[j][i] = y;
+                }
+            }
+        }
+
+        return m[s.length()-1][t.length()-1];
+    }
+
+
+
     /* Utility function to get max of 2 integers */
     static int max(int a, int b){
         return (a > b)? a : b;
@@ -112,10 +168,21 @@ public class Lcs {
 
          */
 
-        System.out.println("Length of LCS is " + lcs(X,Y) );
-        System.out.println("Length of LCS recursive is " + lcs_recursive(X,Y, X.length(), Y.length()) );
-        System.out.println("Length of LCS recursive is " + lcs_recursive_String(X,Y) );
-
+//        System.out.println("Length of LCS is " + lcs(X,Y) );
+//        System.out.println("Length of LCS recursive is " + lcs_recursive(X,Y, X.length(), Y.length()) );
+//        System.out.println("Length of LCS recursive is " + lcs_recursive_String(X,Y) );
+//        System.out.println(lcs("qaersdzfuuuz", "12a34as56d78a9s0df") == 4?"SUCCESS":"ERROR");
+//        System.out.println(lcsFindSubSequence("qaersdzfuuuz", "12a34as56d78a9s0df").equals("asdf")?"SUCCESS":"ERROR");
+//        System.out.println(lcsFindSubSequenceCollection( "12a34as56d78a9s0df", "qaersdzfuuuz").equals("asdf")?"SUCCESS":"ERROR");
+        System.out.println("------------------------------------------------------------");
+        System.out.println(lcsFindSubSequence("aa", "aa").equals("aa")?"SUCCESS":"ERROR");
+        System.out.println(lcsFindSubSequenceCollection( "aa", "aa").equals("aa")?"SUCCESS":"ERROR");
+        System.out.println("------------------------------------------------------------");
+        System.out.println(lcsFindSubSequence("aa", "bb").equals("")?"SUCCESS":"ERROR");
+        System.out.println(lcsFindSubSequenceCollection( "aa", "bb").equals("")?"SUCCESS":"ERROR");
+        System.out.println("------------------------------------------------------------");
+        System.out.println(lcsFindSubSequence("qiwuzterqxztocerzvtiurituzqizy", "yxcv"));
+        System.out.println(lcsFindSubSequenceCollection( "qiwuzterqxztocerzvtiurituzqizy", "yxcv"));
     }
 
     /**
