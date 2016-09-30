@@ -2,6 +2,7 @@ package it.car.reserviorsampling;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -15,7 +16,6 @@ public class Test {
         for(String s : arrays[0]){
             res.add(Arrays.asList(s));
         }
-
         for(int i = 1; i < arrays.length; i++){
             res = multiplyTwoArrays(res, arrays[i]);
         }
@@ -47,6 +47,10 @@ public class Test {
         String[] set1 = new String[]{"aa", "bb", "cc", "dd", "ee"};
         String[] set2 = new String[]{"ff", "gg", "hh"};
         String[] set3 = new String[]{"ii", "ll", "mm"};
-        System.out.print(new Test().cartesianProduct(set1,set2,set3));
+//        System.out.print(new Test().cartesianProduct(set1,set2,set3));
+        int a = 9;
+        assert a < 0 ;
     }
+
+
 }
