@@ -1,28 +1,52 @@
 package it.car.reserviorsampling;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
+import java.util.List;
 
 /**
  * Created by carmeloiriti, 29/09/16.
  */
 public class Test {
 
-    public static void swap(int[] arr, int i, int j){
-        int c = arr[i];
-        arr[i] = arr[j];
-        arr[j] = c;
+    public List<List<String>> cartesianProduct(String[]... arrays){
+
+        List<List<String>> res = new ArrayList<>();
+        for(String s : arrays[0]){
+            res.add(Arrays.asList(s));
+        }
+
+        for(int i = 1; i < arrays.length; i++){
+            res = multiplyTwoArrays(res, arrays[i]);
+        }
+
+        System.out.println("dim " + res.size());
+        return res;
+
+    }
+
+    List<List<String>> multiplyTwoArrays(List<List<String>> res, String[] set2){
+
+        List<List<String>> tmp = new ArrayList<>(res.size() * set2.length);
+
+        for(List<String> list : res){
+            for(String s2 : set2){
+                List<String> l = new ArrayList<>(list);
+                l.add(s2);
+                tmp.add(l);
+            }
+        }
+
+        return tmp;
+
     }
 
 
     public static void main(String[] args) {
 
-        int[] arr = new int[]{1,2,3,4,5,6,7,8,9};
-        Random r = new Random();
-
-        for(int i = arr.length-1; i > 0; i--){
-            swap(arr, i, r.nextInt(i));
-        }
-        System.out.print(Arrays.toString(arr));
+        String[] set1 = new String[]{"aa", "bb", "cc", "dd", "ee"};
+        String[] set2 = new String[]{"ff", "gg", "hh"};
+        String[] set3 = new String[]{"ii", "ll", "mm"};
+        System.out.print(new Test().cartesianProduct(set1,set2,set3));
     }
 }
