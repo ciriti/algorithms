@@ -1,6 +1,8 @@
 package it.car.wayfair.string;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by carmeloiriti, 23/09/16.
@@ -97,13 +99,31 @@ public class LongestSubstringWithoutRepeatingCharacters {
         return max;
     }
 
+    public static int lengthOfLongestSubstringT(String s) {
+        if(s.length() < 2) return s.length();
+        Map<Character, Integer> map = new HashMap<>();
+        int lo = 0;
+        int max = 0;
+        for(int up = 0; up < s.length(); up++){
+            char c = s.charAt(up);
+            if(map.containsKey(c)){
+                max = Math.max(max, up - Math.max(lo, map.get(c)));
+                lo = Math.max(lo, map.get(c)) + 1;
+            }
+            max = Math.max(max, up - lo +1);
+            map.put(s.charAt(up), up);
+        }
+
+        return max;
+    }
+
     public static void main(String args[]){
 
-        System.out.println(lengthOfLongestSubstringMap("abcabcbb") == 3?"SUCCES":"ERROR");
-        System.out.println(lengthOfLongestSubstringMap("bbbbb") == 1?"SUCCES":"ERROR");
-        System.out.println(lengthOfLongestSubstringMap("pwwkew") == 3?"SUCCES":"ERROR");
-        System.out.println(lengthOfLongestSubstringMap("dvdf") == 3?"SUCCES":"ERROR");
-        System.out.println(lengthOfLongestSubstringMap("ckilbkd") == 5?"SUCCES":"ERROR");
-        System.out.println(lengthOfLongestSubstringMap("abba") == 2?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringT("abcabcbb") == 3?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringT("bbbbb") == 1?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringT("pwwkew") == 3?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringT("dvdf") == 3?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringT("ckilbkd") == 5?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringT("abba") == 2?"SUCCES":"ERROR");
     }
 }

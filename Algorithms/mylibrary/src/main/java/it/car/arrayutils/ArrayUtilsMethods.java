@@ -45,6 +45,7 @@ public class ArrayUtilsMethods {
         Arrays.sort(arr2);
         System.out.println("Array sorted");
         System.out.println(Arrays.toString(arr2).equals(Arrays.toString(arr1)));
+        System.out.println(Arrays.equals(arr2, arr1));
     }
 
     /**
@@ -208,14 +209,17 @@ public class ArrayUtilsMethods {
         System.out.println("---------------------------------------");
         System.out.println("NO shuffle: " + Arrays.asList(arr));
         Random r = new Random();
-        for(int i = 1; i < arr.length; i++){
-            int rNum = r.nextInt(i+1);
-            int c = arr[i];
-            arr[i] = arr[rNum];
-            arr[rNum] = c;
+        for(int i = arr.length -1 ; i > 0; i--){
+            swap(arr, r.nextInt(i), i);
         }
         System.out.println("   shuffle: " + Arrays.asList(arr));
 
+    }
+
+    public static void swap(Integer[] arr, int i, int j){
+        Integer c = arr[i];
+        arr[i] = arr[j];
+        arr[j] = c;
     }
 
     public static void shuffle(int[] arr){
