@@ -1,9 +1,10 @@
 package it.car.wayfair.string;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * Created by carmeloiriti, 23/09/16.
@@ -95,6 +96,24 @@ public class LongestSubstringWithoutRepeatingCharacters {
             visitedChar[c] = i;
             max = Math.max(max, i - lo + 1);
             i++;
+        }
+
+        return max;
+    }
+
+    public static int lengthOfLongestSubstringT(String s) {
+        if(s.length() < 2) return s.length();
+        Map<Character, Integer> map = new HashMap<>();
+        int lo = 0;
+        int max = 0;
+        for(int up = 0; up < s.length(); up++){
+            char c = s.charAt(up);
+            if(map.containsKey(c)){
+                max = Math.max(max, up - Math.max(lo, map.get(c)));
+                lo = Math.max(lo, map.get(c)) + 1;
+            }
+            max = Math.max(max, up - lo +1);
+            map.put(s.charAt(up), up);
         }
 
         return max;
