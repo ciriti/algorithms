@@ -1,7 +1,9 @@
 package it.car.wayfair.string;
 
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -119,11 +121,13 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
     public static void main(String args[]){
 
-        System.out.println(lengthOfLongestSubstringT("abcabcbb") == 3?"SUCCES":"ERROR");
-        System.out.println(lengthOfLongestSubstringT("bbbbb") == 1?"SUCCES":"ERROR");
-        System.out.println(lengthOfLongestSubstringT("pwwkew") == 3?"SUCCES":"ERROR");
-        System.out.println(lengthOfLongestSubstringT("dvdf") == 3?"SUCCES":"ERROR");
-        System.out.println(lengthOfLongestSubstringT("ckilbkd") == 5?"SUCCES":"ERROR");
-        System.out.println(lengthOfLongestSubstringT("abba") == 2?"SUCCES":"ERROR");
+        Deque<Integer> ll = new LinkedList<>();
+
+        System.out.println(lengthOfLongestSubstringMap("abcabcbb") == 3?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringMap("bbbbb") == 1?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringMap("pwwkew") == 3?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringMap("dvdf") == 3?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringMap("ckilbkd") == 5?"SUCCES":"ERROR");
+        System.out.println(lengthOfLongestSubstringMap("abba") == 2?"SUCCES":"ERROR");
     }
 }

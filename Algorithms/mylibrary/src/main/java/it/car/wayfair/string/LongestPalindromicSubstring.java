@@ -16,38 +16,37 @@ public class LongestPalindromicSubstring {
         int first = s.length();
         int second = 0;
 
-        for(int i = 0; i < s.length(); i++){
+        for (int i = 0; i < s.length(); i++) {
 
             int lo = i;
             int up = i;
 
-            for(int q = 0; q < 2; q++){
+            for (int q = 0; q < 2; q++) {
 
                 up = up + q;
 
-                while(lo >= 0 && up<= s.length()-1){
+                while (lo >= 0 && up <= s.length() - 1) {
 
-                    if(s.charAt(lo) == s.charAt(up)){
-                        if((up-lo) > (second-first)){
+                    if (s.charAt(lo) == s.charAt(up)) {
+                        if ((up - lo) > (second - first)) {
                             first = lo;
                             second = up;
                         }
                         lo--;
                         up++;
 
-                    }else{
+                    } else {
                         break;
                     }
                 }
             }
         }
 
-        return s.substring(first, second+1);
+        return s.substring(first, second + 1);
     }
 
 
-
-    public static void main(String args[]){
+    public static void main(String args[]) {
         String s = "90_aba_qwertzu_bbbb_iop";
         System.out.println(longestPalindrome(s));
     }
