@@ -1,6 +1,9 @@
 package it.car.wayfair.string;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * Created by carmeloiriti, 23/09/16.
@@ -98,6 +101,8 @@ public class LongestSubstringWithoutRepeatingCharacters {
     }
 
     public static void main(String args[]){
+
+        Deque<Integer> ll = new LinkedList<>();
 
         System.out.println(lengthOfLongestSubstringMap("abcabcbb") == 3?"SUCCES":"ERROR");
         System.out.println(lengthOfLongestSubstringMap("bbbbb") == 1?"SUCCES":"ERROR");
