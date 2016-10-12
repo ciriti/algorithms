@@ -4,15 +4,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
+
+import static android.R.attr.id;
+import static android.R.attr.process;
 
 /**
  * Created by carmeloiriti, 11/10/16.
  */
 public class FromNumbersToWords {
 
-    enum type {
-        hundred,
-        thousand
+    public static void main(String args[]){
+        init();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Insert number: ");
+        int num = scanner.nextInt();
+        System.out.println(translate(num));
+
     }
 
     private static Map<Integer, String> mapUnder20;
@@ -22,12 +30,6 @@ public class FromNumbersToWords {
 
         if(num < 20) return mapUnder20.get(num);
 
-        int tensthousand = num % 1000;
-        int thousand = num / 1000;
-        int tensmillion = thousand % 1000;
-        int millions = thousand / 1000;
-
-
         int processNumber = num;
 
         List<Integer> processNumberList = new ArrayList<>();
@@ -35,55 +37,47 @@ public class FromNumbersToWords {
         while(processNumber > 0){
 
             processNumberList.add(processNumber % 1000);
-//            processNumberList.add(processNumber / 1000);
 
             processNumber = processNumber / 1000;
         }
 
-        char[] tensthousandArr = String.valueOf(tensthousand).toCharArray();
-
         StringBuilder sb = new StringBuilder();
-
-        sb.append(processThreeDigit(type.hundred,
-                tensthousandArr.length > 0 ?tensthousandArr[0]:'0',
-                tensthousandArr.length > 1 ?tensthousandArr[1]:'0',
-                tensthousandArr.length > 2 ?tensthousandArr[2]:'0'
-                ));
+        int dim = processNumberList.size();
+        for(int i = dim-1; i >= 0; i --){
+            char[] arr = converToArr(processNumberList.get(i));
+            sb.append(processThreeDigit(identifier(i), arr[0], arr[1], arr[2]));
+            sb.append(" ");
+        }
 
         return sb.toString().trim();
     }
 
-    public static void main(String args[]){
-
-        init();
-//
-//        System.out.println(translate(22).equals("twenty two")?"SUCCESS":"ERROR");
-//        System.out.println(twoCharacters('9', '9'));
-//        System.out.println(twoCharacters('0', '1'));
-//        System.out.println(twoCharacters('1', '7'));
-//        System.out.println(twoCharacters('8', '0'));
-//        System.out.println(twoCharacters('4', '9'));
-
-//        System.out.println(processThreeDigit(type.hundred, '9', twoCharacters('9', '9')));
-//        System.out.println(processThreeDigit(type.hundred, '1', twoCharacters('0', '0')));
-//        System.out.println(processThreeDigit(type.hundred, '2', twoCharacters('1', '4')));
-//        System.out.println(processThreeDigit(type.hundred, '6', twoCharacters('5', '4')));
-//        System.out.println(processThreeDigit(type.hundred, '6', twoCharacters('5', '4')));
-//        System.out.println(processThreeDigit(type.hundred, '0', twoCharacters('5', '4')).trim());
-
-//        translate(1234);
-
-        System.out.println(translate(98340));
-
-
-
+    private static String identifier(int i){
+        switch (i){
+            case 2:
+                return "million";
+            case 1:
+                return "thousand";
+            default:
+                return "";
+        }
     }
 
+    private static char[] converToArr(int n){
+        char[] res = new char[]{'0', '0', '0'};
+        char[] numC = String.valueOf(n).toCharArray();
+        int index = 2;
+        for(int i = numC.length-1; i >=0; i--){
+            res[index] = numC[i];
+            index--;
+        }
+        return res;
+    }
 
-    private static String processThreeDigit(type t, char thirdChar, char secondChar,char firstChar){
+    private static String processThreeDigit(String identifier, char thirdChar, char secondChar,char firstChar){
 
         String firstSecond = twoCharacters(secondChar, firstChar);
-        return mapUnder20.get(getInteger(thirdChar)) + " " + (getInteger(thirdChar) == 0 ? "": t.name()) + " " + firstSecond;
+        return mapUnder20.get(getInteger(thirdChar)) + (thirdChar=='0'?"":" hundred") + " " + firstSecond + " " +identifier;
     }
 
     private static void init() {
