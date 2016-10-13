@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import static android.R.attr.id;
-import static android.R.attr.process;
-
 /**
  * Created by carmeloiriti, 11/10/16.
  */
 public class FromNumbersToWords {
+
+
+    private static Map<Integer, String> mapUnder20;
+    private static Map<Integer, String> maptens;
 
     public static void main(String args[]){
         init();
@@ -22,9 +23,6 @@ public class FromNumbersToWords {
         System.out.println(translate(num));
 
     }
-
-    private static Map<Integer, String> mapUnder20;
-    private static Map<Integer, String> maptens;
 
     public static String translate(int num){
 
