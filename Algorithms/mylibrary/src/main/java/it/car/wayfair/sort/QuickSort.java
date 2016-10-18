@@ -55,7 +55,6 @@ public class QuickSort {
         if(pivot < up)
             sort(arr, pivot , up);
 
-
     }
 
     public static void main(String arg){

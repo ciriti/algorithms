@@ -45,7 +45,7 @@ public class ProducerConsumer {
             for (int i = 0; i < 10 ; i ++){
                 try {
                     System.out.println("Producer: " + 1);
-                    blockingQueue.put(i);
+                    blockingQueue.offer(i);
                     sleep(1000);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -68,10 +68,11 @@ public class ProducerConsumer {
         public void run() {
             super.run();
 
-            for (int i = 0; i < 10 ; i ++){
+            while(true){
                 try {
-                    int val = blockingQueue.poll(5000, TimeUnit.MILLISECONDS);
+                    Integer val = blockingQueue.poll(5000, TimeUnit.MILLISECONDS);
                     System.out.println("Consumer[" + Thread.currentThread().getName() + "] consume " + val);
+                    if(val == null) break;
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
