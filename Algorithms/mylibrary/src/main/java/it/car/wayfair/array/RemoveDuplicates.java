@@ -1,9 +1,7 @@
 package it.car.wayfair.array;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 /**
  * Created by ciriti on 02/10/16.
@@ -11,38 +9,15 @@ import java.util.Set;
 
 public class RemoveDuplicates {
 
-    public static int removeDuplicates(int[] nums) {
+    public static int removeDuplicates(Integer[] nums) {
 
-        if(nums.length < 2) return nums.length;
-
-        int lo = 0;
-        int up = 1;
-        while(up < nums.length){
-            if(nums[lo] != nums[up]){
-                swap(nums, lo+1, up);
-                lo++;
-                up++;
-            }else{
-                up++;
-            }
-        }
-
-        System.out.println(Arrays.toString(nums));
-
-        return lo+1;
+        return nums.length - new LinkedHashSet<>(Arrays.asList(nums)).size();
 
     }
-
-    static void swap(int[] nums, int i, int j){
-        int c = nums[i];
-        nums[i] = nums[j];
-        nums[j] = c;
-    }
-
 
     public static void main(String[] args) {
 
-        System.out.println(removeDuplicates(new int[]{1,1,2,2,3}));
+        System.out.println(removeDuplicates(new Integer[]{1,1,2,2,3}));
     }
 
 }

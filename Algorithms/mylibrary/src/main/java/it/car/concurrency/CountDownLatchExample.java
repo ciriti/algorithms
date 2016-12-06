@@ -3,7 +3,6 @@ package it.car.concurrency;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Semaphore;
 
 /**
  * Created by carmeloiriti, 29/08/16.
@@ -69,17 +68,17 @@ public class CountDownLatchExample {
      * Utility class
      */
     static class MyThread extends Thread{
-        CountDownLatchExample semaphoreExample;
+        CountDownLatchExample countDownLatchExample;
 
-        public MyThread(String name, CountDownLatchExample semaphoreExample) {
+        public MyThread(String name, CountDownLatchExample countDownLatchExample) {
             super(name);
-            this.semaphoreExample = semaphoreExample;
+            this.countDownLatchExample = countDownLatchExample;
         }
 
         @Override
         public void run() {
             super.run();
-            semaphoreExample.print();
+            countDownLatchExample.print();
         }
     }
 }
