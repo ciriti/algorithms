@@ -1,6 +1,0 @@
-apply plugin: 'java'
-//https://docs.gradle.org/current/userguide/java_plugin.html
-
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-}
