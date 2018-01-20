@@ -1,12 +1,26 @@
+# Android Studio captures folder
+captures/
+
+# Intellij
 *.iml
-.gradle
-/local.properties
-/.idea/
+.idea/*
+
+# Keystore files
+*.jks
+
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild
+.idea/encodings.xml
+
+build/intermediates/dex-cache/cache.xml
+
+App/src/main/res/drawable-hdpi/.DS_Store
+
 .DS_Store
-/build
-/captures
-app/libs/
-app/src/main/res/drawable/
-implementation/libs/
-mylibrary/libs/
-src/main/java/it/car/her_/
+
+.idea/misc.xml
+
+.idea/compiler.xml
+
+projectFilesBackup/
+build/
