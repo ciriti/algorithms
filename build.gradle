@@ -1,23 +1,77 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
+
+    ext.kotlin_version = '1.1.51'
     repositories {
         jcenter()
+        mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+        maven { url 'http://wordpress-mobile.github.io/WordPress-Android' }
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url 'https://dl.bintray.com/drummer-aidan/maven' }
+        maven { url "https://maven.google.com" }
+        maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
-
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath "io.realm:realm-gradle-plugin:3.7.2"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath 'io.fabric.tools:gradle:1.+'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
     }
 }
 
 allprojects {
+
     repositories {
         jcenter()
+        maven { url "https://maven.google.com" }
+        maven { url "https://jitpack.io" }
     }
 }
 
+task wrapper(type: Wrapper) {
+    description 'Creates the gradle wrapper.'
+    gradleVersion '2.8'
+}
+
+
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+
+ext {
+    // Version Code and Name
+    versionCode = 1
+    versionName = "1"
+
+    // Android
+    buildToolsVersion = "27.0.2"
+    minSdkVersion = 15
+    targetSdkVersion = 27
+    compileSdkVersion = 27
+
+    supportLibVersion = "25.3.1"
+    runnerVersion = "0.5"
+    rulesVersion = "0.5"
+    espressoVersion = "2.2.2"
+    archLifecycleVersion = "1.0.0-rc1"
+    archRoomVersion = "1.0.0-rc1"
+    koin_version = "0.5.1"
+    rxjava_version = "2.0.1"
+    support_annotation_Version = "26.1.0"
+
+    mockito_version = "2.12.0"
+
+    // android support library
+    supportLibraryVersion = "27.0.2"
+
+    applicationId = 'algorithms.com.algorithms'
+    alphaApplicationId = 'algorithms.com.algorithms.alpha'
+    testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+    testApplicationId = 'algorithms.com.algorithms.test'
+
 }
