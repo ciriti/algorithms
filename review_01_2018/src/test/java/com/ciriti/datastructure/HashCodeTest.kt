@@ -15,7 +15,7 @@ class HashCodeTest {
             "BBAaAaAa", "BBAaBBBB", "BBAaAaBB", "BBAaBBAa")
 
     @Test
-    fun hashCodeTest(){
+    fun `test if the strings in the array have the same hashcode`(){
 
         val res = arr
                 .map { it.hashCode() }
@@ -27,11 +27,22 @@ class HashCodeTest {
     @Test
     fun `test single hashcode`(){
 
-        val res = arr
-                .map { it.hashCode() }
-                .reduce{ acc, s -> acc xor s }
+        val s = arr[0]
+        val s1 = arr[1]
 
-        Assert.assertEquals(0, res)
+        val h = s.myhash()
+        val h1 = s1.myhash()
+
+        Assert.assertTrue( h != h1)
     }
 
+}
+
+fun String.myhash() : Long{
+    val a = mutableListOf(17L)
+    a.addAll(toCharArray().map { it.toLong() })
+    return a
+            .reduce {
+                acc, i -> 31L * acc + i
+            }
 }
