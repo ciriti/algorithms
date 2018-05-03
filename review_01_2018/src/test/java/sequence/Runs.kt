@@ -4,7 +4,7 @@ package sequence
  * Created by carmeloiriti on 03.05.18.
  */
 
-/*
+/**
  * Any array may be viewed as a number of "runs" of equal numbers.
  * For example, the following array has two runs:
  *   1, 1, 1, 2, 2
