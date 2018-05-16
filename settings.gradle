@@ -1,1 +1,1 @@
-include ':app', ':mylibrary', ':review_01_2018'
+include ':app', ':mylibrary', ':review_01_2018', ':lib'
