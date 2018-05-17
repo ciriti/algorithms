@@ -5,39 +5,36 @@ import java.util.*
  */
 fun main(args : Array<String>){
     val s = Scanner(System.`in`)
-    val n = s.nextInt()
-    println(lastFibDigit(n))
+    val n = s.nextLong()
+    println(fib(n))
 
 }
 
-fun fib(n : Int) : Long{
+fun fib(n : Long) : Long{
     return when(n){
-        0 -> 0
-        1 -> 1
+        0L -> 0
+        1L -> 1
         else -> f(n)
     }
 }
 
 fun lastFibDigit(n : Int) : Long{
-    return Math.abs(n % 10L)
+    var n_b = 0L
+    var n_a = 1L
+    var curr = 1L
+
+    var count = n
+
+    while(--count > 0){
+        curr = (n_b % 10L + n_a % 10L) % 10L
+        n_b = n_a % 10L
+        n_a = curr
+    }
+
+    return curr
 }
 
-fun gcd(a :Int, b: Int) : Int{
-    var small = Math.max(a, b)
-    var big = 0
-    var remainder =  Math.min(a, b)
-
-    do{
-        big = small
-        small = remainder
-        remainder =  big % small
-
-    }while(remainder != 0)
-
-    return small
-}
-
-private fun f(n :Int) : Long{
+private fun f(n :Long) : Long{
     var n_2 = 0L
     var n_1 = 1L
     var curr = 1L

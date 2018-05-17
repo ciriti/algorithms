@@ -33,4 +33,8 @@ class FastScanner(stream : InputStream) {
     fun nextInt() : Int {
         return Integer.parseInt(next())
     }
+
+    fun nextLong() : Long {
+        return next().toLong()
+    }
 }

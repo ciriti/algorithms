@@ -22,6 +22,7 @@ fun gcd(a :Int, b: Int) : Int{
 
     return small
 }
+
 fun gcdSlow(a :Int, b: Int) : Int{
     var na = Math.min(a,b)
     for(i in na downTo 1){
