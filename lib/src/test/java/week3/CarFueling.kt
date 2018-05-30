@@ -77,9 +77,14 @@ class CarFueling{
             }
             maxIncr += (Random().nextInt(10) + 2)
             println("dim $dim arr ${arr.toList()}")
+            var speed1 = System.currentTimeMillis()
             var res1 = getLeastRefills(arr.toTypedArray(), maxIncr)
+            speed1 = System.currentTimeMillis() - speed1
+            var speed2 = System.currentTimeMillis()
             var res2 = getLeastRefillsTester(arr.toTypedArray(), maxIncr)
+            speed2 = System.currentTimeMillis() - speed2
             println("$res1 $res2")
+            println("my: $speed1 tester: $speed2")
             Assert.assertTrue(res1 == res2)
         }
     }
