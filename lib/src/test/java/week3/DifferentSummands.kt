@@ -11,8 +11,8 @@ import java.util.ArrayList
 fun optimalSummands(n : Int) : List<Int>{
     val res = mutableListOf<Int>()
     var value = n
-    var i = 0
-    while(value > 0 && i++ <= value){
+    var i = 1
+    while(value > 0 && i <= value){
         if( 2 * i >= value ){
             res.add(value)
             value = 0
@@ -20,6 +20,7 @@ fun optimalSummands(n : Int) : List<Int>{
             res.add(i)
             value -= i
         }
+        i++
     }
     return res
 }
