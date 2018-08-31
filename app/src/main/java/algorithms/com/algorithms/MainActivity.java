@@ -5,11 +5,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+
+    public MYClass2 x = new MYClass2();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        x.print();
+        System.out.println("AAAAAA" + x);
     }
 
     @Override
@@ -49,4 +54,15 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    static class MYClass2{
+        public MYClass2() {
+            System.out.println("xxxxxxxxxxx");
+        }
+
+        public void print(){
+            System.out.println("AAAAAAAAAAAA");
+        }
+    }
+
 }

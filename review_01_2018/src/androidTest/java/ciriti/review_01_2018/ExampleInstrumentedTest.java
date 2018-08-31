@@ -22,5 +22,8 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("ciriti.review_01_2018.test", appContext.getPackageName());
+
+        System.out.println(String.format(appContext.getString(R.string.test), 80));
+        System.out.println(String.format(appContext.getString(R.string.test_1), 80));
     }
 }
