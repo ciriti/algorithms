@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">review_01_2018</string>
+    <string name="test">%s %</string>
+    <string name="test_1">%s %%</string>
 </resources>
