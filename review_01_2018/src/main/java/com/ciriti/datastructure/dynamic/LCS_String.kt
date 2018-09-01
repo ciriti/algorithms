@@ -65,16 +65,6 @@ fun<T> backtrack(s1 : String, s2 : String, matrix : Array<Array<T>>) : String{
     return sb.reverse().toString()
 }
 
-/**
- * Extension to print the matrix
- */
-fun <T> Array<Array<T>>.printMatrix(){
-    this.forEach { it1 ->
-        print(" ${it1.toList()}")
-        println()
-    }
-}
-
 
 
 
