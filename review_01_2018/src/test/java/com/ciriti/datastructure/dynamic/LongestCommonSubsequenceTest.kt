@@ -12,6 +12,8 @@ class LongestCommonSubsequenceTest {
     fun lcs(){
         Assert.assertEquals("oorld", "Hello World".longestCommonSubsequence("Bonjour le monde"))
         Assert.assertEquals("ABCB", "ABCBX".longestCommonSubsequence("ABDCAB"))
+        Assert.assertEquals(3, "ports".longestCommonSubsequence(" short").length)
+        Assert.assertEquals(5, "editing".longestCommonSubsequence(" distance").length)
     }
 
 }
