@@ -15,7 +15,6 @@ fun main(args : Array<String>){
 
 inline fun <reified T> Array<T>.lcs(other : Array<T>) : Array<T> {
     val matrix = lcsBuildMatrix(this, other)
-    matrix.printMatrix()
     return lcsBackTracking(this, other, matrix)
 }
 
