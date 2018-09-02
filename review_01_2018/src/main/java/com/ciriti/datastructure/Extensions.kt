@@ -7,3 +7,25 @@ package com.ciriti.datastructure
 object L {
     operator fun <T> get (vararg a : T) = listOf(*a)
 }
+
+/**
+ * Extension to print the matrix
+ */
+fun <T> Array<Array<T>>.printMatrix(){
+    this.forEach { it1 ->
+        print(" ${it1.toList()}")
+        println()
+    }
+}
+
+/**
+ * Just for exercise, this function already exists
+ */
+fun <T, K> Array<T>.myZip(array : Array<K>) : ArrayList<Pair<T, K>>{
+    val resSize = kotlin.math.min(size, array.size)
+    val res = ArrayList<Pair<T, K>>(resSize)
+    for(i in 0 until resSize){
+        res.add(Pair(this[i], array[i]))
+    }
+    return res
+}
