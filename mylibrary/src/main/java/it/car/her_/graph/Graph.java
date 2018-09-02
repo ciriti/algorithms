@@ -1,20 +1,14 @@
 package it.car.her_.graph;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
-
-import it.car.dynamic.Lis;
 
 /**
  * Created by carmeloiriti, 05/12/16.
@@ -38,7 +32,7 @@ class Graph {
 
     public void addVertex(Character c){
         nodes.add(c);
-        edges.put(c, new ArrayList<>());
+        edges.put(c, new ArrayList());
     }
 
     public void addEdge(Character a, Character b, int weigth){
@@ -53,10 +47,13 @@ class Graph {
         distances = new HashMap<>();
         parents = new HashMap<>();
         visited = new HashSet<>();
-        pq = new PriorityQueue<>(100, (Character lhs, Character rhs) -> {
-            int distLhs = distances.get(lhs);
-            int distRhs = distances.get(rhs);
-            return distLhs - distRhs;
+        pq = new PriorityQueue<>(100, new Comparator<Character>() {
+            @Override
+            public int compare(Character lhs, Character rhs) {
+                int distLhs = distances.get(lhs);
+                int distRhs = distances.get(rhs);
+                return distLhs - distRhs;
+            }
         });
 
         /**
@@ -65,7 +62,7 @@ class Graph {
          */
         for(Character v : nodes){
             distances.put(v, Integer.MAX_VALUE);
-            parents.put(v, new ArrayList<>());
+            parents.put(v, new ArrayList<Character>());
         }
 
         /** set initial condition */

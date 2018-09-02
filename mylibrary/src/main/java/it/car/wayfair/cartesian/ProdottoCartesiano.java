@@ -1,7 +1,5 @@
 package it.car.wayfair.cartesian;
 
-import com.google.common.collect.Lists;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,7 +10,7 @@ import java.util.List;
  */
 public class ProdottoCartesiano {
 
-    public List<List<Integer>> cartesianProduct(List<Integer>... lists){
+    public static List<List<Integer>> cartesianProduct(List<Integer>... lists){
 
         List<Integer> begin = lists[0];
         List<List<Integer>> tmp = new ArrayList<>();
@@ -30,7 +28,7 @@ public class ProdottoCartesiano {
         return tmp;
     }
 
-    private List<List<Integer>> numtiplyList(List<List<Integer>> firstList, List<Integer> secondList) {
+    private static List<List<Integer>> numtiplyList(List<List<Integer>> firstList, List<Integer> secondList) {
 
         List<List<Integer>> res = new ArrayList<>();
 
@@ -52,7 +50,7 @@ public class ProdottoCartesiano {
         System.out.println(new ProdottoCartesiano().cartesianProduct(Arrays.asList(1,2,3,4,5,6,7,8,9,0), Arrays.asList(1,2,3,4,5,6,7,8,9,0), Arrays.asList(1,2,3,4,5,6,7,8,9,0), Arrays.asList(1,2,3,4,5,6,7,8,9,0)));
         System.out.println(System.currentTimeMillis() - start);
         start = System.currentTimeMillis();
-        System.out.println(Lists.cartesianProduct(Arrays.asList(1,2,3,4,5,6,7,8,9,0), Arrays.asList(1,2,3,4,5,6,7,8,9,0), Arrays.asList(1,2,3,4,5,6,7,8,9,0), Arrays.asList(1,2,3,4,5,6,7,8,9,0)));
+        System.out.println(cartesianProduct(Arrays.asList(1,2,3,4,5,6,7,8,9,0), Arrays.asList(1,2,3,4,5,6,7,8,9,0), Arrays.asList(1,2,3,4,5,6,7,8,9,0), Arrays.asList(1,2,3,4,5,6,7,8,9,0)));
         System.out.println(System.currentTimeMillis() - start);
     }
 
