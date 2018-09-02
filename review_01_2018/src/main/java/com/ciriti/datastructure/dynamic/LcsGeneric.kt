@@ -1,9 +1,10 @@
 package com.ciriti.datastructure.dynamic
 
-import com.ciriti.datastructure.printMatrix
-
 /**
  * Created by ciriti
+ *
+ * Link : https://github.com/raywenderlich/swift-algorithm-club/tree/master/Longest%20Common%20Subsequence
+ *
  */
 
 fun main(args : Array<String>){

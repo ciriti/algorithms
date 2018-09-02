@@ -17,3 +17,15 @@ fun <T> Array<Array<T>>.printMatrix(){
         println()
     }
 }
+
+/**
+ * Just for exercise, this function already exists
+ */
+fun <T, K> Array<T>.myZip(array : Array<K>) : ArrayList<Pair<T, K>>{
+    val resSize = kotlin.math.min(size, array.size)
+    val res = ArrayList<Pair<T, K>>(resSize)
+    for(i in 0 until resSize){
+        res.add(Pair(this[i], array[i]))
+    }
+    return res
+}
