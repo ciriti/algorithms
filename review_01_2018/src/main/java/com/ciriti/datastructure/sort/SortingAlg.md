@@ -6,9 +6,9 @@
 | ------------- | ------------- | ------------- | ------------- | -------------     | ------------- |
 | Merge Sort    | O(nlogn)      | O(nlogn)      | O(nlogn)      | O(n)              | yes           |
 | Insertion Sort| O(n)          | O(n^2)        | O(n^2)        | O(1)              | yes           |
-| Bubble Sort   | ____________  | ____________  | ____________  | ____________      | ____________  |
+| Bubble Sort   | O(n)          | O(n^2)        | O(n^2)        | O(1)              | yes           |
 | Quicksort     | O(nlogn)      | O(n^2)        | O(nlogn)      | logn best/n       | dep. version  |
-| Heapsort      | ____________  | ____________  | ____________  | ____________      | ____________  |
+| Heapsort      | O(nlogn)      | O(nlogn)      | O(nlogn)      | O(1)              | no            |
 
 ## [Insertion Sort]()
 
@@ -31,3 +31,12 @@ sort an array. The algorithm picks a pivot element, *A[q]*, and then
 rearranges the array into two subarrays *A[p...q-1]*,
 such that all elements are less than *A[q]*, and *A[q+1...r]*, such that
 all elements are greater than or equal to *A[q]*.
+
+## Bubblesort
+
+Bubble sort is a comparison​-based algorithm that compares each pair of
+elements in an array and swaps them if they are out of order until the
+entire array is sorted. For each element in the list, the algorithm
+compares every pair of elements.
+
+![Gif of Bubblesort](https://ds055uzetaobb.cloudfront.net/image_optimizer/4f60337caedcc96ffeb08692e4f8d00f5cb3fd58.gif)
