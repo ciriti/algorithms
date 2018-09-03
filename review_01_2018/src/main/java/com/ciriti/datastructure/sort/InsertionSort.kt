@@ -22,7 +22,7 @@ fun main(args : Array<String>){
 /**
  * inline functions -> https://kotlinlang.org/docs/reference/inline-functions.html
  */
-inline fun <reified T : Comparable<T>> Array<T>.insertionSort(){
+fun <T : Comparable<T>> Array<T>.insertionSort(){
     (0 until size).forEach { firstIndex ->
         ( firstIndex downTo  1).forEach{
             when{

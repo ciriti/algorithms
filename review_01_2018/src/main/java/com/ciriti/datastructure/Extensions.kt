@@ -38,3 +38,39 @@ fun <T : Comparable<T>> Array<T>.swap(i : Int, j : Int){
     this[i] = this[j]
     this[j] = copy
 }
+
+/**
+ * Just for exercise, this function already exists
+ */
+fun <T> Array<T>.myPartition(func : (T) -> Boolean) : Pair<ArrayList<T>, ArrayList<T>>{
+
+    val list1 = ArrayList<T>()
+    val list2 = ArrayList<T>()
+
+    forEach {
+        when(func(it)){
+            true -> list1.add(it)
+            else -> list2.add(it)
+        }
+    }
+
+    return Pair(list1, list2)
+}
+
+/**
+ * Just for exercise, this function already exists
+ */
+fun <T> List<T>.myPartition(func : (T) -> Boolean) : Pair<List<T>, List<T>>{
+
+    val list1 = ArrayList<T>()
+    val list2 = ArrayList<T>()
+
+    forEach {
+        when(func(it)){
+            true -> list1.add(it)
+            else -> list2.add(it)
+        }
+    }
+
+    return Pair(list1, list2)
+}
