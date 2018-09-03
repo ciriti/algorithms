@@ -29,3 +29,12 @@ fun <T, K> Array<T>.myZip(array : Array<K>) : ArrayList<Pair<T, K>>{
     }
     return res
 }
+
+/**
+ * Swap two elements in the array
+ */
+fun <T : Comparable<T>> Array<T>.swap(i : Int, j : Int){
+    val copy = this[i]
+    this[i] = this[j]
+    this[j] = copy
+}
