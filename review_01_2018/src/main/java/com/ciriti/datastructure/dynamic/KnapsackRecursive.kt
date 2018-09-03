@@ -1,35 +1,35 @@
 package com.ciriti.datastructure.dynamic
 
+import kotlin.math.max
+
 /**
  * Created by ciriti
  */
 fun main(args : Array<String>){
 
     val capacity = 10
-    val goldBars = arrayOf(1, 4, 8)
-
-    val res = knapsackRec(capacity, goldBars, mutableMapOf())
+    val goldBars = arrayOf(3, 6 , 3)
+    val values = Array(capacity + 1){ mutableListOf<Int>() }
+    val res = knapsackRec(capacity, goldBars, mutableMapOf(), values)
 
     println(res)
 
 }
 
-fun knapsackRec(cap : Int, arr : Array<Int>, map : MutableMap<Int, Int>) : Int{
+fun knapsackRec(cap : Int, arr : Array<Int>, map : MutableMap<Int, Int>, cachedLists : Array<MutableList<Int>>) : Int{
 
-    if(map.containsKey(cap)) return map[cap]!!
+    if(map.containsKey(cap)){
+        return map[cap]!!
+    }
+    map[cap]?:map.put(cap, 0)
 
-    map[cap] = 0
-
-
-    (1..arr.size).forEach{
-        if(arr[it - 1] <= cap){
-            val value = knapsackRec(cap - arr[it - 1], arr, map) + it - 1
-            if(value > map[cap]?:0){
-                map[cap] = value
-            }
+    (0 until arr.size).forEach{
+        if(arr[it] <= cap){
+            val value = knapsackRec(cap - arr[it], arr, map, cachedLists) + arr[it]
+            map[cap] = max(value, map[cap]!!)
         }
     }
 
-    return map[cap] ?: 0
+    return map[cap]!!
 }
 
