@@ -50,8 +50,44 @@ fun <T : Comparable<T>> List<T>.mergeSort() : List<T> {
     return list
 }
 
-inline fun <reified T : Comparable<T>> List<T>.mergeSort(comparator : (t : T) -> Int){
+inline fun <reified T : Comparable<T>> List<T>.mergeSort(compare : (t1 : T, t2 : T) -> Int) : List<T> {
+    if (size <= 1) return this
 
+    val (_half1, _half2) = this.partitionInTwo()
+
+    val half1 = _half1.mergeSort()
+    val half2 = _half2.mergeSort()
+
+    val list = mutableListOf<T>()
+
+    var index1 = 0
+    var index2 = 0
+
+    while (index1 < half1.size || index2 < half2.size) {
+
+        when {
+            index1 < half1.size && index2 < half2.size -> {
+                if(compare(half1[index1],half2[index2]) == -1 || compare(half1[index1],half2[index2]) == 0){
+                    list.add(half1[index1])
+                    index1++
+                }else{
+                    list.add(half2[index2])
+                    index2++
+                }
+            }
+            index1 < half1.size -> {
+                list.add(half1[index1])
+                index1++
+            }
+            index2 < half2.size -> {
+                list.add(half2[index2])
+                index2++
+            }
+        }
+
+    }
+
+    return list
 }
 
 /**
