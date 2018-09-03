@@ -23,3 +23,11 @@ Mergesort is a comparison-based algorithm that focuses on how to merge together 
 ![Gif of Merge Sort](https://ds055uzetaobb.cloudfront.net/image_optimizer/8c074d46d4c96077d11f9e8cab9ff5d95bdc3da0.gif)
 
 ## Quicksort
+
+![Gif of Quicksort](https://ds055uzetaobb.cloudfront.net/image_optimizer/904290ba2b43687554b1d074d091367f370a0c08.gif)
+
+Quicksort is a comparison-based algorithm that uses divide-and-conquer to
+sort an array. The algorithm picks a pivot element, *A[q]*, and then
+rearranges the array into two subarrays *A[p...q-1]*,
+such that all elements are less than *A[q]*, and *A[q+1...r]*, such that
+all elements are greater than or equal to *A[q]*.
