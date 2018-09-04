@@ -10,7 +10,7 @@ import java.util.List;
 public class EqualParts {
 
     public static List<Integer> divide(int num, int parts){
-        List<Integer> res = new ArrayList<>(4);
+        List<Integer> res = new ArrayList<>(parts);
 
         int elementsPerPart = num / parts;
         int elemToAdd = num % parts;
