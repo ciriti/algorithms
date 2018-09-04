@@ -12,11 +12,35 @@ fun main(args : Array<String>){
     val capacity = 10
     val goldBars = arrayOf(1, 4, 8)
 
-    println(knapsackGoldBars(capacity, goldBars))
+    val matrix = knapsackGoldBars(capacity, goldBars)
+    val (maximumCapacity, elements) = knapsackBactracking(capacity, goldBars, matrix)
+    println("maximumCapacity: $maximumCapacity \n elements: $elements")
 
 }
 
-fun knapsackGoldBars(capacity : Int, goldBars : Array<Int>) : Int{
+fun knapsackBactracking(capacity : Int, goldBars : Array<Int>, matrix : Array<Array<Int>>) : Pair<Int, List<Int>>{
+
+    val list = mutableListOf<Int>()
+    var row = goldBars.size
+    var col = capacity
+    while(row >= 1 && col >= 1){
+
+        when(matrix[row][col]){
+            matrix[row - 1][col] -> row-=1
+            else -> {
+                list.add(goldBars[row - 1])
+                col -= goldBars[row - 1]
+                row -= 1
+
+            }
+        }
+
+    }
+
+    return Pair(matrix.last().last(), list)
+}
+
+fun knapsackGoldBars(capacity : Int, goldBars : Array<Int>) : Array<Array<Int>>{
 
     val array = Array(goldBars.size + 1 ){ Array(capacity + 1) { 0 } }
 
@@ -46,7 +70,7 @@ fun knapsackGoldBars(capacity : Int, goldBars : Array<Int>) : Int{
 
     array.printMatrix()
 
-    return array.last().last()
+    return array
 }
 
 /**
