@@ -1,6 +1,6 @@
 package com.ciriti.datastructure
 
-import io.reactivex.Observable
+import com.ciriti.printThis
 
 /**
  * Created by Carmelo Iriti
@@ -8,21 +8,12 @@ import io.reactivex.Observable
 
 fun main(args: Array<String>) {
 
-//    println(listOf(1, 1, 1, 1, 1, 1).mySum())
-//    println(listOf(1, 1, 1, 1, 1, 1).myProduct())
-    println(listOf(1, 2, 3, 4, 5, 6).map { if(it % 2  ==  0) {
-        listOf(it * 2, 6)
-    }else
-
-        listOf(it * 2) })
-    println(listOf(1, 2, 3, 4, 5, 6).flatMap {
-
-        if(it % 2  ==  0) {
-            listOf(it * 2, 6)
-        }else
-            listOf(it * 2)
-    })
-
+    listOf(1, 1, 1, 1, 1, 1).mySum().printThis()
+    listOf(1, 1, 1, 1, 1, 1).myProduct().printThis()
+    listOf(1, 1, 1, 1, 1, 1).myMap { it * 2 }.printThis()
+    listOf(1, 1, 1, 1, 1, 1).myFlatMap { listOf(it * 2) }.printThis()
+    listOf(1, 1, 1, 3, 1, 1).myFilter { it % 3 != 0 }.printThis()
+    listOf(1, 1, 1, 3, 1, 1).myJoinTwoString().printThis()
 
 }
 
@@ -39,4 +30,16 @@ fun Iterable<Int>.myProduct(): Int {
 
 fun <T, R> Iterable<T>.myMap(transform: (t: T) -> R): List<R> {
     return fold(listOf()) { acc, i -> acc + transform(i) }
+}
+
+fun <T, R> Iterable<T>.myFlatMap(transform: (t: T) -> List<R>): List<R> {
+    return fold(listOf()) { acc, i -> acc + transform(i) }
+}
+
+fun <T> Iterable<T>.myFilter(filter: (t: T) -> Boolean): List<T> {
+    return fold(listOf()) { acc, i -> if (filter(i)) acc + i else acc }
+}
+
+fun <T> Iterable<T>.myJoinTwoString(separator: String = " ,", transformer: (t: T) -> String = { "$it" }): String {
+    return foldIndexed("") { index, acc, i -> acc + separator.let { if (index == 0) "" else it } + transformer(i) }
 }
