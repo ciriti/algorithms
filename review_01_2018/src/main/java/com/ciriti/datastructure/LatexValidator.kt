@@ -25,17 +25,17 @@ class LatexValidator {
     }
 
     fun file2Rows(jsonName : String) : List<String>{
-        val inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(jsonName)
-        val br = BufferedReader(InputStreamReader(inputStream, "UTF-8"))
-        var line: String?
+//        val inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(jsonName)
+//        val br = BufferedReader(InputStreamReader(inputStream, "UTF-8"))
+//        var line: String?
         var res = mutableListOf<String>()
 
-        do{
-            line = br.readLine() ?: break
-            res.add(line)
-        }while ( line != null)
-
-        br.close()
+//        do{
+//            line = br.readLine() ?: break
+//            res.add(line)
+//        }while ( line != null)
+//
+//        br.close()
 
         return res
     }
