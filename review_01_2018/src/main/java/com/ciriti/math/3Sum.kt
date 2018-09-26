@@ -10,10 +10,10 @@ fun main(args: Array<String>) {
     println(array.sumOfThree(target))
 }
 
-fun Array<Int>.sumOfThree(target: Int): List<Triple<Int, Int, Int>> {
+fun Array<Int>.sumOfThree(target: Int): List<List<Int>> {
 
     val map: MutableMap<Int, MutableSet<Pair<Int, Int>>> = mutableMapOf()
-    val results: MutableSet<Triple<Pair<Int, Int>, Pair<Int, Int>, Pair<Int, Int>>> = mutableSetOf()
+    val results: MutableSet<List<Int>> = mutableSetOf()
 
     forEachIndexed { index, value ->
         map[(target - value)] = mutableSetOf(Pair(index, value))
@@ -26,11 +26,7 @@ fun Array<Int>.sumOfThree(target: Int): List<Triple<Int, Int, Int>> {
                 if (it) {
                     map[sum]!!.forEach {
                         results.add(
-                                Triple(
-                                        first = Pair(index, value),
-                                        second = Pair(i, this[i]),
-                                        third = Pair(it.first, it.second)
-                                )
+                                listOf(value, this[i], it.second)
                         )
                     }
 
@@ -39,6 +35,7 @@ fun Array<Int>.sumOfThree(target: Int): List<Triple<Int, Int, Int>> {
         }
     }
 
-    return results.map { Triple(it.first.second, it.second.second, it.third.second) }
+    return results.toList()
 
 }
+
