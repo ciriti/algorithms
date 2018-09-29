@@ -4,6 +4,8 @@ import kotlin.collections.Map.Entry
 
 /**
  * Created by Carmelo Iriti
+ *
+ * LINK - https://leetcode.com/problems/majority-element/
  */
 
 fun main(args: Array<String>) {
