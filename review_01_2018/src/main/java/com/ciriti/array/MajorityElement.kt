@@ -20,10 +20,10 @@ fun IntArray.majorityElement(): Int {
 
 fun <K> Map<K, MutableList<Int>>.myMaxBy(selector: (entry: Entry<K, MutableList<Int>>) -> Int): Entry<K, MutableList<Int>>? {
   var res: Entry<K, MutableList<Int>>? = null
-  var max : Int = Int.MIN_VALUE
+  var max: Int = Int.MIN_VALUE
   entries.forEach {
     val tmp = selector(it)
-    if(max <= tmp){
+    if (max <= tmp) {
       max = tmp
       res = it
     }
@@ -43,4 +43,19 @@ fun <K> IntArray.myGroupBy(keySelector: (element: Int) -> K): Map<K, MutableList
   }
 
   return linkedHashMap
+}
+
+fun <K> LinkedHashMap<K, MutableList<Int>>.myMaxBy(selector: (entry: Entry<K, MutableList<Int>>) -> Int):
+    Entry<K, MutableList<Int>>? {
+  if (entries.isEmpty()) return null
+  var res = entries.first()
+  var max = selector(res)
+  for (elem in entries) {
+    val tmpMax = selector(elem)
+    if (max < tmpMax) {
+      max = tmpMax
+      res = elem
+    }
+  }
+  return res
 }
