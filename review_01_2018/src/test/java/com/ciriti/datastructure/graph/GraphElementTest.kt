@@ -9,6 +9,21 @@ import org.junit.Test
 class GraphElementTest {
 
   @Test
+  fun dfsGraph() {
+    val n =
+      C['a',
+          C['b',
+              C['d'], C['f'], C['g']
+          ],
+          C['c',
+              C['x'], C['h', C['i', C['l'] ] ], C['y']
+          ]
+      ]
+    val resultDfs = listOf('a', 'c', 'y', 'h', 'i', 'l', 'x', 'b', 'g', 'f', 'd')
+    Assert.assertEquals(resultDfs.toString(), n.dfs().toString())
+  }
+
+  @Test
   fun bfsGraph() {
     val n =
       C['a',
@@ -19,8 +34,8 @@ class GraphElementTest {
               C['x'], C['h', C['i', C['l'] ] ], C['y']
           ]
       ]
-    val result = listOf('a', 'c', 'y', 'h', 'i', 'l', 'x', 'b', 'g', 'f', 'd')
-    Assert.assertEquals(result.toString(), n.dfs().toString())
+    val resultDfs = listOf('a', 'b', 'c', 'd', 'f', 'g', 'x', 'h', 'y', 'i', 'l')
+    Assert.assertEquals(resultDfs.toString(), n.bfs().toString())
   }
 
 }
