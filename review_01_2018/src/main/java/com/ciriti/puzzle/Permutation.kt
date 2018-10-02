@@ -1,6 +1,8 @@
-package com.ciriti.anagram
+package com.ciriti.puzzle
 
 import com.ciriti.printThis
+import com.marcinmoskala.math.combinations
+import com.marcinmoskala.math.permutationsNumber
 
 /**
  * Created by Carmelo Iriti
@@ -8,13 +10,13 @@ import com.ciriti.printThis
 
 fun main(args: Array<String>) {
 
-  listOf(1,2,3, 3)
+  listOf('a', 'b', 'c')
       .myPerm()
       .printThis()
 
 }
 
-fun List<Int>.myPerm(): List<List<Int>> {
+fun List<Char>.myPerm(): List<List<Char>> {
 
   return when {
     isEmpty() -> listOf()
@@ -33,10 +35,10 @@ fun List<Int>.myPerm(): List<List<Int>> {
 
 }
 
-fun List<Int>.sumAt(
+fun List<Char>.sumAt(
   index: Int,
-  element: Int
-) : List<Int>{
+  element: Char
+) : List<Char>{
   return when {
     index == 0 -> listOf(element) + this
     index == size -> this + listOf(element)

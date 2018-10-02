@@ -1,4 +1,4 @@
-package com.ciriti.anagram
+package com.ciriti.puzzle
 
 import com.ciriti.printThis
 import java.util.HashSet
