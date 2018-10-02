@@ -1,5 +1,7 @@
 package com.ciriti.datastructure.graph
 
+import com.ciriti.datastructure.Stack
+
 /**
  * Created by ciriti
  */
@@ -33,21 +35,31 @@ fun <T> Node<T>.printChild() {
     }
 }
 
-fun<T> Node<T>.dfs(){
-
+fun<T> Node<T>.dfs() : List<T>{
+  val list = mutableListOf<T>()
+  val stack = Stack<Node<T>>()
+  stack.push(this)
+  while(!stack.isEmpty()){
+    val current : Node<T> = stack.pop()!!
+    list.add(current.value)
+    current.args.forEach { stack.push(it) }
+  }
+  return list
 }
 
 
 fun main(args: Array<String>) {
 
-    val n = C[
-            'a',
+    val n =
+      C['a',
             C['b',
-                    C['d'], C['f'], C['g']
+                C['d'], C['f'], C['g']
             ],
-            C['c', C['h', C['i', C['l']]]]
-    ]
+            C['c',
+                C['x'], C['h', C['i', C['l'] ] ], C['y']
+            ]
+      ]
 
-    n.printChild()
+  println(n.dfs())
 
 }
