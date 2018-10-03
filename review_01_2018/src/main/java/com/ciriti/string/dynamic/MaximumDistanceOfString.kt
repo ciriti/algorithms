@@ -1,7 +1,5 @@
 package com.ciriti.datastructure.dynamic
 
-import java.util.*
-
 /**
  * Created by Carmelo Iriti
  */

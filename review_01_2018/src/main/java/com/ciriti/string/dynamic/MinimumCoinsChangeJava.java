@@ -1,4 +1,4 @@
-package com.ciriti.datastructure.dynamic;
+package com.ciriti.string.dynamic;
 
 /**
  * Created by Carmelo Iriti
