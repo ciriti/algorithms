@@ -66,8 +66,8 @@ public class MyAnagram {
 		list.add(anagram.substring(0,1));
 		map.put(1, list);
 		makeAnagram(map, 1, anagram);
-//		System.out.println(count);
-//		System.out.println(map);
+		System.out.println(count);
+		System.out.println(map);
 		
 	}
 	

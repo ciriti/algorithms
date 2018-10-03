@@ -1,7 +1,5 @@
 package com.ciriti.datastructure.dynamic
 
-import ciriti.review_01_2018.R
-
 /**
  * Created by ciriti
  */
