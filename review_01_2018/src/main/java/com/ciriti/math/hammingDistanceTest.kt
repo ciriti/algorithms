@@ -23,7 +23,7 @@ fun Int.hammingDistance(other: Int): Int {
   }
 
   (0 until xBin.length).forEach {
-    if (xBin[it] !== yBin[it]) {
+    if (xBin[it] != yBin[it]) {
       hDiff++
     }
   }
