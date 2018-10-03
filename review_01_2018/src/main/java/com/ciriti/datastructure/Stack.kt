@@ -18,6 +18,9 @@ class Stack<T> : Collection<T> {
   }
 
   override fun containsAll(elements: Collection<T>): Boolean {
+    for (element in elements) {
+      if (!contains(element)) return false
+    }
     return true
   }
 
