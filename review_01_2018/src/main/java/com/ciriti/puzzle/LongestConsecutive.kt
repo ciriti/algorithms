@@ -50,6 +50,12 @@ fun t1() {
 
     val array = Array<Int>(0) { 0 }
     val array1 = arrayOf<Int>()
-    val map = hashMapOf<>()
+    val map = mapOf(1 to "x", 2 to "y", -1 to "zz")
+    val map1 = hashMapOf(1 to "x", 2 to "y", -1 to "zz")
+    val set = 1
+    set.apply {  }
+    map.with
+    set.apply {  }
+    set.apply {  }
 
 }
