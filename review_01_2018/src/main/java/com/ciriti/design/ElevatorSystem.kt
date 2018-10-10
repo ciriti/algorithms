@@ -18,6 +18,23 @@ fun main(args : Array<String>){
     }
 }
 
+class  Elevator{
+
+    var floorState : Floor_ = Floor_.GROUND
+    var floorSelected : MutableSet<Floor_> = mutableSetOf()
+
+    var floorListener : ((floor : Floor_)-> Unit)? = null
+    var stateListener : ((floor : Floor_)-> Unit)? = null
+
+    fun selectFloor(nextFloor : Int){
+
+    }
+
+}
+
+
+
+
 //sealed class Floor(val floor : Int){
 //    abstract fun prev() : Floor
 //    abstract fun next() : Floor
