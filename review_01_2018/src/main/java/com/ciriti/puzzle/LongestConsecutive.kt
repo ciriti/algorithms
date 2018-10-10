@@ -54,7 +54,6 @@ fun t1() {
     val map1 = hashMapOf(1 to "x", 2 to "y", -1 to "zz")
     val set = 1
     set.apply {  }
-    map.with
     set.apply {  }
     set.apply {  }
 
