@@ -24,7 +24,10 @@ fun knapsackWithoutRepetitions(capacity: Int, list: List<Pair<Int, Int>>) : Int 
     (1..list.size).forEach{ elem ->
         (1..capacity).forEach{ cap ->
             when{
-                cap >= list[elem - 1].first -> matrix[elem][cap] = max( matrix[elem-1][cap], list[elem - 1].second + matrix[elem - 1][ cap - list[elem - 1].first] )
+                cap >= list[elem - 1].first -> matrix[elem][cap] = max(
+                        matrix[elem-1][cap],
+                        matrix[elem - 1][ cap - list[elem - 1].first] +list[elem - 1].second
+                )
                 else -> matrix[elem][cap] = matrix[elem - 1][cap]
             }
         }
