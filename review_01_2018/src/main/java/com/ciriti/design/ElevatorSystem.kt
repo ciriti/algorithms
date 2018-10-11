@@ -22,20 +22,6 @@ fun main(args: Array<String>) {
   view.click()
 }
 
-fun main() {
-  var state = Floor.GROUND
-  while (state.next() != Floor.NOTHING) {
-    println("$state -> ${state.next()}")
-    println("${state.ordinal} -> ${state.next().ordinal}")
-    state = state.next()
-  }
-  while (state.prev() != Floor.NOTHING) {
-    println("$state -> ${state.prev()}")
-    println("${state.ordinal} -> ${state.prev().ordinal}")
-    state = state.prev()
-  }
-}
-
 class View {
   private var clickListener: ((view: View) -> Unit)? = null
   fun onClickListener(func: (view: View) -> Unit) {
@@ -111,6 +97,21 @@ enum class Floor {
 
   abstract fun prev(): Floor
   abstract fun next(): Floor
+}
+
+
+fun main() {
+  var state = Floor.GROUND
+  while (state.next() != Floor.NOTHING) {
+    println("$state -> ${state.next()}")
+    println("${state.ordinal} -> ${state.next().ordinal}")
+    state = state.next()
+  }
+  while (state.prev() != Floor.NOTHING) {
+    println("$state -> ${state.prev()}")
+    println("${state.ordinal} -> ${state.prev().ordinal}")
+    state = state.prev()
+  }
 }
 
 //sealed class Floor(val floor : Int){
