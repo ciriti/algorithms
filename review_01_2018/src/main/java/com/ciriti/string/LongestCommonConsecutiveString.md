@@ -18,8 +18,7 @@ corner of matrix, at `matrix[n+1][m+1]`.
 
  if `matrix[n][m]` is equal to `matrix[n+1][m+1]` we pop last element on the stack
 
- ```
-
+```
  fun <T : Comparable<T>> backtrackConsecutive(
    s1: String,
    s2: String,
@@ -62,8 +61,7 @@ corner of matrix, at `matrix[n+1][m+1]`.
    }
    return stack.toString()
  }
-
- ```
+```
 
 ```
 |   |  Ø|  K|  I|  T|  T|  E|  N|
