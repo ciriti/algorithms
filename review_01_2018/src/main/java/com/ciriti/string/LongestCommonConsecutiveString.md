@@ -20,7 +20,7 @@ corner of matrix, at `matrix[n+1][m+1]`.
 
  ```
 
- + fun <T : Comparable<T>> backtrackConsecutive(
+ fun <T : Comparable<T>> backtrackConsecutive(
    s1: String,
    s2: String,
    matrix: Array<Array<T>>
