@@ -60,7 +60,8 @@ corner of matrix, at `matrix[n+1][m+1]`.
 
    }
    return stack.toString()
- }```
+ }
+ ```
 
 ```
 |   |  Ø|  K|  I|  T|  T|  E|  N|
