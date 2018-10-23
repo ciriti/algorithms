@@ -4,7 +4,15 @@ package com.ciriti.pattern
  * Created by Carmelo Iriti
  */
 
-abstract class SmartPhone{
+fun main(args : Array<String>){
+    val smartPhone : ASmartPhone = SmartPhone()
+}
+
+class SmartPhone : ASmartPhone(){
+    override fun makeBattery(): IBattery = Battery()
+}
+
+abstract class ASmartPhone{
 
     val battery : IBattery = makeBattery()
 
