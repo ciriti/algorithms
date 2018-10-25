@@ -12,7 +12,8 @@ import kotlinx.coroutines.experimental.runBlocking
  */
 
 fun main(args: Array<String>) = runBlocking {
-  val job = GlobalScope.launch { // launch new coroutine and keep a reference to its Job
+  val job = GlobalScope.launch {
+    // launch new coroutine and keep a reference to its Job
     delay(1000L)
     println("World!")
   }
@@ -24,6 +25,22 @@ fun main1(args: Array<String>) = runBlocking {
   // start main coroutine
   GlobalScope.launch {
     // launch new coroutine in background and continue
+    delay(1000L)
+    println("World!")
+  }
+  Thread.currentThread()
+      .name
+  println("Hello,") // main coroutine continues here immediately
+  delay(2000L)      // delaying for 2 seconds to keep JVM alive
+
+}
+
+fun main_(args: Array<String>) = runBlocking<Unit> {
+  // start main coroutine
+  launch {
+    // launch new coroutine in background and continue
+    Thread.currentThread()
+        .name
     delay(1000L)
     println("World!")
   }
