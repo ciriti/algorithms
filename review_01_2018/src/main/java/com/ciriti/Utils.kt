@@ -5,4 +5,4 @@ package com.ciriti
  */
 
 fun<T> List<T>.printAll() = println(this)
-fun<T> T.printThis() = println(this)
+fun<T> T.printThis(prefix : String = "", postfix : String = "") = println("$prefix $this $postfix")

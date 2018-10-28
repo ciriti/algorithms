@@ -22,6 +22,12 @@ is an object.
 ## Structural patterns
 ## Behavioral patterns
 
+### Command
+
+Encapsulate a request as an object, thereby letting you parameterize
+clients with different requests, queue or log requests, and support
+undoable operations.
+
 ### Strategy
 
 Define a family of algorithms, encapsulate each one, and make them
