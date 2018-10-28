@@ -12,13 +12,13 @@ fun main(args : Array<String>){
     val weights = arrayOf( 6,  3,  4, 2)
     val values  = arrayOf(30, 14, 16, 9)
 
-    val listOfPairs = weights.myZip( values )
+    val listOfPairs = weights.zip( values )
 
     println(knapsack(capacity, listOfPairs))
 
 }
 
-fun knapsack(capacity : Int, list : ArrayList<Pair<Int, Int>>) : Int{
+fun knapsack(capacity : Int, list : List<Pair<Int, Int>>) : Int{
 
     val res = Array(capacity + 1){ 0 }
 
