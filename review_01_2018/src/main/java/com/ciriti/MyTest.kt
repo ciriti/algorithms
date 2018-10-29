@@ -23,7 +23,6 @@ fun main(args: Array<String>) {
 
   println(duplicateNonZero(listOf(3, 0, 5)))
 
-
 }
 
 private fun duplicateNonZero(list: List<Int>): List<Int> {
