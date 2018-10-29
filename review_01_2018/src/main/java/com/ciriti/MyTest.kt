@@ -1,5 +1,7 @@
 package com.ciriti
 
+import java.math.BigInteger
+
 /**
  * Created by Carmelo Iriti
  */
@@ -18,4 +20,15 @@ val foo2: Int
 
 fun main(args: Array<String>) {
   println("$foo1 $foo1 $foo2 $foo2")
+
+  println(duplicateNonZero(listOf(3, 0, 5)))
+
+
+}
+
+private fun duplicateNonZero(list: List<Int>): List<Int> {
+  return list.flatMap {
+    if (it == 0) return listOf()
+    listOf(it, it)
+  }
 }
