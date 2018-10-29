@@ -50,7 +50,7 @@ fun main(args: Array<String>) {
    *
    * public inline fun <T, R> T.let(block: (T) -> R): R
    *
-   * usage: same as let except allows receiver access
+   * usage: convert from one type to another
    */
   val a3: A = A().let { it }
 
