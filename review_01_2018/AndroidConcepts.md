@@ -48,26 +48,26 @@ component (EXPLICIT INTENT) or a specific type of component (IMPLICIT INTENT).
 
 Component of an Intent:
 
-- Component name
-- Action
-- Data
-- Category
-- Extras
-- Flags
+- **Component name**
+- **Action**
+- **Data**
+- **Category**
+- **Extras**
+- **Flags**
 
 Component name: The name of the component to start can be null and you
 have an implicit intent
 
-Action: A string that specifies the generic action to perform (such as view or pick)
+**Action**: A string that specifies the generic action to perform (such as view or pick)
 
-Data: the URI and/or MIME type
+**Data**: the URI and/or MIME type
 
-Category:  kind of component that should handle the intent
+**Category**:  kind of component that should handle the intent
 
-Extras: Key-value pairs that carry additional information required to
+**Extras**: Key-value pairs that carry additional information required to
 accomplish the requested action
 
-Flags: The flags may instruct the Android system how to launch an
+**Flags**: The flags may instruct the Android system how to launch an
 activity (for example, which task the activity should belong to)
 and how to treat it after it's launched (for example, whether it belongs
 in the list of recent activities).
@@ -84,14 +84,14 @@ These process types are (in order of importance):
 3. service process
 4. cached process
 
-FOREGROUND PROCESS: for instance when an activity at the top of the
+**FOREGROUND PROCESS**: for instance when an activity at the top of the
 screen and the user is interacting with.
 
-VISIBLE PROCESS: when an activity is in pause.
+**VISIBLE PROCESS**: when an activity is in pause.
 
-SERVICE PROCESS: when a **started service** is started.
+**SERVICE PROCESS**: when a **started service** is started.
 
-CACHED PROCESS: is one that is not currently needed.
+**CACHED PROCESS**: is one that is not currently needed.
 
 ### Task
 A [task](https://developer.android.com/guide/components/activities/tasks-and-back-stack)
@@ -130,12 +130,12 @@ any activities started by this one open in a separate task.
 
 ### Parcelables and Bundles
 
-[Parcelable](https://developer.android.com/guide/components/activities/parcelables-and-bundles):
+[**Parcelable**](https://developer.android.com/guide/components/activities/parcelables-and-bundles):
 A Parcelable is the Android implementation of the Java
 Serializable. It is an interface. These object don't use the reflection
 so you have to write manually how to serialize the objects.
 This way a Parcelable can be processed relatively fast, compared to the
 standard Java serialization.
 
-Bundle: it is generally used for passing data between various Android
+**Bundle**: it is generally used for passing data between various Android
 activities.
