@@ -74,7 +74,8 @@ in the list of recent activities).
 
 # Processes and Application Lifecycle
 
-Android places each process into an "importance hierarchy" based on the
+Android places each [process](https://developer.android.com/guide/components/activities/process-lifecycle)
+into an "importance hierarchy" based on the
 components running in them and the state of those components.
 These process types are (in order of importance):
 
@@ -91,3 +92,43 @@ VISIBLE PROCESS: when an activity is in pause.
 SERVICE PROCESS: when a **started service** is started.
 
 CACHED PROCESS: is one that is not currently needed.
+
+### Task
+A [task](https://developer.android.com/guide/components/activities/tasks-and-back-stack)
+is a collection of activities that users interact with when performing
+a certain job. The activities are arranged in a stack—the back stack)—in t
+he order in which each activity is opened.
+
+### Defining launch modes
+
+You can define different launch modes in two ways:
+- [Using the manifest file](https://developer.android.com/guide/components/activities/tasks-and-back-stack#ManifestForTasks)
+- [Using Intent flags](https://developer.android.com/guide/components/activities/tasks-and-back-stack#IntentFlagsForTasks)
+
+
+Using the manifest file
+
+Use the **launchMode** attribute in the manifest, it has:
+- **standard**
+- **singleTop**: the activity if created will call the onNewIntent method
+- **singleTask**: The system creates a new task and instantiates the activity
+at the root of the new task, if an instance of the activity already exists
+in a separate task, the system routes the intent to the existing
+instance through a call to its onNewIntent() method, rather than
+creating a new instance. Only one instance of the activity can exist at
+a time.
+- **singleInstance**: Same as "singleTask", except that the system doesn't
+launch any other activities into the task holding the instance.
+The activity is always the single and only member of its task;
+any activities started by this one open in a separate task.
+
+### Parcelables and Bundles
+[Parcelable](https://developer.android.com/guide/components/activities/parcelables-and-bundles):
+A Parcelable is the Android implementation of the Java
+Serializable. It is an interface. These object don't use the reflection
+so you have to write manually how to serialize the objects.
+This way a Parcelable can be processed relatively fast, compared to the
+standard Java serialization.
+
+Bundle: it is generally used for passing data between various Android
+activities.
