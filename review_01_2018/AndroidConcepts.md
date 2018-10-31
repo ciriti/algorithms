@@ -55,7 +55,7 @@ Component of an Intent:
 - **Extras**
 - **Flags**
 
-Component name: The name of the component to start can be null and you
+**Component name**: The name of the component to start can be null and you
 have an implicit intent
 
 **Action**: A string that specifies the generic action to perform (such as view or pick)
