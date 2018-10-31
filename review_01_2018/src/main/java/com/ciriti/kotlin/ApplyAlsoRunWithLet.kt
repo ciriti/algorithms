@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
    *
    * usage: side effects in chains
    */
-  val a: A = A().also { println("side effect 1") }.also { println("side effect 2") }
+  val a: A = A().also { println("side effect 1 $it") }.also { println("side effect 2$it") }
 
   /**
    * EXTENSION:
@@ -25,7 +25,7 @@ fun main(args: Array<String>) {
    *
    * usage: configure object
    */
-  val a1: A = A().apply { name = "Carmelo" }
+  val a1: A = A().apply { name = "Carmelo $this" }
 
   /**
    * EXTENSION:
