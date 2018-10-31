@@ -102,27 +102,34 @@ he order in which each activity is opened.
 ### Defining launch modes
 
 You can define different launch modes in two ways:
+
 - [Using the manifest file](https://developer.android.com/guide/components/activities/tasks-and-back-stack#ManifestForTasks)
+
 - [Using Intent flags](https://developer.android.com/guide/components/activities/tasks-and-back-stack#IntentFlagsForTasks)
 
 
 Using the manifest file
 
 Use the **launchMode** attribute in the manifest, it has:
+
 - **standard**
+
 - **singleTop**: the activity if created will call the onNewIntent method
+
 - **singleTask**: The system creates a new task and instantiates the activity
 at the root of the new task, if an instance of the activity already exists
 in a separate task, the system routes the intent to the existing
 instance through a call to its onNewIntent() method, rather than
 creating a new instance. Only one instance of the activity can exist at
 a time.
+
 - **singleInstance**: Same as "singleTask", except that the system doesn't
 launch any other activities into the task holding the instance.
 The activity is always the single and only member of its task;
 any activities started by this one open in a separate task.
 
 ### Parcelables and Bundles
+
 [Parcelable](https://developer.android.com/guide/components/activities/parcelables-and-bundles):
 A Parcelable is the Android implementation of the Java
 Serializable. It is an interface. These object don't use the reflection
