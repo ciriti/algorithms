@@ -58,7 +58,7 @@ Component of an Intent:
 **Component name**: The name of the component to start can be null and you
 have an implicit intent
 
-**Action**: A string that specifies the generic action to perform (such as view or pick)
+**Action**: specifies the generic action to perform (such as view or pick)
 
 **Data**: the URI and/or MIME type
 
