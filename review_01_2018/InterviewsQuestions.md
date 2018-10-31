@@ -44,7 +44,7 @@ nor should they; there is always room to store one item temporarily.
 
 **Component**: it is the bridge between module and the consumer (Activity or fragment)
 
-Inside Activity/Fragment we can get these dependencies by defining the **Inject** annotation.
+Inside Activity/Fragment we can get these dependencies by defining the **Inject**
 annotation
 
 ### Design pattern
