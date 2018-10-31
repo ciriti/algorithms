@@ -12,6 +12,7 @@ These are the [most important collections](https://docs.google.com/document/d/1D
 ### ObserverOn vs subscribeOn
 
 **SubscribeOn** specifies the Scheduler on which an Observable will execute its create method
+
 **ObserveOn** specifies the Scheduler on which an observer will consume the items emitted by the Observable.
 
 ### RxJava Subjects Vs Processors
