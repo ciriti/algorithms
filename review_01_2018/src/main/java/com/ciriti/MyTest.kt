@@ -21,8 +21,16 @@ val foo2: Int
   }
 
 fun main(args: Array<String>) {
-  println("$foo1 $foo1 $foo2 $foo2")
-  println(duplicateNonZero(listOf(3, 0, 5)))
+//  println("$foo1 $foo1 $foo2 $foo2")
+//  println(duplicateNonZero(listOf(3, 0, 5)))
+  val listWithNulls: List<String?> = listOf("Kotlin", null)
+  val map = mapOf<Int, Int>()
+  for (item in listWithNulls) {
+    item?.let { println(it) } // prints A and ignores null
+    map[1]?.let {
+      println("map")
+    } // prints A and ignores null
+  }
 
 }
 
@@ -32,3 +40,4 @@ private fun duplicateNonZero(list: List<Int>): List<Int> {
     listOf(it, it)
   }
 }
+
