@@ -1,4 +1,4 @@
-package com.ciriti.string.dynamic;
+package com.ciriti.dynamic;
 
 /**
  * Created by Carmelo Iriti

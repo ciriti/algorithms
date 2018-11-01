@@ -23,10 +23,11 @@ val foo2: Int
 fun main(args: Array<String>) {
 //  println("$foo1 $foo1 $foo2 $foo2")
 //  println(duplicateNonZero(listOf(3, 0, 5)))
-  val map = mapOf<Int, Int>()
-    map[1]?.let {
-      println("map")
-  }
+  val list = listOf("a", "a", "a", "", "a")
+
+  " ".isEmpty().printThis()
+  " ".isBlank().printThis()
+  " ab ".trim().printThis()
 
 }
 
