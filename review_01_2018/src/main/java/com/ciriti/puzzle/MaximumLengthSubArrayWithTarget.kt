@@ -30,7 +30,7 @@ private fun maxSubArrTarget(
   }
 
   sumArray.indices.forEach {
-    if (map[sumArray[it] - target] != null) {
+    map[sumArray[it] - target].runIfNotNull{
       diff = Math.max(it - map[sumArray[it] - target]!!, diff)
       subArray = arr.copyOfRange(map[sumArray[it] - target]!! + 1, it + 1)
     }
@@ -41,6 +41,7 @@ private fun maxSubArrTarget(
 }
 
 private fun <T> T.runIfNull(func: () -> Unit) = this ?: func.invoke()
+private fun <T> T.runIfNotNull(func: () -> Unit) = this?.let { func.invoke() }
 private fun <T> T.printThisPrivate() = println(this)
 
 
