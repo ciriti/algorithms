@@ -11,7 +11,10 @@ import java.util.List;
  */
 public class Solution {
 
+  public static String a = "";
+
   public static void main(String[] args) {
+
     int[] input = {-2, 5, -1, 7, -3};
 
     // [[-2], [5], [], [], []]

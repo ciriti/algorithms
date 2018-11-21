@@ -1,40 +1,56 @@
 package com.ciriti
 
-import android.os.Bundle
-import android.os.Parcelable
-import java.math.BigInteger
+import java.security.InvalidParameterException
+import java.util.Random
 
 /**
  * Created by Carmelo Iriti
  */
 
-val foo1 = run {
-  println("Calculating the answer... f1")
-  42
-}
 
+fun main(args : Array<String>){
 
-val foo2: Int
-  get() {
-    println("Calculating the answer... f2")
-    return 42
+//  val input = generateSequence {
+//    readLine().takeIf { it != "exit" }
+//  }.toList().toString().printThis()
+//
+//  val numbers = generateSequence(3) { n ->
+//    println("Generating element...")
+//    (n + 1).takeIf { it < 7 }
+//  }
+//  println(numbers.take(9).toList())
+
+//  val s = myBuildString {}.printThis()
+
+  val num = if(Random().nextInt() % 2 == 0){
+    2
+  }else{
+    fail()
   }
 
-fun main(args: Array<String>) {
-//  println("$foo1 $foo1 $foo2 $foo2")
-//  println(duplicateNonZero(listOf(3, 0, 5)))
-  val list = listOf("a", "a", "a", "", "a")
-
-  " ".isEmpty().printThis()
-  " ".isBlank().printThis()
-  " ab ".trim().printThis()
-
 }
 
-private fun duplicateNonZero(list: List<Int>): List<Int> {
-  return list.flatMap {
-    if (it == 0) return listOf()
-    listOf(it, it)
-  }
+fun fail() : Nothing{
+  TODO()
 }
+
+
+
+inline fun myBuildString(builderAction: StringBuilder.() -> Unit): String{
+  val sb = StringBuilder()
+  sb.builderAction()
+  return sb.toString()
+}
+
+//inline fun f(crossinline body: () -> Unit) {
+//  val f = object: Runnable {
+//    override fun run() = body()
+//  }
+//  // ...
+//}
+
+
+
+
+
 

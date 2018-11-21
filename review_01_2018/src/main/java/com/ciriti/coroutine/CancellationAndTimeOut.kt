@@ -1,19 +1,19 @@
 package com.ciriti.coroutine
 
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.NonCancellable
-import kotlinx.coroutines.experimental.cancelAndJoin
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
-import kotlinx.coroutines.experimental.withContext
-import kotlinx.coroutines.experimental.withTimeout
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeout
 
 /**
  * Created by Carmelo Iriti
  */
 
-fun main(args: Array<String>) = runBlocking {
+fun main() = runBlocking {
   withTimeout(1300L) {
     repeat(1000) { i ->
       println("I'm sleeping $i ...")
