@@ -63,3 +63,5 @@ enum class PathType(pathType: String) {
   PATH("."),
   WALL("B")
 }
+
+fun addPath(map : String) = ""
