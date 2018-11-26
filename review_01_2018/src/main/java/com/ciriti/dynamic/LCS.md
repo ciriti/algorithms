@@ -32,7 +32,7 @@ Given strings `"ABCBX"` and `"ABDCAB"`, the output matrix of `lcsLength(_:)` is 
 | X | 0 | 1 | 2 | 2 | 3 | 3 | 4 |
 ```
 
-In this example, if we look at `matrix[3][4]` we find the value `3`. This means the length of the LCS between `a[0...2]` and `b[0...3]`, or between `"ABC"` and `"ABDC"`, is 3. That is correct, because these two substrings have the subsequence `ABC` in common. (Note: the first row and column of the matrix are always filled with zeros.)
+In this example, if we look at `matrix[3][4]` we find the value `3`. This means the length of the LCS between `a[0...2]` and `b[0...3]`, or between `"ABC"` and `"ABDC"`, is 3. That is correct, because these two substrings have the subsequence `ABC` in common. (Note: the first row and col of the matrix are always filled with zeros.)
 
 Here is the source code for `lcsLength(_:)`; this lives in an extension on `String`:
 
@@ -115,7 +115,7 @@ Backtracking starts at `matrix[n+1][m+1]` and walks up and left (in this priorit
 | X |  0|  1|  2|  2|  3|  3|↑ 4|
 ```
 
-Each `↖` move indicates a character (in row/column header) that is part of the LCS.
+Each `↖` move indicates a character (in row/col header) that is part of the LCS.
 
 If the number on the left and above are different than the number in the current cell, no propagation happened. In that case `matrix[i][j]` indicates a common char between the strings `a` and `b`, so the characters at `a[i - 1]` and `b[j - 1]` are part of the LCS that we're looking for.
 

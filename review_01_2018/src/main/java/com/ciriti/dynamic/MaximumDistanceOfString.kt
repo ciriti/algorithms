@@ -25,8 +25,8 @@ fun main(args : Array<String>){
 //    // Displaying the result
 //    println("Sum of two matrices is: ")
 //    for (row in sum) {
-//        for (column in row) {
-//            print("$column    ")
+//        for (col in row) {
+//            print("$col    ")
 //        }
 //        println()
 //    }

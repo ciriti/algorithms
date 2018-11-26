@@ -53,6 +53,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'android.arch.persistence.room:runtime:' + rootProject.archRoomVersion
     kapt 'android.arch.persistence.room:compiler:' + rootProject.archRoomVersion
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
     //lifecycle
     implementation 'android.arch.lifecycle:extensions:' + rootProject.archLifecycleVersion
     kapt 'android.arch.lifecycle:compiler:' + rootProject.archLifecycleVersion
