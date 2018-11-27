@@ -56,10 +56,10 @@ class Graph(map: String) {
   data class Point(
     val row: Int,
     val col: Int,
-    var weight: Double = 0.0,
     private val matrix: Array<CharArray>,
     private val begin: Pair<Int, Int>,
-    private val target: Pair<Int, Int>
+    private val target: Pair<Int, Int>,
+    var weight: Double = 0.0
   ) : Serializable {
 
     val distance: Double = heuristicDistance(this, begin) + heuristicDistance(this, target)
@@ -158,14 +158,14 @@ fun locationInMatrixOf(
   return Pair(index / numCharsPerRow, index % numCharsPerRow)
 }
 
-inline fun checkBounds(
+fun checkBounds(
   p : Point,
   t: Triple<Int, Int, Double>,
   boundStart: Pair<Int, Int>,
   boundEnd: Pair<Int, Int>
 ) : Boolean {
-  val a = t.first + p.row  >= boundStart.first && t.first + p.row >= boundEnd.first
-  val b = t.second + p.col  >= boundStart.second && t.second + p.col >= boundEnd.second
+  val a = t.first + p.row  >= boundStart.first && t.first + p.row <= boundEnd.first
+  val b = t.second + p.col  >= boundStart.second && t.second + p.col <= boundEnd.second
 
   return a && b
 }
