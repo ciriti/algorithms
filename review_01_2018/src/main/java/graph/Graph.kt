@@ -48,7 +48,9 @@ class Graph(map: String) {
   fun getPoint(
     row: Int,
     col: Int
-  ) {
+  ): Point {
+    checkBounds(Pair(row, col), matrix).let { if (!it) throw InvalidParameterException() }
+    return Point(row, col, matrix, begin, target)
   }
 
   operator fun Point.plus(other: Pair<Int, Int>) =
@@ -173,6 +175,19 @@ fun checkBounds(
   val a = indexRow >= boundStart.first && indexRow <= boundEnd.first
   val b = indexCol >= boundStart.second && indexCol <= boundEnd.second
 
+  return a && b
+}
+
+fun checkBounds(
+  p: Pair<Int, Int>,
+  matrix: Array<CharArray>
+): Boolean {
+  val boundStart = Pair(0, 0)
+  val boundEnd = Pair(matrix.lastIndex, matrix.first().lastIndex)
+  val indexRow = p.first
+  val indexCol = p.second
+  val a = indexRow >= boundStart.first && indexRow <= boundEnd.first
+  val b = indexCol >= boundStart.second && indexCol <= boundEnd.second
   return a && b
 }
 
