@@ -45,6 +45,12 @@ class Graph(map: String) {
 //    val queue = mutableSetOf<Point>()
   }
 
+  fun getPoint(
+    row: Int,
+    col: Int
+  ) {
+  }
+
   operator fun Point.plus(other: Pair<Int, Int>) =
     this.copy(row = this.row + other.first, col = this.col + other.second)
 
@@ -98,11 +104,8 @@ class Graph(map: String) {
     val neighbours: List<Point>
       get() = movements
           .asSequence()
-          .filter { it.first + row >= boundStart.first }
+          .filter { checkPath(this, it, matrix) }
           .map { this + it }
-          .filter { matrix[it.row][it.col] != 'B' }
-          .filter { it.row >= boundStart.first && it.col >= boundEnd.first }
-          .filter { it.row <= boundEnd.first && it.col <= boundEnd.second }
           .toList()
 
     val movements = listOf(
@@ -159,13 +162,29 @@ fun locationInMatrixOf(
 }
 
 fun checkBounds(
-  p : Point,
+  p: Point,
   t: Triple<Int, Int, Double>,
-  boundStart: Pair<Int, Int>,
-  boundEnd: Pair<Int, Int>
-) : Boolean {
-  val a = t.first + p.row  >= boundStart.first && t.first + p.row <= boundEnd.first
-  val b = t.second + p.col  >= boundStart.second && t.second + p.col <= boundEnd.second
+  matrix: Array<CharArray>
+): Boolean {
+  val boundStart = Pair(0, 0)
+  val boundEnd = Pair(matrix.lastIndex, matrix.first().lastIndex)
+  val indexRow = t.first + p.row
+  val indexCol = t.second + p.col
+  val a = indexRow >= boundStart.first && indexRow <= boundEnd.first
+  val b = indexCol >= boundStart.second && indexCol <= boundEnd.second
 
   return a && b
+}
+
+fun checkPath(
+  p: Point,
+  t: Triple<Int, Int, Double>,
+  matrix: Array<CharArray>
+): Boolean {
+  val indexRow = t.first + p.row
+  val indexCol = t.second + p.col
+  if (checkBounds(p, t, matrix)) {
+    return matrix[indexRow][indexCol] != 'B'
+  }
+  return false
 }
