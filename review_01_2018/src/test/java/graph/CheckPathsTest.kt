@@ -1,6 +1,6 @@
 package graph
 
-import graph.Graph.Point
+import graph.MapPoint
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -22,10 +22,10 @@ class CheckPathsTest {
   }
 
   @Test
-  fun `Corner point diagonal movements`() {
+  fun `Corner MapPoint diagonal movements`() {
     /** matrix 3x3 */
 
-    val p1 = Point(0, 0, matrix, Pair(0,0), Pair(0,0))
+    val p1 = MapPoint(0, 0, matrix, Pair(0,0), Pair(0,0))
 
     // low right diagonal
     Assert.assertTrue(
@@ -61,10 +61,10 @@ class CheckPathsTest {
   }
 
   @Test
-  fun `Corner point linear movements`() {
+  fun `Corner MapPoint linear movements`() {
     /** matrix 3x3 */
 
-    val p1 = Point(0, 0, matrix, Pair(0,0), Pair(0,0))
+    val p1 = MapPoint(0, 0, matrix, Pair(0,0), Pair(0,0))
 
     // right
     Assert.assertTrue(
@@ -100,10 +100,10 @@ class CheckPathsTest {
   }
 
   @Test
-  fun `Middle point all direction movements`() {
+  fun `Middle MapPoint all direction movements`() {
     /** matrix 3x3 */
 
-    val p1 = Point(1, 1, matrix, Pair(0,0), Pair(0,0))
+    val p1 = MapPoint(1, 1, matrix, Pair(0,0), Pair(0,0))
 
     // right
     Assert.assertTrue(
@@ -171,10 +171,10 @@ class CheckPathsTest {
   }
 
   @Test
-  fun `Middle point with 2 blocks B, all direction movements`() {
+  fun `Middle MapPoint with 2 blocks B, all direction movements`() {
     /** matrix 3x3 */
 
-    val p1 = Point(1, 1, matrixWithBlock, Pair(0,0), Pair(0,0))
+    val p1 = MapPoint(1, 1, matrixWithBlock, Pair(0,0), Pair(0,0))
 
     // right
     Assert.assertTrue(

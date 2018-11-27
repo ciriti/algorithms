@@ -1,11 +1,5 @@
 package graph
 
-import graph.Graph.PathType.BEGIN
-import graph.Graph.PathType.PATH
-import graph.Graph.PathType.TARGET
-import graph.Graph.PathType.WALL
-import graph.Graph.Point
-import java.io.Serializable
 import java.security.InvalidParameterException
 import kotlin.math.sqrt
 
@@ -48,80 +42,9 @@ class Graph(map: String) {
   fun getPoint(
     row: Int,
     col: Int
-  ): Point {
+  ): MapPoint {
     checkBounds(Pair(row, col), matrix).let { if (!it) throw InvalidParameterException() }
-    return Point(row, col, matrix, begin, target)
-  }
-
-  operator fun Point.plus(other: Pair<Int, Int>) =
-    this.copy(row = this.row + other.first, col = this.col + other.second)
-
-  operator fun Point.plus(other: Point) =
-    this.copy(
-        row = this.row + other.row, col = this.col + other.col
-    )
-
-  data class Point(
-    val row: Int,
-    val col: Int,
-    private val matrix: Array<CharArray>,
-    private val begin: Pair<Int, Int>,
-    private val target: Pair<Int, Int>,
-    var weight: Double = 0.0
-  ) : Serializable {
-
-    val distance: Double = heuristicDistance(this, begin) + heuristicDistance(this, target)
-    val pathType: PathType = when (matrix[row][col]) {
-      'S' -> BEGIN
-      'X' -> TARGET
-      '.' -> PATH
-      'B' -> WALL
-      else -> throw InvalidParameterException()
-    }
-
-    private val boundStart = Pair(0, 0)
-    private val boundEnd = Pair(matrix.lastIndex, matrix.first().lastIndex)
-
-    override fun toString(): String = "{($row, $col) -> $weight}}"
-
-    override fun equals(other: Any?): Boolean {
-      if (other == null) return false
-      if (other !is Point) return false
-      return this.col == other.col && this.row == other.row
-    }
-
-    override fun hashCode(): Int {
-      var result = 17
-      result = 31 * result + row.hashCode()
-      result = 31 * result + col.hashCode()
-      return result
-    }
-
-    operator fun Point.plus(other: Triple<Int, Int, Double>) =
-      this.copy(
-          row = this.row + other.first, col = this.col + other.second,
-          weight = other.third + this.weight
-      )
-
-    val neighbours: List<Point>
-      get() = movements
-          .asSequence()
-          .filter { checkPath(this, it, matrix) }
-          .map { this + it }
-          .toList()
-
-    val movements = listOf(
-        Triple(+1, +1, 1.5), //diagonal
-        Triple(-1, -1, 1.5), //diagonal
-        Triple(+1, -1, 1.5), //diagonal
-        Triple(-1, +1, 1.5), //diagonal
-
-        Triple(0, +1, 1.0),
-        Triple(0, -1, 1.0),
-        Triple(+1, 0, 1.0),
-        Triple(-1, 0, 1.0)
-    )
-
+    return MapPoint(row, col, matrix, begin, target)
   }
 
   enum class PathType(pathType: Char) {
@@ -131,10 +54,10 @@ class Graph(map: String) {
     WALL('B')
   }
 
-  object COMPARE_BY_DISTANCE : Comparator<Point> {
+  object COMPARE_BY_DISTANCE : Comparator<MapPoint> {
     override fun compare(
-      p1: Point,
-      p2: Point
+      p1: MapPoint,
+      p2: MapPoint
     ): Int {
 //      heuristicDistance(p1, p2)
       return 0
@@ -144,7 +67,7 @@ class Graph(map: String) {
 }
 
 fun heuristicDistance(
-  p1: Point,
+  p1: MapPoint,
   p2: Pair<Int, Int>
 ) = sqrt(
     Math.pow((p1.row - p2.first).toDouble(), 2.toDouble()) +
@@ -164,7 +87,7 @@ fun locationInMatrixOf(
 }
 
 fun checkBounds(
-  p: Point,
+  p: MapPoint,
   t: Triple<Int, Int, Double>,
   matrix: Array<CharArray>
 ): Boolean {
@@ -192,7 +115,7 @@ fun checkBounds(
 }
 
 fun checkPath(
-  p: Point,
+  p: MapPoint,
   t: Triple<Int, Int, Double>,
   matrix: Array<CharArray>
 ): Boolean {

@@ -1,6 +1,6 @@
 package graph
 
-import graph.Graph.Point
+import graph.MapPoint
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -21,7 +21,7 @@ class CheckBoundsTest {
   fun `Corner point diagonal movements`() {
     /** matrix 3x3 */
 
-    val p1 = Point(0, 0, matrix, Pair(0,0), Pair(0,0))
+    val p1 = MapPoint(0, 0, matrix, Pair(0,0), Pair(0,0))
 
     // low right diagonal
     Assert.assertTrue(
@@ -57,10 +57,10 @@ class CheckBoundsTest {
   }
 
   @Test
-  fun `Corner point linear movements`() {
+  fun `Corner MapPoint linear movements`() {
     /** matrix 3x3 */
 
-    val p1 = Point(0, 0, matrix, Pair(0,0), Pair(0,0))
+    val p1 = MapPoint(0, 0, matrix, Pair(0,0), Pair(0,0))
 
     // right
     Assert.assertTrue(
@@ -95,10 +95,10 @@ class CheckBoundsTest {
         ))
   }
   @Test
-  fun `Middle point all direction movements`() {
+  fun `Middle MapPoint all direction movements`() {
     /** matrix 3x3 */
 
-    val p1 = Point(1, 1, matrix, Pair(0,0), Pair(0,0))
+    val p1 = MapPoint(1, 1, matrix, Pair(0,0), Pair(0,0))
 
     // right
     Assert.assertTrue(
