@@ -6,17 +6,21 @@ package graph
 
 fun main() {
   val mapString = """
+        XS..................
         ....................
-        .........XS.........
-        ....................
+        ..................XS
         """.trimIndent()
 
-  val matrix : Array<CharArray> = buildMatrix(mapString)
+
+  val matrix: Array<CharArray> = buildMatrix(mapString)
   matrix.printMatrix()
+
+  mapString.lines().count()
+  mapString.lineSequence().first().count()
 
 }
 
-fun buildMatrix(map: String) : Array<CharArray> = map
+fun buildMatrix(map: String): Array<CharArray> = map
     .lines()
     .let { list ->
       Array(list.size) { list[it].toCharArray() }
@@ -24,7 +28,7 @@ fun buildMatrix(map: String) : Array<CharArray> = map
 
 fun addPath(map: String) = ""
 
-fun Array<CharArray>.printMatrix(){
+fun Array<CharArray>.printMatrix() {
   this.forEach { it1 ->
     print(" ${it1.joinToString(separator = " ", postfix = "|", prefix = "|")}")
     println()
