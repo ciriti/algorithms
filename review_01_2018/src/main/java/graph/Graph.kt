@@ -1,42 +1,79 @@
 package graph
 
 import java.security.InvalidParameterException
-import kotlin.math.sqrt
+import java.util.PriorityQueue
 
 /**
  * Created by Carmelo Iriti
  */
 
-fun main() {
-  val mapString = """
-        ....................
-        ........XBS.........
-        ....................
-        """.trimIndent()
+fun addPath(map: String) = Graph(map).aStarAlg()
 
-  val graph = Graph(mapString)
-  graph.matrix.printMatrix()
-  graph.verify()
+class Graph(val map: String) {
 
-}
-
-class Graph(map: String) {
-
+  // creates the matrix out of the string
   val matrix: Array<CharArray> = buildMatrix(map)
-  val begin = locationInMatrixOf(map, 'S')
+  // Start point on the map
+  val start = locationInMatrixOf(map, 'S')
+  // Destination point
   val target = locationInMatrixOf(map, 'X')
+  // Buonds on the map
   val origin = Pair(0, 0)
   val end = Pair(matrix.lastIndex, matrix.first().lastIndex)
 
-  fun verify() {
-//    matrix[2][9].printThis("value: ")
-//    Point(1, 10).neighbours.forEachIndexed { index, it ->
-//      println(
-//          " -> $index: ${matrix[it.row][it.col]} <-"
-//      )
-//    }
-//    val visited = mutableSetOf<Point>()
-//    val queue = mutableSetOf<Point>()
+  fun aStarAlg() : String{
+
+    // visited location
+    val visited: Array<BooleanArray> =
+      Array(matrix.size) { BooleanArray(matrix.first().size) { false } }
+    // list of nodes to reach the specific location
+    val pathsMatrix: Array<Array<Paths>> =
+      Array(matrix.size) { Array(matrix.first().size) { Paths() } }
+    // priority queue
+    val priorityQueue = PriorityQueue<MapPoint>(COMPARE_BY_DISTANCE)
+    // initial point
+    val startPoint = MapPoint(start.first, start.second, matrix, start, target)
+
+    // distance 0 to the start node
+    pathsMatrix.getPaths(startPoint)
+        .distance = 0.0
+    // enqueue the star node
+    priorityQueue.add(startPoint)
+    while (priorityQueue.isNotEmpty()) {
+      // dequeue the node
+      val node = priorityQueue.poll()
+      // if the node is not visited
+      if (visited.isNotVisited(node)) {
+        visited.markVisited(node)
+        if (node.isTarget()) {
+          pathsMatrix.getPaths(node)
+              .pathsList
+              .add(node.toPair())
+          return toStringPath(matrix, pathsMatrix.getPaths(node))
+        }
+        node
+            .neighbours
+            .filter { visited.isNotVisited(it) }
+            .forEach { neighbor ->
+
+              val distanceNode2Neighbor =
+                pathsMatrix.getPaths(node).distance + heuristicDistance(node, neighbor)
+
+              if (distanceNode2Neighbor < pathsMatrix.getPaths(neighbor).distance) {
+                pathsMatrix.getPaths(neighbor)
+                    .distance = distanceNode2Neighbor
+
+                // update the new path
+                pathsMatrix.getPaths(neighbor)
+                    .updatePaths(node, pathsMatrix.getPaths(node))
+
+                // enqueue the neighbor
+                priorityQueue.add(neighbor)
+              }
+            }
+      }
+    }
+    return map
   }
 
   fun getPoint(
@@ -44,85 +81,46 @@ class Graph(map: String) {
     col: Int
   ): MapPoint {
     checkBounds(Pair(row, col), matrix).let { if (!it) throw InvalidParameterException() }
-    return MapPoint(row, col, matrix, begin, target)
+    return MapPoint(row, col, matrix, start, target)
   }
 
-  enum class PathType(pathType: Char) {
-    BEGIN('S'),
-    TARGET('X'),
-    PATH('.'),
-    WALL('B')
+  fun MapPoint.isTarget() : Boolean = (this.row == target.first && this.col == target.second)
+
+  data class Paths(
+    var distance: Double = Double.MAX_VALUE,
+    val pathsList: MutableList<Pair<Int, Int>> = mutableListOf()
+  )
+
+  fun Array<BooleanArray>.isNotVisited(point: MapPoint): Boolean = !this[point.row][point.col]
+  fun Array<BooleanArray>.markVisited(point: MapPoint) {
+    this[point.row][point.col] = true
   }
 
-  object COMPARE_BY_DISTANCE : Comparator<MapPoint> {
-    override fun compare(
-      p1: MapPoint,
-      p2: MapPoint
-    ): Int {
-//      heuristicDistance(p1, p2)
-      return 0
+  fun Array<Array<Paths>>.getPaths(point: MapPoint): Paths = this[point.row][point.col]
+
+  fun Paths.updatePaths(
+    node: MapPoint,
+    paths: Paths
+  ) {
+    pathsList
+        .also { it.clear() }
+        .also { it.addAll(paths.pathsList) }
+        .also { it.add(Pair(node.row, node.col)) }
+  }
+
+  fun toStringPath(pMatrix : Array<CharArray>, paths : Paths) : String{
+
+    paths
+        .pathsList
+        .forEach { pMatrix[it.first][it.second] = '*' }
+
+    val sb = StringBuffer()
+    val iterator = pMatrix.iterator()
+    sb.append(iterator.next().joinToString(prefix = "",postfix = "",separator = ""))
+    while(iterator.hasNext()){
+      sb.append("\n${iterator.next().joinToString(prefix = "",postfix = "",separator = "")}")
     }
+    return sb.toString()
   }
 
-}
-
-fun heuristicDistance(
-  p1: MapPoint,
-  p2: Pair<Int, Int>
-) = sqrt(
-    Math.pow((p1.row - p2.first).toDouble(), 2.toDouble()) +
-        Math.pow((p1.col - p2.second).toDouble(), 2.toDouble())
-)
-
-fun locationInMatrixOf(
-  s: String,
-  c: Char
-): Pair<Int, Int> {
-  val numCharsPerRow = s.lines()
-      .first()
-      .count()
-  val string = s.replace("\n".toRegex(), "")
-  val index = string.indexOf(c)
-  return Pair(index / numCharsPerRow, index % numCharsPerRow)
-}
-
-fun checkBounds(
-  p: MapPoint,
-  t: Triple<Int, Int, Double>,
-  matrix: Array<CharArray>
-): Boolean {
-  val boundStart = Pair(0, 0)
-  val boundEnd = Pair(matrix.lastIndex, matrix.first().lastIndex)
-  val indexRow = t.first + p.row
-  val indexCol = t.second + p.col
-  val a = indexRow >= boundStart.first && indexRow <= boundEnd.first
-  val b = indexCol >= boundStart.second && indexCol <= boundEnd.second
-
-  return a && b
-}
-
-fun checkBounds(
-  p: Pair<Int, Int>,
-  matrix: Array<CharArray>
-): Boolean {
-  val boundStart = Pair(0, 0)
-  val boundEnd = Pair(matrix.lastIndex, matrix.first().lastIndex)
-  val indexRow = p.first
-  val indexCol = p.second
-  val a = indexRow >= boundStart.first && indexRow <= boundEnd.first
-  val b = indexCol >= boundStart.second && indexCol <= boundEnd.second
-  return a && b
-}
-
-fun checkPath(
-  p: MapPoint,
-  t: Triple<Int, Int, Double>,
-  matrix: Array<CharArray>
-): Boolean {
-  val indexRow = t.first + p.row
-  val indexCol = t.second + p.col
-  if (checkBounds(p, t, matrix)) {
-    return matrix[indexRow][indexCol] != 'B'
-  }
-  return false
 }

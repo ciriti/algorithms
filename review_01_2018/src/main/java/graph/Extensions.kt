@@ -18,3 +18,5 @@ operator fun MapPoint.plus(other: MapPoint) =
   this.copy(
       row = this.row + other.row, col = this.col + other.col
   )
+
+fun MapPoint.toPair() = Pair(row, col)

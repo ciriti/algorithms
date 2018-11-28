@@ -1,10 +1,6 @@
 package graph
 
-import graph.Graph.PathType
-import graph.Graph.PathType.BEGIN
-import graph.Graph.PathType.PATH
-import graph.Graph.PathType.TARGET
-import graph.Graph.PathType.WALL
+import graph.PathType.*
 import java.io.Serializable
 import java.security.InvalidParameterException
 
@@ -20,7 +16,12 @@ data class MapPoint(
   var weight: Double = 0.0
 ) : Serializable {
 
-  val distance: Double = heuristicDistance(this, begin) + heuristicDistance(this, target)
+  /**
+   * It is the sum of the 2 distance:
+   * 1. distance between this node and the start point
+   * 1. distance between this node and the target point
+   */
+  val heuristicDistance: Double = heuristicDistance(this, begin) + heuristicDistance(this, target)
 
   val pathType: PathType = when (matrix[row][col]) {
     'S' -> BEGIN

@@ -26,8 +26,6 @@ fun buildMatrix(map: String): Array<CharArray> = map
       Array(list.size) { list[it].toCharArray() }
     }
 
-fun addPath(map: String) = ""
-
 fun Array<CharArray>.printMatrix() {
   this.forEach { it1 ->
     print(" ${it1.joinToString(separator = " ", postfix = "|", prefix = "|")}")

@@ -1,6 +1,6 @@
 package graph
 
-import graph.Graph.PathType.BEGIN
+import graph.PathType.BEGIN
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
