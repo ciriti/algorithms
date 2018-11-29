@@ -43,7 +43,7 @@ class UtilsTest {
     val B = MapPoint(2, 1, matrix, end, start)
     val C = MapPoint(1, 2, matrix, end, start)
 
-    val pq = PriorityQueue<MapPoint>(COMPARE_BY_DISTANCE)
+    val pq = PriorityQueue<MapPoint>()
     pq.add(C)
     pq.add(A)
     pq.add(B)

@@ -1,6 +1,5 @@
 package graph
 
-import com.ciriti.datastructure.printMatrix
 import java.security.InvalidParameterException
 import java.util.PriorityQueue
 
@@ -18,9 +17,6 @@ class Graph(val map: String) {
   val start = locationInMatrixOf(map, 'S')
   // Destination point
   val target = locationInMatrixOf(map, 'X')
-  // Buonds on the map
-  val origin = Pair(0, 0)
-  val end = Pair(matrix.lastIndex, matrix.first().lastIndex)
 
   fun aStarAlg(): String {
 

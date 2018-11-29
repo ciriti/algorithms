@@ -90,14 +90,3 @@ enum class PathType(pathType: Char) {
   PATH('.'),
   WALL('B')
 }
-
-val COMPARE_BY_DISTANCE = Comparator { p1: MapPoint, p2: MapPoint ->
-  val c1 = p1.heuristicDistance.compareTo(p2.heuristicDistance)
-//        val c2 = p1.second.compareTo(p2.second)
-//        when{
-//          c1 != 0 ->c1
-//          c2 != 0 ->c2
-//          else -> 0
-//        }
-  c1
-}

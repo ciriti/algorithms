@@ -19,13 +19,6 @@ data class MapPoint(
   var weight: Double = 0.0
 ) : Serializable {
 
-  /**
-   * It is the sum of the 2 distance:
-   * 1. distance between this node and the start point
-   * 1. distance between this node and the target point
-   */
-  val heuristicDistance: Double = heuristicDistance(this, begin) + heuristicDistance(this, target)
-
   val pathType: PathType = when (matrix[row][col]) {
     'S' -> BEGIN
     'X' -> TARGET
