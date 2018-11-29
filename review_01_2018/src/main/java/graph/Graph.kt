@@ -28,7 +28,9 @@ internal class Graph(private val map: String) {
     // priority queue
     val priorityQueue = PriorityQueue<MapPoint>(Comparator { p1: MapPoint, p2: MapPoint ->
       val p1D = heuristicDistance(p1, target) + pathsMatrix.getPaths(p1).distance
-      val p2D = heuristicDistance(p2, target) + pathsMatrix.getPaths(p2).distance // heuristicDistance(p2, start)//
+      val p2D = heuristicDistance(p2, target) + pathsMatrix.getPaths(
+          p2
+      ).distance // heuristicDistance(p2, start)//
       p1D.compareTo(p2D)
     })
     // initial point
@@ -50,9 +52,6 @@ internal class Graph(private val map: String) {
               .pathsList
               .add(node.toPair())
           return toStringPath(matrix, pathsMatrix.getPaths(node))
-        }
-        if (node.col == 7 && node.row == 3) {
-          println()
         }
         node.neighbours
             .filter { visited.isNotVisited(it) }
@@ -89,7 +88,9 @@ internal class Graph(private val map: String) {
     val pathsList: MutableList<Pair<Int, Int>> = mutableListOf()
   )
 
-  private fun Array<BooleanArray>.isNotVisited(point: MapPoint): Boolean = !this[point.row][point.col]
+  private fun Array<BooleanArray>.isNotVisited(point: MapPoint): Boolean =
+    !this[point.row][point.col]
+
   fun Array<BooleanArray>.markVisited(point: MapPoint) {
     this[point.row][point.col] = true
   }
