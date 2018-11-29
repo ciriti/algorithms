@@ -1,8 +1,6 @@
 package graph
 
-import java.io.Serializable
 import java.util.PriorityQueue
-import kotlin.math.sqrt
 
 /**
  * Created by Carmelo Iriti
@@ -29,8 +27,8 @@ internal class Graph(private val map: String) {
       Array(matrix.size) { Array(matrix.first().size) { Paths() } }
     // priority queue
     val priorityQueue = PriorityQueue<MapPoint>(Comparator { p1: MapPoint, p2: MapPoint ->
-      val p1D = heuristicDistance(p1, target) + getMetricsP1(p1, pathsMatrix.getPaths(p1))
-      val p2D = heuristicDistance(p2, target) + getMetricsP2(p2, pathsMatrix.getPaths(p2))
+      val p1D = heuristicDistance(p1, target) + pathsMatrix.getPaths(p1).distance
+      val p2D = heuristicDistance(p2, target) + pathsMatrix.getPaths(p2).distance // heuristicDistance(p2, start)//
       p1D.compareTo(p2D)
     })
     // initial point
@@ -63,6 +61,10 @@ internal class Graph(private val map: String) {
               val distanceNode2Neighbor =
                 pathsMatrix.getPaths(node).distance + neighbor.weight
 
+//              val condition = when(neighbor.isTarget()){
+//                true -> distanceNode2Neighbor <= pathsMatrix.getPaths(neighbor).distance
+//                false -> distanceNode2Neighbor < pathsMatrix.getPaths(neighbor).distance
+//              }
               if (distanceNode2Neighbor < pathsMatrix.getPaths(neighbor).distance) {
                 pathsMatrix.getPaths(neighbor)
                     .distance = distanceNode2Neighbor
@@ -122,25 +124,6 @@ internal class Graph(private val map: String) {
     return sb.toString()
   }
 
-  private fun getMetricsP1(
-    p1: MapPoint,
-    path: Paths
-  ): Double {
-    return path.distance
-  }
-
-  private val countWalls = map.count { it == 'B' }
-
-  private fun getMetricsP2(
-    p2: MapPoint,
-    path: Paths
-  ): Double {
-    return if (countWalls < 40)
-      heuristicDistance(p2, start)
-    else
-      path.distance
-  }
-
   private operator fun MapPoint.plus(other: Triple<Int, Int, Double>) =
     this.copy(
         row = this.row + other.first, col = this.col + other.second,
@@ -157,6 +140,11 @@ internal class Graph(private val map: String) {
 
   private fun MapPoint.toPair() = Pair(row, col)
 
+  private fun buildMatrix(map: String): Array<CharArray> = map
+      .lines()
+      .let { list ->
+        Array(list.size) { list[it].toCharArray() }
+      }
 
 }
 
@@ -167,7 +155,7 @@ internal data class MapPoint(
   private val begin: Pair<Int, Int>,
   private val target: Pair<Int, Int>,
   val weight: Double = 0.0
-) : Serializable {
+) {
 
   override fun toString(): String = "{($row, $col) -> $weight}}"
 
@@ -221,7 +209,7 @@ internal fun distance(
   col_1: Int,
   row_2: Int,
   col_2: Int
-) = sqrt(
+) = kotlin.math.sqrt(
     Math.pow((row_1 - row_2).toDouble(), 2.toDouble()) +
         Math.pow((col_1 - col_2).toDouble(), 2.toDouble())
 )
