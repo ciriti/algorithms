@@ -1,5 +1,6 @@
 package graph
 
+import com.ciriti.datastructure.printMatrix
 import java.security.InvalidParameterException
 import java.util.PriorityQueue
 
@@ -21,7 +22,7 @@ class Graph(val map: String) {
   val origin = Pair(0, 0)
   val end = Pair(matrix.lastIndex, matrix.first().lastIndex)
 
-  fun aStarAlg() : String{
+  fun aStarAlg(): String {
 
     // visited location
     val visited: Array<BooleanArray> =
@@ -30,7 +31,11 @@ class Graph(val map: String) {
     val pathsMatrix: Array<Array<Paths>> =
       Array(matrix.size) { Array(matrix.first().size) { Paths() } }
     // priority queue
-    val priorityQueue = PriorityQueue<MapPoint>(COMPARE_BY_DISTANCE)
+    val priorityQueue = PriorityQueue<MapPoint>(Comparator { p1: MapPoint, p2: MapPoint ->
+      val p1D = heuristicDistance(p1, target) + pathsMatrix.getPaths(p1).distance
+      val p2D = heuristicDistance(p2, target) + pathsMatrix.getPaths(p2).distance
+      p1D.compareTo(p2D)
+    })
     // initial point
     val startPoint = MapPoint(start.first, start.second, matrix, start, target)
 
@@ -51,13 +56,15 @@ class Graph(val map: String) {
               .add(node.toPair())
           return toStringPath(matrix, pathsMatrix.getPaths(node))
         }
-        node
-            .neighbours
+        if (node.col == 7 && node.row == 3) {
+          println()
+        }
+        node.neighbours
             .filter { visited.isNotVisited(it) }
             .forEach { neighbor ->
 
               val distanceNode2Neighbor =
-                pathsMatrix.getPaths(node).distance + heuristicDistance(node, neighbor)
+                pathsMatrix.getPaths(node).distance + neighbor.weight
 
               if (distanceNode2Neighbor < pathsMatrix.getPaths(neighbor).distance) {
                 pathsMatrix.getPaths(neighbor)
@@ -84,12 +91,22 @@ class Graph(val map: String) {
     return MapPoint(row, col, matrix, start, target)
   }
 
-  fun MapPoint.isTarget() : Boolean = (this.row == target.first && this.col == target.second)
+  fun MapPoint.isTarget(): Boolean = (this.row == target.first && this.col == target.second)
 
   data class Paths(
     var distance: Double = Double.MAX_VALUE,
     val pathsList: MutableList<Pair<Int, Int>> = mutableListOf()
-  )
+  ) {
+    /*override fun toString(): String {
+
+      val s1 = when (distance) {
+        Double.MAX_VALUE -> " ".padStart(5)
+        else -> "%.2f".format(distance).padStart(5)
+      }
+      val s2 = "${pathsList.size}".padStart(3)
+      return s1
+    }*/
+  }
 
   fun Array<BooleanArray>.isNotVisited(point: MapPoint): Boolean = !this[point.row][point.col]
   fun Array<BooleanArray>.markVisited(point: MapPoint) {
@@ -108,7 +125,10 @@ class Graph(val map: String) {
         .also { it.add(Pair(node.row, node.col)) }
   }
 
-  fun toStringPath(pMatrix : Array<CharArray>, paths : Paths) : String{
+  fun toStringPath(
+    pMatrix: Array<CharArray>,
+    paths: Paths
+  ): String {
 
     paths
         .pathsList
@@ -116,9 +136,9 @@ class Graph(val map: String) {
 
     val sb = StringBuffer()
     val iterator = pMatrix.iterator()
-    sb.append(iterator.next().joinToString(prefix = "",postfix = "",separator = ""))
-    while(iterator.hasNext()){
-      sb.append("\n${iterator.next().joinToString(prefix = "",postfix = "",separator = "")}")
+    sb.append(iterator.next().joinToString(prefix = "", postfix = "", separator = ""))
+    while (iterator.hasNext()) {
+      sb.append("\n${iterator.next().joinToString(prefix = "", postfix = "", separator = "")}")
     }
     return sb.toString()
   }

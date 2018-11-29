@@ -50,5 +50,9 @@ class GraphTest {
 
     Assert.assertEquals(marked, res)
   }
+  @Test
+  fun `format`() {
+    String.format("%02f",  7.3).printThis()
+  }
 
 }

@@ -8,7 +8,7 @@ package graph
 operator fun MapPoint.plus(other: Triple<Int, Int, Double>) =
   this.copy(
       row = this.row + other.first, col = this.col + other.second,
-      weight = other.third + this.weight
+      weight = other.third
   )
 
 operator fun MapPoint.plus(other: Pair<Int, Int>) =

@@ -1,6 +1,9 @@
 package graph
 
-import graph.PathType.*
+import graph.PathType.BEGIN
+import graph.PathType.PATH
+import graph.PathType.TARGET
+import graph.PathType.WALL
 import java.io.Serializable
 import java.security.InvalidParameterException
 
