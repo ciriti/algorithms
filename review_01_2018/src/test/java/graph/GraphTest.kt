@@ -10,22 +10,6 @@ import org.junit.Test
 class GraphTest {
 
   @Test
-  fun t1(){
-    val mapString = """
-        .......
-        ..XBS..
-        .......
-        """.trimIndent()
-    mapString.printThis()
-    println("")
-    println("")
-    println("")
-
-    val graph = Graph(mapString)
-    graph.aStarAlg().printThis()
-  }
-
-  @Test
   fun `Mark way around wall 2`() {
     val mapString = """
         ..........B.........
@@ -50,9 +34,30 @@ class GraphTest {
 
     Assert.assertEquals(marked, res)
   }
+
+
   @Test
-  fun `format`() {
-    String.format("%02f",  7.3).printThis()
+  fun `Mark way around wall`() {
+    val mapString = """
+        ....................
+        ......X...B.........
+        ..........B.........
+        ........BBB....S....
+        ....................
+        """.trimIndent()
+
+    val marked = """
+        ........***.........
+        ......**..B*........
+        ..........B.*.......
+        ........BBB..***....
+        ....................
+        """.trimIndent()
+
+    val res = addPath(mapString)
+    res.printThis()
+
+    Assert.assertEquals(marked, res)
   }
 
 }

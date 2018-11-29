@@ -28,8 +28,8 @@ class Graph(val map: String) {
       Array(matrix.size) { Array(matrix.first().size) { Paths() } }
     // priority queue
     val priorityQueue = PriorityQueue<MapPoint>(Comparator { p1: MapPoint, p2: MapPoint ->
-      val p1D = heuristicDistance(p1, target) + pathsMatrix.getPaths(p1).distance
-      val p2D = heuristicDistance(p2, target) + pathsMatrix.getPaths(p2).distance
+      val p1D = heuristicDistance(p1, target) + getMetricsP1(p1, pathsMatrix.getPaths(p1))
+      val p2D = heuristicDistance(p2, target) + getMetricsP2(p2, pathsMatrix.getPaths(p2))
       p1D.compareTo(p2D)
     })
     // initial point
@@ -139,4 +139,35 @@ class Graph(val map: String) {
     return sb.toString()
   }
 
+  fun getMetricsP1(p1: MapPoint, path : Paths) : Double{
+    return path.distance
+  }
+
+  val countWalls = map.count { it == 'B' }
+
+  fun getMetricsP2(p2: MapPoint, path : Paths) : Double{
+    return if(countWalls < 40)
+      heuristicDistance(p2, start)
+    else
+      path.distance
+  }
+
+  operator fun MapPoint.plus(other: Triple<Int, Int, Double>) =
+    this.copy(
+        row = this.row + other.first, col = this.col + other.second,
+        weight = other.third
+    )
+
+  operator fun MapPoint.plus(other: Pair<Int, Int>) =
+    this.copy(row = this.row + other.first, col = this.col + other.second)
+
+  operator fun MapPoint.plus(other: MapPoint) =
+    this.copy(
+        row = this.row + other.row, col = this.col + other.col
+    )
+
+  fun MapPoint.toPair() = Pair(row, col)
+
 }
+
+
