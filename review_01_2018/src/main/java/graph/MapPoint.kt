@@ -1,11 +1,6 @@
 package graph
 
-import graph.PathType.BEGIN
-import graph.PathType.PATH
-import graph.PathType.TARGET
-import graph.PathType.WALL
 import java.io.Serializable
-import java.security.InvalidParameterException
 
 /**
  * Created by Carmelo Iriti
@@ -16,19 +11,8 @@ data class MapPoint(
   private val matrix: Array<CharArray>,
   private val begin: Pair<Int, Int>,
   private val target: Pair<Int, Int>,
-  var weight: Double = 0.0
+  val weight: Double = 0.0
 ) : Serializable {
-
-  val pathType: PathType = when (matrix[row][col]) {
-    'S' -> BEGIN
-    'X' -> TARGET
-    '.' -> PATH
-    'B' -> WALL
-    else -> throw InvalidParameterException()
-  }
-
-  private val boundStart = Pair(0, 0)
-  private val boundEnd = Pair(matrix.lastIndex, matrix.first().lastIndex)
 
   override fun toString(): String = "{($row, $col) -> $weight}}"
 
@@ -52,7 +36,7 @@ data class MapPoint(
         .map { this + it }
         .toList()
 
-  val movements = listOf(
+  private val movements = listOf(
       Triple(+1, +1, 1.5), //diagonal
       Triple(-1, -1, 1.5), //diagonal
       Triple(+1, -1, 1.5), //diagonal

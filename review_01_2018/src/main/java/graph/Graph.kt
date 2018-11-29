@@ -9,7 +9,7 @@ import java.util.PriorityQueue
 
 fun addPath(map: String) = Graph(map).aStarAlg()
 
-class Graph(val map: String) {
+private class Graph(val map: String) {
 
   // creates the matrix out of the string
   val matrix: Array<CharArray> = buildMatrix(map)
@@ -92,17 +92,7 @@ class Graph(val map: String) {
   data class Paths(
     var distance: Double = Double.MAX_VALUE,
     val pathsList: MutableList<Pair<Int, Int>> = mutableListOf()
-  ) {
-    /*override fun toString(): String {
-
-      val s1 = when (distance) {
-        Double.MAX_VALUE -> " ".padStart(5)
-        else -> "%.2f".format(distance).padStart(5)
-      }
-      val s2 = "${pathsList.size}".padStart(3)
-      return s1
-    }*/
-  }
+  )
 
   fun Array<BooleanArray>.isNotVisited(point: MapPoint): Boolean = !this[point.row][point.col]
   fun Array<BooleanArray>.markVisited(point: MapPoint) {
@@ -139,14 +129,20 @@ class Graph(val map: String) {
     return sb.toString()
   }
 
-  fun getMetricsP1(p1: MapPoint, path : Paths) : Double{
+  fun getMetricsP1(
+    p1: MapPoint,
+    path: Paths
+  ): Double {
     return path.distance
   }
 
   val countWalls = map.count { it == 'B' }
 
-  fun getMetricsP2(p2: MapPoint, path : Paths) : Double{
-    return if(countWalls < 40)
+  fun getMetricsP2(
+    p2: MapPoint,
+    path: Paths
+  ): Double {
+    return if (countWalls < 40)
       heuristicDistance(p2, start)
     else
       path.distance
