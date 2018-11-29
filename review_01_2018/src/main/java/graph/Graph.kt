@@ -1,7 +1,8 @@
 package graph
 
-import java.security.InvalidParameterException
+import java.io.Serializable
 import java.util.PriorityQueue
+import kotlin.math.sqrt
 
 /**
  * Created by Carmelo Iriti
@@ -9,16 +10,16 @@ import java.util.PriorityQueue
 
 fun addPath(map: String) = Graph(map).aStarAlg()
 
-private class Graph(val map: String) {
+internal class Graph(private val map: String) {
 
   // creates the matrix out of the string
-  val matrix: Array<CharArray> = buildMatrix(map)
+  private val matrix: Array<CharArray> = buildMatrix(map)
   // Start point on the map
-  val start = locationInMatrixOf(map, 'S')
+  private val start = locationInMatrixOf(map, 'S')
   // Destination point
-  val target = locationInMatrixOf(map, 'X')
+  private val target = locationInMatrixOf(map, 'X')
 
-  fun aStarAlg(): String {
+  internal fun aStarAlg(): String {
 
     // visited location
     val visited: Array<BooleanArray> =
@@ -79,29 +80,21 @@ private class Graph(val map: String) {
     return map
   }
 
-  fun getPoint(
-    row: Int,
-    col: Int
-  ): MapPoint {
-    checkBounds(Pair(row, col), matrix).let { if (!it) throw InvalidParameterException() }
-    return MapPoint(row, col, matrix, start, target)
-  }
+  private fun MapPoint.isTarget(): Boolean = (this.row == target.first && this.col == target.second)
 
-  fun MapPoint.isTarget(): Boolean = (this.row == target.first && this.col == target.second)
-
-  data class Paths(
+  internal data class Paths(
     var distance: Double = Double.MAX_VALUE,
     val pathsList: MutableList<Pair<Int, Int>> = mutableListOf()
   )
 
-  fun Array<BooleanArray>.isNotVisited(point: MapPoint): Boolean = !this[point.row][point.col]
+  private fun Array<BooleanArray>.isNotVisited(point: MapPoint): Boolean = !this[point.row][point.col]
   fun Array<BooleanArray>.markVisited(point: MapPoint) {
     this[point.row][point.col] = true
   }
 
-  fun Array<Array<Paths>>.getPaths(point: MapPoint): Paths = this[point.row][point.col]
+  private fun Array<Array<Paths>>.getPaths(point: MapPoint): Paths = this[point.row][point.col]
 
-  fun Paths.updatePaths(
+  private fun Paths.updatePaths(
     node: MapPoint,
     paths: Paths
   ) {
@@ -111,7 +104,7 @@ private class Graph(val map: String) {
         .also { it.add(Pair(node.row, node.col)) }
   }
 
-  fun toStringPath(
+  private fun toStringPath(
     pMatrix: Array<CharArray>,
     paths: Paths
   ): String {
@@ -129,16 +122,16 @@ private class Graph(val map: String) {
     return sb.toString()
   }
 
-  fun getMetricsP1(
+  private fun getMetricsP1(
     p1: MapPoint,
     path: Paths
   ): Double {
     return path.distance
   }
 
-  val countWalls = map.count { it == 'B' }
+  private val countWalls = map.count { it == 'B' }
 
-  fun getMetricsP2(
+  private fun getMetricsP2(
     p2: MapPoint,
     path: Paths
   ): Double {
@@ -148,22 +141,129 @@ private class Graph(val map: String) {
       path.distance
   }
 
-  operator fun MapPoint.plus(other: Triple<Int, Int, Double>) =
+  private operator fun MapPoint.plus(other: Triple<Int, Int, Double>) =
     this.copy(
         row = this.row + other.first, col = this.col + other.second,
         weight = other.third
     )
 
-  operator fun MapPoint.plus(other: Pair<Int, Int>) =
+  private operator fun MapPoint.plus(other: Pair<Int, Int>) =
     this.copy(row = this.row + other.first, col = this.col + other.second)
 
-  operator fun MapPoint.plus(other: MapPoint) =
+  private operator fun MapPoint.plus(other: MapPoint) =
     this.copy(
         row = this.row + other.row, col = this.col + other.col
     )
 
-  fun MapPoint.toPair() = Pair(row, col)
+  private fun MapPoint.toPair() = Pair(row, col)
 
+
+}
+
+internal data class MapPoint(
+  val row: Int,
+  val col: Int,
+  private val matrix: Array<CharArray>,
+  private val begin: Pair<Int, Int>,
+  private val target: Pair<Int, Int>,
+  val weight: Double = 0.0
+) : Serializable {
+
+  override fun toString(): String = "{($row, $col) -> $weight}}"
+
+  override fun equals(other: Any?): Boolean {
+    if (other == null) return false
+    if (other !is MapPoint) return false
+    return this.col == other.col && this.row == other.row
+  }
+
+  override fun hashCode(): Int {
+    var result = 17
+    result = 31 * result + row.hashCode()
+    result = 31 * result + col.hashCode()
+    return result
+  }
+
+  val neighbours: List<MapPoint>
+    get() = movements
+        .asSequence()
+        .filter { checkPath(this, it, matrix) }
+        .map { this + it }
+        .toList()
+
+  private val movements = listOf(
+      Triple(+1, +1, 1.5), //diagonal
+      Triple(-1, -1, 1.5), //diagonal
+      Triple(+1, -1, 1.5), //diagonal
+      Triple(-1, +1, 1.5), //diagonal
+
+      Triple(0, +1, 1.0),
+      Triple(0, -1, 1.0),
+      Triple(+1, 0, 1.0),
+      Triple(-1, 0, 1.0)
+  )
+
+}
+
+internal operator fun MapPoint.plus(other: Triple<Int, Int, Double>) =
+  this.copy(
+      row = this.row + other.first, col = this.col + other.second,
+      weight = other.third
+  )
+
+internal fun heuristicDistance(
+  p1: MapPoint,
+  p2: Pair<Int, Int>
+) = distance(p1.row, p1.col, p2.first, p2.second)
+
+internal fun distance(
+  row_1: Int,
+  col_1: Int,
+  row_2: Int,
+  col_2: Int
+) = sqrt(
+    Math.pow((row_1 - row_2).toDouble(), 2.toDouble()) +
+        Math.pow((col_1 - col_2).toDouble(), 2.toDouble())
+)
+
+internal fun locationInMatrixOf(
+  s: String,
+  c: Char
+): Pair<Int, Int> {
+  val numCharsPerRow = s.lines()
+      .first()
+      .count()
+  val string = s.replace("\n".toRegex(), "")
+  val index = string.indexOf(c)
+  return Pair(index / numCharsPerRow, index % numCharsPerRow)
+}
+
+internal fun checkBounds(
+  p: MapPoint,
+  t: Triple<Int, Int, Double>,
+  matrix: Array<CharArray>
+): Boolean {
+  val boundStart = Pair(0, 0)
+  val boundEnd = Pair(matrix.lastIndex, matrix.first().lastIndex)
+  val indexRow = t.first + p.row
+  val indexCol = t.second + p.col
+  val a = indexRow >= boundStart.first && indexRow <= boundEnd.first
+  val b = indexCol >= boundStart.second && indexCol <= boundEnd.second
+
+  return a && b
+}
+
+internal fun checkPath(
+  p: MapPoint,
+  t: Triple<Int, Int, Double>,
+  matrix: Array<CharArray>
+): Boolean {
+  val indexRow = t.first + p.row
+  val indexCol = t.second + p.col
+  if (checkBounds(p, t, matrix)) {
+    return matrix[indexRow][indexCol] != 'B'
+  }
+  return false
 }
 
 
