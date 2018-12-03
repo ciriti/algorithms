@@ -23,6 +23,7 @@ suspend fun CoroutineScope.massiveRun(action: suspend () -> Unit) {
     val jobs = List(n) {
       launch {
         repeat(k) { action() }
+        threadName().printThis()
       }
     }
     jobs.forEach { it.join() }

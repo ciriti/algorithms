@@ -1,0 +1,111 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "kotlin-allopen"
+
+android {
+  compileSdkVersion rootProject.compileSdkVersion
+  //buildToolsVersion rootProject.buildToolsVersion
+
+  defaultConfig {
+    minSdkVersion rootProject.minSdkVersion
+    targetSdkVersion rootProject.targetSdkVersion
+    versionCode 1
+    versionName "1.0"
+    multiDexEnabled true
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    //        testApplicationId "ciriti.datasource.test"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  kapt {
+    generateStubs = true
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+  }
+
+  sourceSets {
+    String sharedTestDir = 'src/sharedTest/kotlin'
+    test {
+      java.srcDir sharedTestDir
+    }
+    androidTest {
+      java.srcDir sharedTestDir
+    }
+    test.java.srcDirs += 'src/test/kotlin'
+    androidTest.java.srcDirs += 'src/androidTest/kotlin'
+  }
+
+  allOpen {
+    //        annotation("com.sociomantic.app.datasource.annotation.MakeItOpen")
+    // annotations("com.another.Annotation", "com.third.Annotation")
+  }
+
+}
+
+
+tasks.whenTaskAdded { theTask ->
+  def taskName = theTask.name.toString()
+  if ("testDevDebug".toString().equals(taskName)) {
+    theTask.jvmArgs('-ea', '-noverify')
+  }
+}
+
+//Ensure Kotlin will not be used in production code.
+afterEvaluate {
+  android.sourceSets.all { sourceSet ->
+    if (!sourceSet.name.startsWith('test') || !sourceSet.name.startsWith('androidTest')) {
+      sourceSet.kotlin.setSrcDirs([])
+    }
+  }
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+  // kotlin
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
+  // Room
+  implementation 'android.arch.persistence.room:runtime:' + rootProject.archRoomVersion
+  implementation 'android.arch.persistence.room:rxjava2:' + rootProject.archRoomVersion
+  kapt 'android.arch.persistence.room:compiler:' + rootProject.archRoomVersion
+  //lifecycle
+  implementation 'android.arch.lifecycle:extensions:' + rootProject.archLifecycleVersion
+  kapt 'android.arch.lifecycle:compiler:' + rootProject.archLifecycleVersion
+  // kotson
+  implementation 'com.github.salomonbrys.kotson:kotson:2.5.0'
+  // math tool kit
+  implementation "com.marcinmoskala:DiscreteMathToolkit:1.0.3"
+  // rxandroid
+  implementation 'io.reactivex.rxjava2:rxandroid:' + rootProject.rxjava_version
+  // test
+  testImplementation 'com.android.support.test:runner:1.0.2'
+  //    testImplementation 'org.mockito:mockito-core:' + rootProject.mockito_version
+  testImplementation "com.nhaarman:mockito-kotlin:1.5.0"
+  androidTestImplementation "com.nhaarman:mockito-kotlin:1.5.0"
+
+  // guava
+  implementation group: 'com.google.guava', name: 'guava', version: '24.1-jre'
+
+  // For instrumentation tests on Android devices and emulators
+  testImplementation group: 'com.google.guava', name: 'guava', version: '24.1-jre'
+  testImplementation 'junit:junit:4.12'
+  androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+  androidTestImplementation 'com.android.support.test:runner:1.0.2'
+  androidTestImplementation 'com.android.support:support-annotations:28.0.0'
+  androidTestImplementation 'org.mockito:mockito-android:' + rootProject.mockito_version
+  // https://mvnrepository.com/artifact/com.google.guava/guava
+  androidTestImplementation group: 'com.google.guava', name: 'guava', version: '24.1-jre'
+
+}

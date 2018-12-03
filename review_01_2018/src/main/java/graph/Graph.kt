@@ -6,7 +6,7 @@ import java.util.PriorityQueue
  * Created by Carmelo Iriti
  */
 
-fun addPath(map: String) = Graph(map).aStarAlg()
+fun addPath(mapString: String) = Graph(mapString).aStarAlg()
 
 internal class Graph(private val map: String) {
 

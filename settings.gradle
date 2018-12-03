@@ -1,1 +1,1 @@
-include ':app', ':mylibrary', ':review_01_2018', ':lib', ':grapmodule', ':implementation'
+include ':app', ':mylibrary', ':review_01_2018', ':lib', ':grapmodule', ':implementation', ':kotlintipsandtricks'
