@@ -1,5 +1,10 @@
 package ciriti.dilib
 
+import ciriti.dilib.ghexample.InjectModule
+import ciriti.dilib.ghexample.Prototype
+import ciriti.dilib.ghexample.Scoped
+import ciriti.dilib.ghexample.Singleton
+
 /**
  * Created by Carmelo Iriti
  */

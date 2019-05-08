@@ -1,4 +1,10 @@
-package ciriti.dilib
+package ciriti.dilib.ghexample
+
+import ciriti.dilib.dependsOn
+import ciriti.dilib.factory
+import ciriti.dilib.module
+import ciriti.dilib.scoped
+import ciriti.dilib.singleton
 
 /**
  * Created by Carmelo Iriti

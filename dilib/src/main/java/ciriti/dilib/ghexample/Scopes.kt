@@ -1,4 +1,4 @@
-package ciriti.dilib
+package ciriti.dilib.ghexample
 
 /**
  * Created by Carmelo Iriti

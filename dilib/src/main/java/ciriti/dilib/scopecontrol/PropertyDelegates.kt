@@ -1,6 +1,5 @@
 package ciriti.dilib.scopecontrol
 
-import com.ciriti.printThis
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
@@ -10,7 +9,6 @@ import kotlin.reflect.KProperty
 
 fun main(){
   val e = Example()
-  e.p.printThis()
 
   val lazyValue: String by lazy {
     println("computed!")

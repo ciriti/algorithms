@@ -69,58 +69,74 @@ afterEvaluate {
   }
 }
 
-dependencies {
-  implementation fileTree(dir: 'libs', include: ['*.jar'])
+def arrow_version = "0.8.1"
 
+dependencies {
+  implementation fileTree(include: ['*.jar'], dir: 'libs')
   testImplementation 'junit:junit:4.12'
   androidTestImplementation 'com.android.support.test:runner:1.0.1'
   androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
   androidTestImplementation 'com.android.support.test:runner:1.0.1'
   // kotlin
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
   implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
   implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-
   // Room
   implementation 'android.arch.persistence.room:runtime:' + rootProject.archRoomVersion
   implementation 'android.arch.persistence.room:rxjava2:' + rootProject.archRoomVersion
   kapt 'android.arch.persistence.room:compiler:' + rootProject.archRoomVersion
-
   //lifecycle
   implementation 'android.arch.lifecycle:extensions:' + rootProject.archLifecycleVersion
   kapt 'android.arch.lifecycle:compiler:' + rootProject.archLifecycleVersion
-
   // kotson
   implementation 'com.github.salomonbrys.kotson:kotson:2.5.0'
-
   // retrofit
-  implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-  implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-  implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-  implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
-  implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+  implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+  implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+  implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+  implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+  implementation 'com.squareup.okhttp3:okhttp:3.11.0'
   // math tool kit
-  implementation "com.marcinmoskala:DiscreteMathToolkit:1.0.3"
+  implementation 'com.marcinmoskala:DiscreteMathToolkit:1.0.3'
   // rxandroid
   implementation 'io.reactivex.rxjava2:rxandroid:' + rootProject.rxjava_version
 
-  // https://mvnrepository.com/artifact/javax.inject/javax.inject
-  implementation group: 'javax.inject', name: 'javax.inject', version: '1'
+  implementation "io.arrow-kt:arrow-core:$arrow_version"
+  implementation "io.arrow-kt:arrow-syntax:$arrow_version"
+  implementation "io.arrow-kt:arrow-typeclasses:$arrow_version"
+  implementation "io.arrow-kt:arrow-data:$arrow_version"
+  implementation "io.arrow-kt:arrow-instances-core:$arrow_version"
+  implementation "io.arrow-kt:arrow-instances-data:$arrow_version"
+  kapt "io.arrow-kt:arrow-annotations-processor:$arrow_version"
+
+  implementation "io.arrow-kt:arrow-free:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-instances-free:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-mtl:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-effects:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-effects-instances:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-effects-rx2:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-effects-rx2-instances:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-effects-reactor:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-effects-reactor-instances:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-effects-kotlinx-coroutines:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-effects-kotlinx-coroutines-instances:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-optics:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-generic:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-recursion:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-instances-recursion:$arrow_version" //optional
+  implementation "io.arrow-kt:arrow-integration-retrofit-adapter:$arrow_version" //optional
 
   // test
-  testImplementation 'com.android.support.test:runner:1.0.1'
+  testImplementation 'com.android.support.test:runner:1.0.2'
   //    testImplementation 'org.mockito:mockito-core:' + rootProject.mockito_version
-  testImplementation "com.nhaarman:mockito-kotlin:1.5.0"
-  androidTestImplementation "com.nhaarman:mockito-kotlin:1.5.0"
-
+  testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
+  androidTestImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
   // For instrumentation tests on Android devices and emulators
   androidTestImplementation 'org.mockito:mockito-android:' + rootProject.mockito_version
-
-
   androidTestImplementation 'com.android.support:support-annotations:27.0.1'
   // https://mvnrepository.com/artifact/com.google.guava/guava
-  androidTestImplementation group: 'com.google.guava', name: 'guava', version: '23.6-android'
-  testImplementation group: 'com.google.guava', name: 'guava', version: '23.6-android'
-  implementation group: 'com.google.guava', name: 'guava', version: '23.6-android'
+  androidTestImplementation 'com.google.guava:guava:23.6-android'
+  testImplementation 'com.google.guava:guava:23.6-android'
+  implementation 'com.google.guava:guava:23.6-android'
+  implementation project(':common')
 }

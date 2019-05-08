@@ -1,8 +1,14 @@
 package com.ciriti.coroutine.basis
 
-import com.ciriti.printThis
 import com.ciriti.threadName
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlin.system.measureTimeMillis
 
 /**
@@ -10,10 +16,17 @@ import kotlin.system.measureTimeMillis
  */
 
 fun main() = runBlocking {
-  val time = measureTimeMillis {
-    println("The answer is ${concurrentSum()}")
+  val jobs = Job()//SupervisorJob()
+  val job = launch(jobs) {
+    val time = measureTimeMillis {
+      println("The answer is ${concurrentSum()}")
+    }
+    println("Completed in $time ms")
   }
-  println("Completed in $time ms")
+//  job.cancelChildren()
+  println()
+//  jobs.cancelChildren()
+  job.join()
 }
 
 suspend fun concurrentSum(): Int = coroutineScope {
@@ -22,14 +35,18 @@ suspend fun concurrentSum(): Int = coroutineScope {
   one.await() + two.await()
 }
 
-suspend fun doSomethingUsefulOne(): Int {
-  delay(1000L) // pretend we are doing something useful here
-  println("somethingUsefulOneAsync - ${threadName()}")
-  return 13
+suspend fun doSomethingUsefulOne(): Int  = coroutineScope{
+  async {
+    delay(1000L) // pretend we are doing something useful here
+    println("somethingUsefulOneAsync - ${threadName()}")
+    13
+  }.await()
 }
 
-suspend fun doSomethingUsefulTwo(): Int {
-  delay(1000L) // pretend we are doing something useful here, too
-  println("somethingUsefulTwoAsync - ${threadName()}")
-  return 29
+suspend fun doSomethingUsefulTwo(): Int = coroutineScope {
+  async {
+    delay(1000L) // pretend we are doing something useful here, too
+    println("somethingUsefulTwoAsync - ${threadName()}")
+    29
+  }.await()
 }
